@@ -41,9 +41,9 @@
 
   <div class="change-text-block p-3 text-center" id="change-text-block">
     <a href="#" class="close-button"><i class='fas fa-window-close' style='font-size:24px;color:red'></i></a>
-    <form action="">
+    <form method="post" action ="/admin/head-slider/{{$slide->id}}/change-text">
       {!! csrf_field() !!}
-      <input type="text">
+      <input type="text" name="description">
       <button type="submit">Змінити</button>
     </form>
   </div>
@@ -56,6 +56,7 @@
       <button type="submit">Змінити</button>
     </form>
   </div>
+
   <div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->

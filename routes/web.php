@@ -33,6 +33,7 @@ Route::get('/admin/head-slider/edit/{slide_id}','HeadSliderController@show');
 Route::get('/admin/head-slider/add','HeadSliderController@add');
 Route::post('/admin/head-slider/add','HeadSliderController@addRequest');
 Route::post('/admin/head-slider/{slide_id}/change-button','HeadSliderController@changeButton');
+Route::post('/admin/head-slider/{slide_id}/change-text','HeadSliderController@changeText');
 Route::post('/admin/head-slider/{slide_id}/change-photo','HeadSliderController@changePhoto');
 Route::post('/admin/head-slider/{slide_id}/delete','HeadSliderController@delete');
 Route::get('/admin/all-products','BouquetController@indexAdmin');

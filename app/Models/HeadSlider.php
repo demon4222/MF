@@ -3,10 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-class HeadSlider extends Model
+/**
+ * Class HeadSlider.
+ *
+ * @package namespace App\Models;
+ */
+class HeadSlider extends Model implements Transformable
 {
-	protected $fillable = [
+    use TransformableTrait;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+
+    protected $fillable = [
 		"path_to_photo",
 		"description",
 		"button_text"
@@ -14,28 +29,4 @@ class HeadSlider extends Model
 
 	public $timestamps = false;
 
-    public static function showAll(){
-    	return static::all();
-    }
-
-    public static function showToEditById($slide_id){
-    	$objHeadSlider = new HeadSlider();
-    	$head_slider = $objHeadSlider->where('id',$slide_id)->first();
-    	return $head_slider;
-    }
-
-    public static function changeButton(){
-    	$objHeadSlider = new HeadSlider();
-    	$head_slider = $objHeadSlider->where('id',$slide_id)->first();
-    }
-
-    public static function createSlide($data)
-    {
-    	$objHeadSlider = new HeadSlider();
-    	$objHeadSlider->create([
-    		"path_to_photo" => '/media/head-slider/'.$data->photo->getClientOriginalName(),
-    		"description" => $data->description,
-    		"button_text" => $data->button_text,
-    	]);
-    }
 }
