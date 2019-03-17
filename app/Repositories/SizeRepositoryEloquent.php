@@ -24,7 +24,6 @@ class SizeRepositoryEloquent extends BaseRepository implements SizeRepository
     {
         return Size::class;
     }
-
     
 
     /**

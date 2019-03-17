@@ -17,7 +17,7 @@ class BouquetsSubTypeController extends Controller
     }
 
     public function getSubTypes(Request $request){
-		$subTypes = $this->bouquetTypeRepository->getSubTypesByTypeName($request->typeName);
+		$subTypes = $this->bouquetTypeRepository->getSubTypesByTypeId($request->typeName);
     	$types = collect();
     	foreach ($subTypes as $subType) {  		
     		$types->push($subType);

@@ -35,10 +35,6 @@ class Bouquet extends Model implements Transformable
        return $this->belongsToMany('App\Models\Size')->withPivot(['price']);
      }
 
-     public function addBouquet($req){
-        
-     }
-
      public $timestamps = false;
 
    //  public function sizes()

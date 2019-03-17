@@ -40,4 +40,5 @@ Route::get('/admin/all-products','BouquetController@indexAdmin');
 Route::get('/admin/add-bouquet','BouquetController@add');
 Route::post('/admin/add-bouquet/ajax-subtypes','BouquetsSubTypeController@getSubTypes');
 Route::post('/admin/add-bouquet','BouquetController@addRequest');
+Route::get('/admin/edit-bouquet/{bouquet_id}', 'BouquetController@edit');
 /*ENDADMIN*/

@@ -25,7 +25,10 @@ class BouquetSubTypeRepositoryEloquent extends BaseRepository implements Bouquet
         return BouquetSubType::class;
     }
 
-    
+    public function findParentType($id)
+    {
+        return $this->find($id)->bouquetTypes()->first();
+    }
 
     /**
      * Boot up the repository, pushing criteria

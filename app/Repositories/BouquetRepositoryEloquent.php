@@ -11,7 +11,7 @@ use App\Repositories\SizeRepositoryEloquent;
 use Illuminate\Container\Container as Application;
 use App\Models\BouquetSize;
 use App\Http\Controllers\FileUploadController;
-
+use App\Repositories\BouquetSubTypeRepositoryEloquent;
 
 /**
  * Class BouquetRepositoryEloquent.
@@ -22,10 +22,13 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
 {
     private $size;
 
-    public function __construct(SizeRepositoryEloquent $size,Application $app)
+    private $subType;
+
+    public function __construct(BouquetSubTypeRepositoryEloquent $subType,
+    SizeRepositoryEloquent $size,Application $app)
     {
         $this->size = $size;
-
+        $this->subType = $subType;
         parent::__construct($app);
     }
     
@@ -71,6 +74,30 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
         }
 
         // FileUploaderController::uploadBouquetPhoto($)
+
+    }
+
+    public function getForEdit($id)
+    {
+
+        $bouquet = $this->find($id);
+        $subTypeId = $bouquet->sub_type_id;
+        $subType = $this->subType->find($id);
+        $type = $this->subType->findParentType($subTypeId);
+        $bouquetSizes = $bouquet->sizes->toArray();
+        $data = [
+            'name' => $bouquet->name,
+            'typeName' => $type->name,
+            'typeId' => $type->id,
+            'subTypeName' => $subType->name,
+            'subTypeId' => $subTypeId,
+            'sizes' => $bouquetSizes,
+        ];
+        // foreach($data['sizes'] as $size)
+        // {
+        //     dd($size['size']);
+        // }
+        return $data;
 
     }
 

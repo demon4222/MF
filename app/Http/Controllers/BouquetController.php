@@ -38,11 +38,12 @@ class BouquetController extends Controller
     }
 
     public function addRequest(Request $request){
-        // $this->
-        // dd($request->size_name[0]);
-
-        // dd($request->all());
         $this->bouquetRepository->createByReq($request);
+    }
+
+    public function edit($id){
+        $bouquetData = $this->bouquetRepository->getForEdit($id);
+        return view('layouts.admin.admin-edit-bouquet', compact('bouquetData'));
     }
 
 }

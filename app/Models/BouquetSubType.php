@@ -15,6 +15,8 @@ class BouquetSubType extends Model implements Transformable
 {
     use TransformableTrait;
 
+    protected $table = 'bouquet_sub_types';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,7 +25,7 @@ class BouquetSubType extends Model implements Transformable
     protected $fillable = [];
 
     public function bouquetTypes(){
-    	return $this->belongsTo(BouquetType::class);
+    	return $this->belongsTo(BouquetType::class, 'type_id');
     }
 
 }

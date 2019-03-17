@@ -22,6 +22,8 @@ class BouquetType extends Model implements Transformable
      */
     protected $fillable = [];
 
+    protected $table = 'bouquet_types';
+
     public function bouquetsSubTypes(){
     	return $this->hasMany(BouquetSubType::class,'type_id');
     }
