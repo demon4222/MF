@@ -1,0 +1,34 @@
+.slick-slide{
+	margin:0 20px;
+	width: auto;
+	border:none;
+	outline: none;
+}
+.slick-list{
+	margin: 0 -20px;
+}
+.slick-arrow{
+	border-radius: 3px;
+	opacity: 0.6;
+}
+.slick-arrow:focus{
+	background-color: black;
+	opacity: 0.6;
+}
+.slick-arrow:hover{
+	background-color: black;
+	opacity: 0.8;
+}
+.slick-next{
+	width: 35px;
+	height: 60px;
+	background-color: black;
+	right:0px;
+}
+.slick-prev{
+	width: 35px;
+	height: 60px;
+	background-color: black;
+	left: 0px;
+	z-index: 15;
+}

@@ -1,0 +1,42 @@
+.delete-slide-block, .change-photo-block, .change-text-block, .change-button-block{
+	position: absolute;
+	display: none;	
+	background-color: white;
+	color:black;
+	border:1px solid black;
+	border-radius: 15px;
+	width: auto;
+	z-index:100;
+}
+.delete-slide-block{
+	bottom:50%;
+	left:45%;
+}
+.change-photo-block{
+	bottom:45%;
+	left:40%;
+}
+.change-text-block{
+	bottom:45%;
+	left:45%;
+}
+.change-button-block{
+	bottom:45%;
+	left:45%;
+}
+.close-button button{
+	border:1px solid white;
+}
+.close-button{
+	display: inline-block;
+	float: right;
+}
+.photo{
+	display: flex;
+	max-width: 700px;
+	max-height: 600px;
+}
+.slide-edit-buttons, .photo{
+	display: inline-block;
+	float: left;
+}

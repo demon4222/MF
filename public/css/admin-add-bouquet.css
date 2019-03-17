@@ -1,0 +1,16 @@
+#new_size_block{
+	border: 1px solid red;
+	border-radius: 20px;
+	padding: 5px;
+	width:145px;
+}
+.add_photo_b{
+	width:132px;
+}
+
+.form-group div{
+	display: inline-block;
+}
+.deleteButton{
+	width: 100px;
+}

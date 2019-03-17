@@ -1,0 +1,124 @@
+/*head-slider*/
+
+.bg-head-image{
+  min-height: 610px;
+  width:100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-size: cover;
+}
+.head-sl__slide{
+  position: relative;
+}
+.head-sl__text{
+  margin-top: 15rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+.head-sl__text_description {
+  text-align: center!important;
+}
+.head-sl__text_button a{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*end*/
+
+/*head-slider-buttons*/
+a.b-ghost {
+  outline: none;
+  border-radius: 25px;
+  display: block;
+  width: auto;
+  min-width: 150px;
+  max-width: 150px;
+  padding: 10px;
+  color:  white;
+  font-family: latoregular;
+  border: 3px solid white;
+  text-align: center;
+  text-decoration: none;
+  background-color: rgba(0,0,0,0.5);
+
+}
+.b-ghost:hover,.b-ghost:active {
+  outline: none;
+  background-color: rgba(213,0,0,0.9);
+  border: 3px solid white;
+  color: #CFCFCF;
+  
+}
+/*end*/
+
+/*begin head-slider dots */
+
+.my-dots {
+  position: absolute;
+  bottom: 10px;
+  display: block;
+  width: 100%;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.my-dots li {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.my-dots li button {
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  width: 24px;
+  height: 24px;
+  padding: 5px;
+  cursor: pointer;
+  color: transparent;
+  border: 0;
+  outline: none;
+  background: transparent;
+}
+
+.my-dots li button:hover,
+.my-dots li button:focus {
+  outline: none;
+}
+
+.my-dots li button:hover:before,
+.my-dots li button:focus:before {
+  opacity: 1;
+}
+
+.my-dots li button:before {
+  font-family: 'slick';
+  font-size: 6px;
+  line-height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: url('/img/dots-clear.png');
+  text-align: center;
+  opacity: .6;
+  color: black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+   
+}
+
+.my-dots li.slick-active button:before {
+  opacity: .9;
+  color: black;
+  content: url('/img/dot-and-circle.png');
+}
+
+/*end*/
