@@ -17,13 +17,6 @@ class BouquetsSubTypeController extends Controller
     }
 
     public function getSubTypes(Request $request){
-    	// $objBouquetType = BouquetsType::where('name',$request->typeName)->first();
-		// $subTypes = $objBouquetType->bouquetsSubTypes()->get(); 
-
-
-		// $subTypes = $this->bouquetTypeRepository->getSubTypesByTypeName($request->name);
-		// $subTypes = $this->bouquetTypeRepository->findByField('name','Композиції')->first();
-		//$subTypes = $this->getSubTypesByTypeName('Композиції')->first();
 		$subTypes = $this->bouquetTypeRepository->getSubTypesByTypeName($request->typeName);
     	$types = collect();
     	foreach ($subTypes as $subType) {  		
