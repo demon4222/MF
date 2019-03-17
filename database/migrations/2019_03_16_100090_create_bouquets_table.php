@@ -31,7 +31,7 @@ class CreateBouquetsTable extends Migration
 
             // $table->integer('price');
 
-            // $table->mediumText('description');
+            $table->mediumText('description');
 
 		});
 	}

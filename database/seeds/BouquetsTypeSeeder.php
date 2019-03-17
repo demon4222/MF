@@ -40,22 +40,29 @@ class BouquetsTypeSeeder extends Seeder
          DB::table('sizes')->insert([
             'size'    => 'S',
             'count' => 21,
+            'height' => 70,
+            'diameter' =>50,
         ]);
          DB::table('sizes')->insert([
             'size'    => 'M',
             'count' => 35,
+            'height' => 50,
+            'diameter' =>40,
         ]);
          DB::table('bouquets')->insert([
             'name'    => '21 троянда',
             'sub_type_id' => 1,
+            'description' => 'aaa'
         ]);
          DB::table('bouquets')->insert([
             'name'    => '51 троянда',
             'sub_type_id' => 1,
+            'description' => 'aaa'
         ]);
          DB::table('bouquets')->insert([
             'name'    => 'Весна',
             'sub_type_id' => 4,
+            'description' => 'aaa'
         ]);
 
          DB::table('bouquet_size')->insert([

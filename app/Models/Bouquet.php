@@ -20,7 +20,7 @@ class Bouquet extends Model implements Transformable
      *
      * @var array
      */
-     protected $fillable = [];
+     protected $fillable = ['name', 'sub_type_id','description'];
 
 	  public function join(Size $size, Photo $photo)
      {
@@ -38,6 +38,8 @@ class Bouquet extends Model implements Transformable
      public function addBouquet($req){
         
      }
+
+     public $timestamps = false;
 
    //  public function sizes()
    //  {

@@ -54,8 +54,4 @@ class HeadSliderController extends Controller
         $slide = $this->headSliderRepository->deleteSlide($id);
         return $this->index();
     }
-
-    public function edit(){
-    	
-    }
 }

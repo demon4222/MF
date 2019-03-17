@@ -20,11 +20,13 @@ class Size extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['size','count','diameter','height'];
 
     public function bouquets(){
     	return $this->belongsToMany('App\Models\Bouquet');
     }
+
+    public $timestamps = false;
 
 }
 

@@ -27,7 +27,7 @@ class BouquetTypeRepositoryEloquent extends BaseRepository implements BouquetTyp
 
     public function getSubTypesByTypeName($name)
     {
-        $type = $this->find($name)->first();
+        $type = $this->find($name);
         return $type->bouquetsSubTypes()->get();
     }
 

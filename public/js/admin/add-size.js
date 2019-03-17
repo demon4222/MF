@@ -18,6 +18,8 @@ var content = '<div id="new_size_block" class="mr-2">\
       <input type="number" name="size_height[]" required class="form-control">\
       <lable >Діаметр</lable>\
       <input type="number" name="size_diameter[]" required class="form-control">\
+      <label>Ціна</label>\
+      <input type="number" name="price[]" class="form-control">\
       <label >Головне фото</label>\
       <input type="file" class="add_photo_b" name="main_photo[]" multiple accept="image/jpeg" required>\
       <label >При наведені</label>\

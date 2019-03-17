@@ -22,11 +22,9 @@ class CreateSizesTable extends Migration
 
             $table->integer('count');
 
-            // $table->unsignedInteger('height_id');
-            // $table->foreign('height_id')->references('id')->on('heights');
+            $table->unsignedInteger('height');
 
-            // $table->unsignedInteger('diameter_id');
-            // $table->foreign('diameter_id')->references('id')->on('diameters');
+            $table->unsignedInteger('diameter');
 
 		});
 	}

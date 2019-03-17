@@ -2,15 +2,11 @@
 
 @section('content')
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
   {{ csrf_field() }}
   <div class="form-group">
     <label for="exampleFormControlInput1">Назва букету</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1">
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlFile1">Фото</label>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    <input type="text" name="name" class="form-control" id="exampleFormControlInput1">
   </div>
   <div class="form-group">
     <label for="exampleFormControlSelect1">Тип букету</label>
@@ -34,12 +30,8 @@
 
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Ціна</label>
-    <input type="number" class="form-control" id="exampleFormControlInput1">
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Example textarea</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <label for="exampleFormControlTextarea1">Опис</label>
+    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
   </div>
   <button type="submit" class="btn btn-success">Додати</button>
 </form>

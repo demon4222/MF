@@ -33,12 +33,16 @@ class BouquetController extends Controller
         
         $bouquetTypes = $this->bouquetTypeRepository->all();
         // $bouquet = Bouquet::with('sizes')->find(1);
-        // dd($bouquet->sizes[0]->pivot->price);
+        //  dd($bouquet->sizes[0]->pivot->price=4);
     	return view('layouts.admin.admin-add-bouquet',compact('bouquetTypes'));
     }
 
     public function addRequest(Request $request){
-        dd($request->all());
+        // $this->
+        // dd($request->size_name[0]);
+
+        // dd($request->all());
+        $this->bouquetRepository->createByReq($request);
     }
 
 }

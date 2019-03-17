@@ -19,4 +19,14 @@ class FileUploadController extends Controller
         if(file_exists( $pathToDirectory . $id . '.jpg'))
             unlink($pathToDirectory . $id . '.jpg');
     }
+
+    /* types - 'main', 'hover', 'add'*/
+    public static function uploadBouquetPhoto($file, $bouquet_id, $size_id, $type)
+    {
+        $pathToDirectory = public_path() . '/media/bouquets/';
+        if(file_exists( $pathToDirectory . $bouquet_id . '_' . $size_id . '_' . $type . '.jpg'))
+            unlink($pathToDirectory . $bouquet_id . '_' . $size_id . '_' . $type . '.jpg');
+
+        $file->move($pathToDirectory, $bouquet_id . '_' . $size_id . '_' . $type . '.jpg');
+    }
 }
