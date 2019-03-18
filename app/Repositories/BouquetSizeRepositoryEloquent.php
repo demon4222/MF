@@ -4,17 +4,16 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\SizeRepository;
-use App\Models\Size;
-use App\Validators\SizeValidator;
+use App\Repositories\BouquetSizeRepository;
 use App\Models\BouquetSize;
+use App\Validators\BouquetSizeValidator;
 
 /**
- * Class SizeRepositoryEloquent.
+ * Class BouquetSizeRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class SizeRepositoryEloquent extends BaseRepository implements SizeRepository
+class BouquetSizeRepositoryEloquent extends BaseRepository implements BouquetSizeRepository
 {
     /**
      * Specify Model class name
@@ -23,7 +22,12 @@ class SizeRepositoryEloquent extends BaseRepository implements SizeRepository
      */
     public function model()
     {
-        return Size::class;
+        return BouquetSize::class;
+    }
+
+    public function deleteSize($sizeId, $bouquetId)
+    {
+        $size = $this->deleteWhere(['size_id' => $sizeId, 'bouquet_id' => $bouquetId]);
     }
 
     /**

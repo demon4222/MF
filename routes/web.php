@@ -41,4 +41,6 @@ Route::get('/admin/add-bouquet','BouquetController@add');
 Route::post('/admin/add-bouquet/ajax-subtypes','BouquetsSubTypeController@getSubTypes');
 Route::post('/admin/add-bouquet','BouquetController@addRequest');
 Route::get('/admin/edit-bouquet/{bouquet_id}', 'BouquetController@edit');
+Route::post('/admin/edit-bouquet/{bouquet_id}', 'BouquetController@editRequest');
+Route::get('/admin/edit-bouquet/delete-size/{size_id}/{bouquet_id}', 'BouquetSizeController@deleteSize');
 /*ENDADMIN*/

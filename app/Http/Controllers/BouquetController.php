@@ -43,7 +43,15 @@ class BouquetController extends Controller
 
     public function edit($id){
         $bouquetData = $this->bouquetRepository->getForEdit($id);
-        return view('layouts.admin.admin-edit-bouquet', compact('bouquetData'));
+
+        $bouquetTypes = $this->bouquetTypeRepository->all();
+        return view('layouts.admin.admin-edit-bouquet', compact('bouquetData'),compact('bouquetTypes'));
+    }
+
+    public function editRequest(Request $req, $id)
+    {
+        $this->bouquetRepository->editByReq($id, $req);
+        return $this->edit($id);
     }
 
 }

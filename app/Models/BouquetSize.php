@@ -3,17 +3,34 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-class BouquetSize extends Model
+/**
+ * Class BouquetSize.
+ *
+ * @package namespace App\Models;
+ */
+class BouquetSize extends Model implements Transformable
 {
-	protected $table = 'bouquet_size';
+    use TransformableTrait;
 
-	protected $fillable = ['bouquet_id', 'size_id','price'];
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function price()
 	{
 	    return $this->price;
 	}
-	
+
 	public $timestamps = false;
+
+    protected $table = 'bouquet_size';
+
+	protected $fillable = ['bouquet_id', 'size_id','price'];
+
 }
+
+
