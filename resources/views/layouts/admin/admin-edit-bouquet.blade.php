@@ -23,6 +23,10 @@
     <option value="{{$bouquetData['subTypeId']}}"></option>
     </select>
   </div>
+  <div class="form-group">
+    <label >Для вітрини</label><br/>
+    <input type="file" class="add_photo_b" name="general_photo" multiple accept="image/jpeg">
+  </div>
   <div class="form-group" id="">
     <label for="exampleFormControlSelect1">Розміри</label><br>
     <a class="btn btn-primary" id="add_size_button" href="#" role="button">Додати розмір</a>

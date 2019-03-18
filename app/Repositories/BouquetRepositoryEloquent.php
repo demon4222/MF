@@ -44,6 +44,7 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
 
     public function createByReq($req)
     {
+        // dd($req->all());
         $data = [
             "name"        => $req->name,
             "sub_type_id" => $req->subType,
@@ -70,7 +71,8 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
             FileUploadController::uploadBouquetPhoto($req->main_photo[$i],$bouquet->id,$size->id,'m');
             FileUploadController::uploadBouquetPhoto($req->hover_photo[$i],$bouquet->id,$size->id,'h');
             FileUploadController::uploadBouquetPhoto($req->add_photo[$i],$bouquet->id,$size->id,'a');
-
+            FileUploadController::uploadGeneralBouquetPhoto($req->general_photo,$bouquet->id,'g');
+            FileUploadController::uploadGeneralBouquetPhoto($req->general_photo_hover,$bouquet->id,'gh');
         }
 
         // FileUploaderController::uploadBouquetPhoto($)
@@ -136,6 +138,16 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
                         'price'     => $req->price[$i],
                     ]);
                 }
+                if(isset($req->main_photo[$i]))
+                    FileUploadController::uploadBouquetPhoto($req->main_photo[$i],$bouquet->id,$size->id,'m');
+                if(isset($req->hover_photo[$i]))
+                    FileUploadController::uploadBouquetPhoto($req->hover_photo[$i],$bouquet->id,$size->id,'h');
+                if(isset($req->add_photo[$i]))
+                    FileUploadController::uploadBouquetPhoto($req->add_photo[$i],$bouquet->id,$size->id,'a');
+                if(isset($req->general_photo))    
+                    FileUploadController::uploadGeneralBouquetPhoto($req->general_photo,$bouquet->id,'g');
+                if(isset($req->general_photo_hover))
+                    FileUploadController::uploadGeneralBouquetPhoto($req->general_photo_hover,$bouquet->id,'gh');
             }
         }
         $sizes_new_count = count($req->size_name) - $sizes_exist_count;
@@ -156,6 +168,15 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
                     'size_id'   => $newSize->id,
                     'price'     => $req->price[$i],
                 ]);
+
+                if(isset($req->main_photo[$i]))
+                    FileUploadController::uploadBouquetPhoto($req->main_photo[$i],$bouquet->id,$newSize->id,'m');
+                if(isset($req->hover_photo[$i]))
+                    FileUploadController::uploadBouquetPhoto($req->hover_photo[$i],$bouquet->id,$newSize->id,'h');
+                if(isset($req->add_photo[$i]))
+                    FileUploadController::uploadBouquetPhoto($req->add_photo[$i],$bouquet->id,$newSize->id,'a');
+                if(isset($req->general_photo))
+                    FileUploadController::uploadGeneralBouquetPhoto($req->general_photo,$bouquet->id);
             }
         }
         

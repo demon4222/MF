@@ -9,7 +9,7 @@
     @foreach($bouquets as $bouquet)
     <div class="col-md-6 col-lg-4 product-card mb-4">
         <div class="card">
-            <img class="card-img-top" src="{{asset('media/bouquets/13_6_h.jpg')}}">
+            <img class="card-img-top" src="{{asset('media/bouquets/' . $bouquet->id . '/' . $bouquet->id . '_g.jpg')}}">
             <div class="card-body">
                 <h5 class="card-title">{{$bouquet->name}}</h5>
                 <p class="card-text">{{$bouquet->description}}</p>

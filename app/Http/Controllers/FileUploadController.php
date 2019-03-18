@@ -20,13 +20,22 @@ class FileUploadController extends Controller
             unlink($pathToDirectory . $id . '.jpg');
     }
 
-    /* types - 'main', 'hover', 'add'*/
+    /* types - 'main'(m), 'hover'(h), 'add'(a)*/
     public static function uploadBouquetPhoto($file, $bouquet_id, $size_id, $type)
     {
-        $pathToDirectory = public_path() . '/media/bouquets/';
-        if(file_exists( $pathToDirectory . $bouquet_id . '_' . $size_id . '_' . $type . '.jpg'))
-            unlink($pathToDirectory . $bouquet_id . '_' . $size_id . '_' . $type . '.jpg');
+        $pathToDirectory = public_path() . '/media/bouquets/' . $bouquet_id . '/';
+        if(file_exists( $pathToDirectory . $size_id . '_' . $type . '.jpg'))
+            unlink($pathToDirectory . $size_id . '_' . $type . '.jpg');
 
-        $file->move($pathToDirectory, $bouquet_id . '_' . $size_id . '_' . $type . '.jpg');
+        $file->move($pathToDirectory, $size_id . '_' . $type . '.jpg');
+    }
+    /* types - 'general'(g), 'genera hover'(gh)*/
+    public static function uploadGeneralBouquetPhoto($file, $bouquet_id,$type)
+    {
+        $pathToDirectory = public_path() . '/media/bouquets/' . $bouquet_id . '/';
+        if(file_exists( $pathToDirectory . $bouquet_id . '_' . $type . '.jpg'))
+            unlink($pathToDirectory . $bouquet_id . '_' . $type . '.jpg');
+
+        $file->move($pathToDirectory, $bouquet_id . '_' . $type . '.jpg');
     }
 }

@@ -30,5 +30,8 @@ var content = '<div id="new_size_block" class="mr-2">\
 
 
 $('#add_size_button').click(function(){
-	$('#sizes_cards').append(content);
+  $('#sizes_cards').append(content);
+  document.getElementById("save").disabled = false;
 });
+
+

@@ -39,6 +39,7 @@ class BouquetController extends Controller
 
     public function addRequest(Request $request){
         $this->bouquetRepository->createByReq($request);
+        return $this->indexAdmin();
     }
 
     public function edit($id){
