@@ -57,21 +57,21 @@ class FileUploadController extends Controller
         }
     }
 
-    public static function uploadFlowerPhoto($file, $flower_id, $height_id, $type)
+    public static function uploadFlowerPhoto($file, $flower_id, $type)
     {
         $pathToDirectory = public_path() . '/media/flowers/' . $flower_id . '/';
-        if(file_exists($pathToDirectory . $height_id . '_' . $type . '.jpg'))
-            unlink($pathToDirectory . $height_id . '_' . $type . '.jpg');
+        if(file_exists($pathToDirectory . $type . '.jpg'))
+            unlink($pathToDirectory . $type . '.jpg');
             
-        $file->move($pathToDirectory, $height_id . '_' . $type . '.jpg' );
+        $file->move($pathToDirectory,  $type . '.jpg' );
     }
 
-    public static function deleteFlowerPhoto($flower_id, $height_id)
+    public static function deleteFlowerPhoto($flower_id)
     {
         $pathToDirectory = public_path() . '/media/flowers/' . $flower_id . '/';
-        if(file_exists( $pathToDirectory . $height_id . '_m' . '.jpg'))
-            unlink( $pathToDirectory . $height_id . '_m' . '.jpg' );
-        if(file_exists( $pathToDirectory . $height_id . '_h' . '.jpg'))
-            unlink( $pathToDirectory . $height_id . '_h' . '.jpg' );
+        if(file_exists( $pathToDirectory . 'm' . '.jpg'))
+            unlink( $pathToDirectory . 'm' . '.jpg' );
+        if(file_exists( $pathToDirectory . 'h' . '.jpg'))
+            unlink( $pathToDirectory . 'h' . '.jpg' );
     }
 }

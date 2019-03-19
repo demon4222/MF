@@ -14,18 +14,20 @@
   </div>
   <div class="form-group">
     <label for="exampleFormControlSelect1">Категорія</label>
-    <select class="form-control" name="category" id="category" required="required">
-      <option value="1">Виберіть</option>
-     
+    <select class="form-control" name="category" id="category" required>
+    <option value="none">Виберіть</option>
+      @foreach($categories as $category)
+        <option value="{{$category->id}}">{{$category->name}}</option>
+      @endforeach
     </select>
   </div>
   <div class="form-group">
     <label >Для вітрини</label><br/>
-    <input type="file" class="add_photo_b" name="main_photo[]" accept="image/jpeg" required>
+    <input type="file" class="add_photo_b" name="main_photo" accept="image/jpeg" required>
   </div>
   <div class="form-group">
     <label >Для вітрини(при наведені)</label><br/>
-    <input type="file" class="add_photo_b" name="hover_photo[]" accept="image/jpeg" required>
+    <input type="file" class="add_photo_b" name="hover_photo" accept="image/jpeg" required>
   </div>
   <div class="form-group">
     <label for="exampleFormControlSelect1">Висота</label><br>

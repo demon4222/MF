@@ -101,7 +101,6 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
             'description' => $bouquet->description,
             'sizes' => $bouquetSizes,
         ];
-    
         return $data;
     }
 

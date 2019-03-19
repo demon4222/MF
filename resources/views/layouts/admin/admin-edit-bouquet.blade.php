@@ -1,5 +1,11 @@
 @extends('admin')
 
+@push('scripts')
+<script type="text/javascript" src="{{asset('js/admin/bouquetSubTypes.js')}}"></script>
+
+<script type="text/javascript" src="{{asset('js/admin/add-size.js')}}"></script>
+@endpush
+
 @section('content')
 
 <form method="post" enctype="multipart/form-data" action="/admin/edit-bouquet/{{$bouquetData['id']}}">

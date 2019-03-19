@@ -17,12 +17,12 @@ class Flower extends Model implements Transformable
 
     public function heights()
     {
-        $this->belobgsToMany('App\Models\Height');
+        return $this->belongsToMany('App\Models\Height')->withPivot(['price']);
     }
     
     public function categories()
     {
-        $this->belongsTo('App\Models\FlowerCategory');
+        return $this->belongsTo('App\Models\FlowerCategory');
     }
 
     /**
@@ -30,7 +30,7 @@ class Flower extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = ['id','name','flower_category_id'];
+    protected $fillable = ['id','name','flower_category_id', 'description'];
 
     public $timestamps = false;
 }

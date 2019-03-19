@@ -21,6 +21,7 @@ class CreateFlowersTable extends Migration
             $table->integer('flower_category_id')->unsigned();
             $table->foreign('flower_category_id')->references('id')->on('flower_categories');
 
+            $table->text('description');
         });
     }
 

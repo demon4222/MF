@@ -17,7 +17,7 @@ class Height extends Model implements Transformable
 
     public function flowers()
     {
-        $this->belobgsToMany('App\Models\Flower');
+        $this->belongsToMany('App\Models\Flower');
     }
 
     /**

@@ -17,4 +17,13 @@ function f1(){
     {
         document.getElementById("save").disabled = true;
     }
-};
+}
+// $('#save').click(function(event){
+//   var elem = document.getElementById("category");
+//   var elemValue = elem.options[elem.selectedIndex].value;
+//   if(elemValue == "none")
+//   {
+//     event.preventDefault();
+//     alert("Виберіть Категорію");
+//   }
+// });

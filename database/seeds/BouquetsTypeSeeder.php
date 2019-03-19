@@ -75,5 +75,11 @@ class BouquetsTypeSeeder extends Seeder
             'size_id' => 1,
             'price'=> 111,
         ]);
+        DB::table('flower_categories')->insert([
+            'name'    => 'троянда'
+        ]);
+        DB::table('flower_categories')->insert([
+            'name'    => 'тюльпан'
+        ]);
     }
 }

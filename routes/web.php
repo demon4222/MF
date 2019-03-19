@@ -51,4 +51,6 @@ Route::get('/admin/all-bouquets/delete/{bouquet_id}', 'BouquetController@delete'
 Route::get('/admin/flowers/','FlowerController@indexAdmin');
 Route::get('/admin/flowers/add-flower', 'FlowerController@add');
 Route::post('/admin/flowers/add-flower', 'FlowerController@addRequest');
+Route::get('/admin/flowers/edit/{flower_id}', 'FlowerController@getForEdit');
+Route::post('/admin/flowers/edit', 'FlowerController@editRequest');
 /*ENDADMIN*/
