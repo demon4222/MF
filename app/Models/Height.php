@@ -7,22 +7,17 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class Flower.
+ * Class Height.
  *
  * @package namespace App\Models;
  */
-class Flower extends Model implements Transformable
+class Height extends Model implements Transformable
 {
     use TransformableTrait;
 
-    public function heights()
+    public function flowers()
     {
-        $this->belobgsToMany('App\Models\Height');
-    }
-    
-    public function categories()
-    {
-        $this->belongsTo('App\Models\FlowerCategory');
+        $this->belobgsToMany('App\Models\Flower');
     }
 
     /**
@@ -30,7 +25,8 @@ class Flower extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = ['id','name','flower_category_id'];
+    protected $fillable = ['height'];
 
     public $timestamps = false;
+
 }

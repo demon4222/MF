@@ -18,18 +18,9 @@ class CreateFlowersTable extends Migration
 
             $table->char('name',100);
 
-            $table->boolean('exist');
+            $table->integer('flower_category_id')->unsigned();
+            $table->foreign('flower_category_id')->references('id')->on('flower_categories');
 
-            $table->integer('height_id')->unsigned();
-            $table->foreign('height_id')->references('id')->on('heights');
-
-            $table->integer('price')->unsigned();
-
-            $table->mediumText('description');
-
-            $table->string('main_photo',200);
-            $table->string('hover_photo',200);
-            $table->string('additional_photo',200);
         });
     }
 

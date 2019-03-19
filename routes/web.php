@@ -36,7 +36,10 @@ Route::post('/admin/head-slider/{slide_id}/change-button','HeadSliderController@
 Route::post('/admin/head-slider/{slide_id}/change-text','HeadSliderController@changeText');
 Route::post('/admin/head-slider/{slide_id}/change-photo','HeadSliderController@changePhoto');
 Route::post('/admin/head-slider/{slide_id}/delete','HeadSliderController@delete');
-Route::get('/admin/all-products','BouquetController@indexAdmin');
+Route::get('/admin/bouquets/','BouquetController@indexAdmin');
+Route::get('/admin/all-products', function(){
+    return view('layouts.admin.admin-all-products');
+});
 Route::get('/admin/add-bouquet','BouquetController@add');
 Route::post('/admin/add-bouquet/ajax-subtypes','BouquetsSubTypeController@getSubTypes');
 Route::post('/admin/add-bouquet','BouquetController@addRequest');
@@ -44,4 +47,8 @@ Route::get('/admin/edit-bouquet/{bouquet_id}', 'BouquetController@edit');
 Route::post('/admin/edit-bouquet/{bouquet_id}', 'BouquetController@editRequest');
 Route::get('/admin/edit-bouquet/delete-size/{size_id}/{bouquet_id}', 'BouquetSizeController@deleteSize');
 Route::get('/admin/all-bouquets/delete/{bouquet_id}', 'BouquetController@delete');
+
+Route::get('/admin/flowers/','FlowerController@indexAdmin');
+Route::get('/admin/flowers/add-flower', 'FlowerController@add');
+Route::post('/admin/flowers/add-flower', 'FlowerController@addRequest');
 /*ENDADMIN*/

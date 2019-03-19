@@ -26,7 +26,7 @@ class BouquetController extends Controller
         // dd($bouquets);
         // $bouquets = $this->bouquetRepository->with(['sizes'])->find(1);
         // dd($bouquets->sizes[0]);
-		return view('layouts.admin.admin-all-products', compact('bouquets'));
+		return view('layouts.admin.admin-all-bouquets', compact('bouquets'));
     }
     
     public function add(){

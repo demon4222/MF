@@ -56,4 +56,22 @@ class FileUploadController extends Controller
             rmdir($pathToDirectory);
         }
     }
+
+    public static function uploadFlowerPhoto($file, $flower_id, $height_id, $type)
+    {
+        $pathToDirectory = public_path() . '/media/flowers/' . $flower_id . '/';
+        if(file_exists($pathToDirectory . $height_id . '_' . $type . '.jpg'))
+            unlink($pathToDirectory . $height_id . '_' . $type . '.jpg');
+            
+        $file->move($pathToDirectory, $height_id . '_' . $type . '.jpg' );
+    }
+
+    public static function deleteFlowerPhoto($flower_id, $height_id)
+    {
+        $pathToDirectory = public_path() . '/media/flowers/' . $flower_id . '/';
+        if(file_exists( $pathToDirectory . $height_id . '_m' . '.jpg'))
+            unlink( $pathToDirectory . $height_id . '_m' . '.jpg' );
+        if(file_exists( $pathToDirectory . $height_id . '_h' . '.jpg'))
+            unlink( $pathToDirectory . $height_id . '_h' . '.jpg' );
+    }
 }

@@ -1,5 +1,9 @@
 @extends('admin')
 
+@push('scripts')
+<script type="text/javascript" src="{{asset('js/head-slider.js')}}"></script>
+@endpush
+
 @section('content')
 <section class="block">
   <h1 class="mt-4 mb-3">Головний слайдер</h1>

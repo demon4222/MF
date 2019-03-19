@@ -3,8 +3,18 @@
  * Copyright 2013-2019 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
  */
-body {
-  overflow-x: hidden;
+ @font-face {
+  font-family: latoregular; 
+  src: url(/fonts/LatoRegular.woff); 
+}
+@font-face {
+  font-family: latobold; 
+  src: url(/fonts/LatoBold.woff); 
+}
+body{
+font-family: latoregular,latobold,lucida grande,Tahoma,Sans-Serif;
+  font-size: 16px;
+  color: #333333; overflow-x: hidden;
   background-color: rgba(0,0,0,.7);
 }
 
@@ -79,6 +89,20 @@ body {
 
 #subTypeSelect{
   display: none;
+}
+
+.card a{
+  background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	background-size: cover;
+}
+.card a img{
+  opacity: 0;
+  transition: 0.3s;
+}
+.card a img:hover{
+  opacity:1;
 }
 
 

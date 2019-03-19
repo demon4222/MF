@@ -89,12 +89,11 @@
   </script>
   <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  
   <script type="text/javascript" src="{{asset('slick/slick.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/hits-slider.js')}}"></script>
-  <script type="text/javascript" src="{{asset('js/head-slider.js')}}"></script>
 
-  <script type="text/javascript" src="{{asset('js/admin/bouquetSubTypes.js')}}"></script>
-  <script type="text/javascript" src="{{asset('js/admin/add-size.js')}}"></script>
+  @stack('scripts')
 
   <link rel="stylesheet" type="text/css" href="{{asset('css/head-slider-style.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('css/hits-slider-style.css')}}">

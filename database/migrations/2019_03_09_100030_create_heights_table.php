@@ -16,8 +16,6 @@ class CreateHeightsTable extends Migration
         Schema::create('heights', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('height');
-            $table->integer('unit_id')->unsigned();
-            $table->foreign('unit_id')->references('id')->on('height_units');
         });
     }
 

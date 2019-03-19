@@ -50,8 +50,8 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
     {
         // dd($req->all());
         $data = [
-            "name"        => $req->name,
-            "sub_type_id" => $req->subType,
+            "name"        => mb_strtoupper($req->name),
+            "sub_type_id" => mb_strtoupper($req->subType),
     		"description" => $req->description,
         ];
         $bouquet = $this->create($data);
@@ -60,7 +60,7 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
         for($i=0; $i<$sizes_count; $i++)
         {
             $data = [
-                "size" => $req->size_name[$i],
+                "size" => mb_strtoupper($req->size_name[$i]),
                 "count"    => $req->size_count[$i],
                 "diameter" => $req->size_diameter[$i],
                 "height"   => $req->size_height[$i],
@@ -101,21 +101,15 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
             'description' => $bouquet->description,
             'sizes' => $bouquetSizes,
         ];
-        
-        // foreach($data['sizes'] as $size)
-        // {
-        //     // dd($data['id'].$size['id']);
-        // }
     
         return $data;
-
     }
 
     public function editByReq($id, $req)
     {
         $bouquet = $this->find($id);
         $data = [
-            'name' => $req->name,
+            'name' => mb_strtoupper($req->name),
             'sub_type_id' => $req->subType,
             'description' => $req->description,
         ];
@@ -127,7 +121,7 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
             for($i=0; $i<$sizes_exist_count; $i++)
             {
                 $data = [
-                    "size" => $req->size_name[$i],
+                    "size" => mb_strtoupper($req->size_name[$i]),
                     "count"    => $req->size_count[$i],
                     "diameter" => $req->size_diameter[$i],
                     "height"   => $req->size_height[$i],
@@ -172,7 +166,7 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
             for($i=$sizes_exist_count; $i<$sizes_new_count+$sizes_exist_count; $i++)
             {
                 $data = [
-                    "size" => $req->size_name[$i],
+                    "size" => mb_strtoupper($req->size_name[$i]),
                     "count"    => $req->size_count[$i],
                     "diameter" => $req->size_diameter[$i],
                     "height"   => $req->size_height[$i],
