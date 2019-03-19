@@ -21,11 +21,11 @@ var content = '<div id="new_size_block" class="mr-2">\
       <label>Ціна</label>\
       <input type="number" name="price[]" class="form-control">\
       <label >Головне фото</label>\
-      <input type="file" class="add_photo_b" name="main_photo[]" multiple accept="image/jpeg" required>\
+      <input type="file" class="add_photo_b" name="main_photo[]" accept="image/jpeg" required>\
       <label >При наведені</label>\
-      <input type="file" class="add_photo_b" name="hover_photo[]" multiple accept="image/jpeg" required>\
+      <input type="file" class="add_photo_b" name="hover_photo[]" accept="image/jpeg" required>\
       <label >Додаткове</label>\
-      <input type="file" class="add_photo_b" name="add_photo[]" multiple accept="image/jpeg" required>\
+      <input type="file" class="add_photo_b" name="add_photo[]" accept="image/jpeg" required>\
     </div>';
 
 

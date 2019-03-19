@@ -43,4 +43,5 @@ Route::post('/admin/add-bouquet','BouquetController@addRequest');
 Route::get('/admin/edit-bouquet/{bouquet_id}', 'BouquetController@edit');
 Route::post('/admin/edit-bouquet/{bouquet_id}', 'BouquetController@editRequest');
 Route::get('/admin/edit-bouquet/delete-size/{size_id}/{bouquet_id}', 'BouquetSizeController@deleteSize');
+Route::get('/admin/all-bouquets/delete/{bouquet_id}', 'BouquetController@delete');
 /*ENDADMIN*/

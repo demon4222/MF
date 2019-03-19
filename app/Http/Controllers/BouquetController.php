@@ -52,7 +52,13 @@ class BouquetController extends Controller
     public function editRequest(Request $req, $id)
     {
         $this->bouquetRepository->editByReq($id, $req);
-        return $this->edit($id);
+        return $this->indexAdmin();
+    }
+
+    public function delete($id)
+    {
+        $this->bouquetRepository->deleteBouquet($id);
+        return back();
     }
 
 }

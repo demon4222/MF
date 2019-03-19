@@ -4,14 +4,15 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\BouquetRepository;
-use App\Models\Bouquet;
 use App\Validators\BouquetValidator;
-use App\Repositories\SizeRepositoryEloquent;
 use Illuminate\Container\Container as Application;
 use App\Models\BouquetSize;
+use App\Models\Bouquet;
 use App\Http\Controllers\FileUploadController;
+use App\Repositories\BouquetRepository;
+use App\Repositories\SizeRepositoryEloquent;
 use App\Repositories\BouquetSubTypeRepositoryEloquent;
+use App\Repositories\BouquetSizeRepositoryEloquent;
 
 /**
  * Class BouquetRepositoryEloquent.
@@ -24,11 +25,14 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
 
     private $subType;
 
+    private $bouquetSize;
+
     public function __construct(BouquetSubTypeRepositoryEloquent $subType,
-    SizeRepositoryEloquent $size,Application $app)
+    SizeRepositoryEloquent $size, BouquetSizeRepositoryEloquent $bouquetSize, Application $app)
     {
         $this->size = $size;
         $this->subType = $subType;
+        $this->bouquetSize = $bouquetSize;
         parent::__construct($app);
     }
     
@@ -62,7 +66,7 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
                 "height"   => $req->size_height[$i],
             ];
             $size = $this->size->firstOrCreate($data);
-            BouquetSize::create([
+            $this->bouquetSize->create([
                 'bouquet_id'=> $bouquet->id,
                 'size_id'   => $size->id,
                 'price'     => $req->price[$i],
@@ -128,26 +132,38 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
                     "diameter" => $req->size_diameter[$i],
                     "height"   => $req->size_height[$i],
                 ];
-                $size = $this->size->findWhere($data);
+                $size = $this->size->findWhere($data)->first();
                 if($size->first()===null)
                 {
                     $newSize = $this->size->create($data);
-                    BouquetSize::create([
+                    $this->bouquetSize->create([
                         'bouquet_id'=> $id,
                         'size_id'   => $newSize->id,
                         'price'     => $req->price[$i],
                     ]);
+                    if(isset($req->main_photo[$i]))
+                        FileUploadController::uploadBouquetPhoto($req->main_photo[$i],$bouquet->id,$$newSize->id,'m');
+                    if(isset($req->hover_photo[$i]))
+                        FileUploadController::uploadBouquetPhoto($req->hover_photo[$i],$bouquet->id,$newSize->id,'h');
+                    if(isset($req->add_photo[$i]))
+                        FileUploadController::uploadBouquetPhoto($req->add_photo[$i],$bouquet->id,$newSize->id,'a');
+                    if(isset($req->general_photo))    
+                        FileUploadController::uploadGeneralBouquetPhoto($req->general_photo,$bouquet->id,'g');
+                    if(isset($req->general_photo_hover))
+                        FileUploadController::uploadGeneralBouquetPhoto($req->general_photo_hover,$bouquet->id,'gh');
                 }
-                if(isset($req->main_photo[$i]))
-                    FileUploadController::uploadBouquetPhoto($req->main_photo[$i],$bouquet->id,$size->id,'m');
-                if(isset($req->hover_photo[$i]))
-                    FileUploadController::uploadBouquetPhoto($req->hover_photo[$i],$bouquet->id,$size->id,'h');
-                if(isset($req->add_photo[$i]))
-                    FileUploadController::uploadBouquetPhoto($req->add_photo[$i],$bouquet->id,$size->id,'a');
-                if(isset($req->general_photo))    
-                    FileUploadController::uploadGeneralBouquetPhoto($req->general_photo,$bouquet->id,'g');
-                if(isset($req->general_photo_hover))
-                    FileUploadController::uploadGeneralBouquetPhoto($req->general_photo_hover,$bouquet->id,'gh');
+                else{
+                    if(isset($req->main_photo[$i]))
+                        FileUploadController::uploadBouquetPhoto($req->main_photo[$i],$bouquet->id,$size->id,'m');
+                    if(isset($req->hover_photo[$i]))
+                        FileUploadController::uploadBouquetPhoto($req->hover_photo[$i],$bouquet->id,$size->id,'h');
+                    if(isset($req->add_photo[$i]))
+                        FileUploadController::uploadBouquetPhoto($req->add_photo[$i],$bouquet->id,$size->id,'a');
+                    if(isset($req->general_photo))    
+                        FileUploadController::uploadGeneralBouquetPhoto($req->general_photo,$bouquet->id,'g');
+                    if(isset($req->general_photo_hover))
+                        FileUploadController::uploadGeneralBouquetPhoto($req->general_photo_hover,$bouquet->id,'gh');
+                }
             }
         }
         $sizes_new_count = count($req->size_name) - $sizes_exist_count;
@@ -163,7 +179,7 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
                 ];
 
                 $newSize = $this->size->firstOrCreate($data);
-                BouquetSize::updateOrCreate([
+                $this->bouquetSize->updateOrCreate([
                     'bouquet_id'=> $id,
                     'size_id'   => $newSize->id,
                     'price'     => $req->price[$i],
@@ -176,10 +192,23 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
                 if(isset($req->add_photo[$i]))
                     FileUploadController::uploadBouquetPhoto($req->add_photo[$i],$bouquet->id,$newSize->id,'a');
                 if(isset($req->general_photo))
-                    FileUploadController::uploadGeneralBouquetPhoto($req->general_photo,$bouquet->id);
+                    FileUploadController::uploadGeneralBouquetPhoto($req->general_photo,$bouquet->id,'g');
+                    if(isset($req->general_photo))
+                    FileUploadController::uploadGeneralBouquetPhoto($req->general_photo_hover,$bouquet->id,'gh');
             }
         }
         
+    }
+
+    public function deleteBouquet($id)
+    {
+        $bouquetSizes = $this->bouquetSize->findWhere(['bouquet_id'=>$id]);
+        foreach($bouquetSizes as $bouquetSize)
+        {
+            FileUploadController::deleteBouquetsPhoto($id, $bouquetSize->size_id);
+        }
+        $this->bouquetSize->deleteWhere(['bouquet_id'=>$id]);
+        $this->delete($id);
     }
 
     /**
