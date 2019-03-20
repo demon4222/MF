@@ -44,6 +44,8 @@ class FlowerController extends Controller
     public function editRequest(Request $req)
     {
         $this->flowerRepository->editByReq($req);
-        
+        return redirect()->action(
+            'FlowerController@indexAdmin'
+        );
     }
 }

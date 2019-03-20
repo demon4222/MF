@@ -9,7 +9,7 @@
 
 
 var content = '<div id="new_size_block" class="mr-2">\
-	  <a class="btn btn-danger" onclick="this.parentNode.remove();f1();" id="delete_size_button" href="#" role="button">Видалити</a>\
+	  <a class="btn btn-danger" onclick="this.parentNode.remove();" id="delete_size_button" href="#" role="button">Видалити</a>\
       <label>Розмір</label>\
       <input type="text" name="size_name[]" required class="form-control">\
       <label>Кількість</label>\
@@ -31,13 +31,13 @@ var content = '<div id="new_size_block" class="mr-2">\
 
 $('#add_size_button').click(function(){
   $('#sizes_cards').append(content);
-  document.getElementById("save").disabled = false;
 });
-function f1(){
+$('#save').click(function(event){
   if($("#new_size_block").length == 0)
   {
-      document.getElementById("save").disabled = true;
+    event.preventDefault();
+    alert("Додайте хоча б один розмір");
   }
-};
+});
 
 

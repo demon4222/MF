@@ -69,7 +69,7 @@
     <label for="exampleFormControlTextarea1">Опис</label>
     <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{$bouquetData['description']}}</textarea>
   </div>
-  <button type="submit" class="btn btn-success">Зберегти</button>
+  <button type="submit" id="save" class="btn btn-success">Зберегти</button>
 </form>
 
 @endsection
