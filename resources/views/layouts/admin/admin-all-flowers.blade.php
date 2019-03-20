@@ -13,7 +13,7 @@
             </a>
             <div class="card-body">
                 <h5 class="card-title">{{$flower->name}}</h5>
-                <p class="card-text">{{$flower->description}}</p>
+                <p class="card-text">{{$prices[$flower->id]}} <span>грн</span></p>
                 <a href="/admin/flowers/edit/{{$flower->id}}" class="btn btn-primary">Редагувати</a>
                 <a href="/admin/flowers/delete/{{$flower->id}}" class="btn btn-danger">Видалити</a>
             </div>

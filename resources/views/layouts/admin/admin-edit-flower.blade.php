@@ -37,7 +37,7 @@
   @foreach($data['heights'] as $height)
     <div id="new_height_block" class="mr-2">
     <input name="height_id[]" type="hidden" value="{{$height['id']}}">
-	  <a class="btn btn-danger" onclick="this.parentNode.remove();f1();" id="delete_heigth_button" href="#" role="button">Видалити</a><br/>
+	  <a class="btn btn-danger" onclick="this.parentNode.remove();f1();" id="delete_heigth_button" href="/admin/flowers/edit/{{$data['flower_id']}}/delete-height/{{$height['id']}}" role="button">Видалити</a><br/>
       <label>Висота</label>
       <input type="number" value="{{$height['height']}}" name="height[]" required class="form-control">
       <label>Ціна</label>

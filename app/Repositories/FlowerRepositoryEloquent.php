@@ -41,6 +41,18 @@ class FlowerRepositoryEloquent extends BaseRepository implements FlowerRepositor
         parent::__construct($app);
     }
 
+    public function getPrices()
+    {
+        $flowers = $this->all();
+        $prices = collect();
+        foreach($flowers as $flower)
+        {
+            $price = $flower->heights()->orderBy('height')->first()->pivot->price;
+            $prices->put($flower->id, $price);
+        }
+        return $prices->all();
+    }
+
     public function createByReq($req)
     {
         

@@ -53,4 +53,5 @@ Route::get('/admin/flowers/add-flower', 'FlowerController@add');
 Route::post('/admin/flowers/add-flower', 'FlowerController@addRequest');
 Route::get('/admin/flowers/edit/{flower_id}', 'FlowerController@getForEdit');
 Route::post('/admin/flowers/edit', 'FlowerController@editRequest');
+Route::get('/admin/flowers/edit/{flower_id}/delete-height/{height_id}','FlowerHeightController@deleteHeight');
 /*ENDADMIN*/

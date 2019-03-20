@@ -18,7 +18,8 @@ class FlowerController extends Controller
     public function indexAdmin()
     {
         $flowers = $this->flowerRepository->all();
-        return view('layouts.admin.admin-all-flowers', compact('flowers'));
+        $prices = $this->flowerRepository->getPrices();
+        return view('layouts.admin.admin-all-flowers', compact('flowers','prices'));
     }
     public function add()
     {

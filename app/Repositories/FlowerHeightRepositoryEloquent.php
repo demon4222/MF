@@ -25,7 +25,10 @@ class FlowerHeightRepositoryEloquent extends BaseRepository implements FlowerHei
         return FlowerHeight::class;
     }
 
-    
+    public function deleteHeight($height_id, $flower_id)
+    {
+        $this->deleteWhere(['flower_id' => $flower_id, 'height_id' => $height_id]);
+    }
 
     /**
      * Boot up the repository, pushing criteria

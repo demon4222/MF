@@ -83,6 +83,18 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
 
     }
 
+    public function getPrices()
+    {
+        $bouquets = $this->all();
+        $prices = collect();
+        foreach($bouquets as $bouquet)
+        {
+            $price = $bouquet->sizes()->orderBy('count')->first()->pivot->price;
+            $prices->put($bouquet->id, $price);
+        }
+        return $prices->all();
+    }
+
     public function getForEdit($id)
     {
         
@@ -146,11 +158,11 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
                         FileUploadController::uploadBouquetPhoto($req->add_photo[$i],$bouquet->id,$newSize->id,'a');
                 }
                 else{
-                    $id = $this->bouquetSize->findWhere([
+                    $bouquetSize_id = $this->bouquetSize->findWhere([
                         'bouquet_id'=>$bouquet->id,
                         'size_id'=>$size->id
                     ])->first()->id;
-                    $this->bouquetSize->update(['price' => $req->price[$i]],$id);
+                    $this->bouquetSize->update(['price' => $req->price[$i]],$bouquetSize_id);
                     if(isset($req->main_photo[$i]))
                         FileUploadController::uploadBouquetPhoto($req->main_photo[$i],$bouquet->id,$size->id,'m');
                     if(isset($req->hover_photo[$i]))

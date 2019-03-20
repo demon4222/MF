@@ -8,6 +8,7 @@ use App\BouquetsSubType;
 use App\Repositories\BouquetRepositoryEloquent as Bouquet;
 use App\Repositories\SizeRepositoryEloquent as Size;
 use App\Repositories\BouquetTypeRepositoryEloquent as BouquetType;
+use App\Repositories\BouquetSizeRepositoryEloquent as BouquetSize;
 
 class BouquetController extends Controller
 {
@@ -15,23 +16,26 @@ class BouquetController extends Controller
 
     private $bouquetTypeRepository;
 
-    public function __construct(Bouquet $bouquetRepository, BouquetType $bouquetTypeRepository) {
+    private $bouquetSizeRepository;
+
+    public function __construct(Bouquet $bouquetRepository,
+     BouquetType $bouquetTypeRepository, BouquetSize $bouquetSizeRepository) {
 
         $this->bouquetRepository = $bouquetRepository;
         $this->bouquetTypeRepository = $bouquetTypeRepository;
+        $this->bouquetSizeRepository = $bouquetSizeRepository;
     }
 
 	public function indexAdmin(){
         $bouquets = $this->bouquetRepository->all();
-        // dd($bouquets);
-        // $bouquets = $this->bouquetRepository->with(['sizes'])->find(1);
-        // dd($bouquets->sizes[0]);
-		return view('layouts.admin.admin-all-bouquets', compact('bouquets'));
+        $prices = $this->bouquetRepository->getPrices();
+		return view('layouts.admin.admin-all-bouquets', compact('bouquets','prices'));
     }
     
     public function add(){
         
         $bouquetTypes = $this->bouquetTypeRepository->all();
+        // $bouquetPrices = $this->
         // $bouquet = Bouquet::with('sizes')->find(1);
         //  dd($bouquet->sizes[0]->pivot->price=4);
     	return view('layouts.admin.admin-add-bouquet',compact('bouquetTypes'));

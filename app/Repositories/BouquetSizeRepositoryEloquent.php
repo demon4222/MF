@@ -27,7 +27,7 @@ class BouquetSizeRepositoryEloquent extends BaseRepository implements BouquetSiz
 
     public function deleteSize($sizeId, $bouquetId)
     {
-        $size = $this->deleteWhere(['size_id' => $sizeId, 'bouquet_id' => $bouquetId]);
+        $this->deleteWhere(['size_id' => $sizeId, 'bouquet_id' => $bouquetId]);
     }
 
     /**
