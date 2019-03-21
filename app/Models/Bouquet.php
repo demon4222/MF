@@ -35,6 +35,11 @@ class Bouquet extends Model implements Transformable
        return $this->belongsToMany('App\Models\Size')->withPivot(['price']);
      }
 
+     public function hitsSlider()
+     {
+       return $this->hasOne('App\Models\HitsSlider');
+     }
+
      public $timestamps = false;
 
    //  public function sizes()

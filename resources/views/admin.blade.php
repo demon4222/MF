@@ -30,7 +30,7 @@
       <div class="sidebar-heading text-light">Million Flowers</div>
       <div class="list-group list-group-flush">
         <a href="/admin/head-slider" class="list-group-item list-group-item-action">Головний слайдер</a>
-        <a href="#" class="list-group-item list-group-item-action">Хіти продаж</a>
+        <a href="/admin/hits-slider" class="list-group-item list-group-item-action">Хіти продаж</a>
         <a href="#" class="list-group-item list-group-item-action">Букет дня</a>
         <a href="/admin/all-products" class="list-group-item list-group-item-action">Всі товари</a>
         <a href="/admin/nav-edit" class="list-group-item list-group-item-action">Меню</a>
@@ -68,6 +68,7 @@
       </nav>
 
       <div class="container-fluid">
+        
         @yield('content')
       </div>
     </div>
@@ -91,7 +92,6 @@
   <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   
   <script type="text/javascript" src="{{asset('slick/slick.min.js')}}"></script>
-  <script type="text/javascript" src="{{asset('js/hits-slider.js')}}"></script>
 
   @stack('scripts')
 

@@ -54,4 +54,8 @@ Route::post('/admin/flowers/add-flower', 'FlowerController@addRequest');
 Route::get('/admin/flowers/edit/{flower_id}', 'FlowerController@getForEdit');
 Route::post('/admin/flowers/edit', 'FlowerController@editRequest');
 Route::get('/admin/flowers/edit/{flower_id}/delete-height/{height_id}','FlowerHeightController@deleteHeight');
+
+Route::get('/admin/hits-slider', 'HitsSliderController@indexAdmin');
+Route::get('/admin/add-to-hits/{bouquet_id}', 'HitsSliderController@addBouquet');
+Route::get('/admin/hits-slider/delete-slide/{slide_id}', 'HitsSliderController@deleteSlide');
 /*ENDADMIN*/

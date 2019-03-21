@@ -48,7 +48,7 @@
     <label for="exampleFormControlTextarea1">Опис</label>
     <textarea required class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
   </div>
-  <button id="save" disabled type="submit" class="btn btn-success">Додати</button>
+  <button id="save" type="submit" class="btn btn-success">Додати</button>
 </form>
 
 @endsection
