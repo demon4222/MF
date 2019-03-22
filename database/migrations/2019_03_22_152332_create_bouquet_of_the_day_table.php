@@ -19,7 +19,7 @@ class CreateBouquetOfTheDayTable extends Migration
             $table->integer('bouquet_id')->unsigned();
             $table->foreign('bouquet_id')->references('id')->on('bouquets');
 
-            $table->integer('discount');
+            $table->decimal('discount',5,3);
         });
     }
 

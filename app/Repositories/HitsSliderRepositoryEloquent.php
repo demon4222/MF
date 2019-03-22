@@ -42,6 +42,10 @@ class HitsSliderRepositoryEloquent extends BaseRepository implements HitsSliderR
         {
             $this->create(['bouquet_id' => $bouquet_id]);
         }
+        else
+        {
+            $this->create(['bouquet_id' => $bouquet_id]);
+        }
     }
 
     /**

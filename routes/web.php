@@ -16,11 +16,7 @@
 // DB::listen(function($query) {
 //     var_dump($query->time);
 // });
-Route::get('/', function () {
-	$head_slides = DB::table('head_sliders')->get();
-	
-    return view('home',['head_slides' => $head_slides]);
-});
+Route::get('/', 'HomeController@index');
 Route::get('/item', function () {
     return view('layouts.item');
 });

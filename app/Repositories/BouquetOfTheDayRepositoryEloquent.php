@@ -35,6 +35,27 @@ class BouquetOfTheDayRepositoryEloquent extends BaseRepository implements Bouque
         return BouquetOfTheDay::class;
     }
 
+    public function getDiscountPrice($bouquet)
+    {
+        $discount = $this->findWhere(['bouquet_id' => $bouquet->id])->first()->discount;
+        $oldPrice = $bouquet->sizes()->orderBy('count')->first()->pivot->price;
+        $newPrice = $oldPrice - ( $discount / 100 ) * $oldPrice;
+        return $newPrice;
+    }
+
+    public function getForHome()
+    {
+        $bouquetOfTheDay = $this->first()->bouquet;
+        $discountPrice = $this->getDiscountPrice($bouquetOfTheDay);
+        $data = [
+            'id' => $bouquetOfTheDay->id,
+            'name' => $bouquetOfTheDay->name,
+            'usual_price' => $bouquetOfTheDay->sizes()->orderBy('count')->first()->pivot->price,
+            'discount_price' => round($discountPrice)
+        ];
+        return $data;
+    }
+
     public function newBouquetofTheDay($req)
     {
         $bouquetOfTheDay = $this->findWhere(['bouquet_id' => $req->bouquet_id])->first();

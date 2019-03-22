@@ -10,6 +10,7 @@ $('#discount_input').keyup(function(){
     var old_price = Number($('#old_price')[0].innerHTML);
     var discount = $('#discount_input').val();
     var new_price = old_price - ((discount/100)*old_price);
+    new_price = Math.round(new_price);
     $('#new_price').text(new_price);
 });
 

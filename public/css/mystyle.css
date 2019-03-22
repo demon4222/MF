@@ -242,6 +242,19 @@ a.b-ghost {
     height: 100%;
     object-fit: cover;
 }
+.hit-slide-photo{
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	background-size: cover;
+}
+.hit-slide-photo img{
+	opacity:0;
+	transition: 0.3s;
+}
+.hit-slide-photo img:hover{
+	opacity:1;
+}
 
 /*end*/
 
@@ -254,6 +267,19 @@ a.b-ghost {
 	border-top: 1px solid #dedede;
     border-bottom: 1px solid #dedede;
 	position: relative;
+}
+.daily-offer-photo{
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	background-size: cover;
+}
+.daily-offer img{
+	opacity:0;
+	transition: 0.3s;
+}
+.daily-offer img:hover{
+	opacity: 1;
 }
 .daily-offer-title{
 	font-size: 60px;
@@ -287,6 +313,8 @@ a.b-ghost {
 	width:200px;
 	padding: 10px; 
 }
+/*end daily-offer*/
+
 /*footer*/
 .footer-menu-title{
 	font-size: 20px;

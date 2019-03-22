@@ -15,7 +15,7 @@
             <div class="col-auto mt-3">
                 <input hidden name="bouquet_id" id="bouquet-id">
                 <a href="#" class="close-button"><i class='fas fa-window-close' style='font-size:24px;color:red'></i></a>
-                <input type="number" name="discount" class="form-control mb-2" id="discount_input" placeholder="Знижка у %">
+                <input type="number" step="any" name="discount" class="form-control mb-2" id="discount_input" placeholder="Знижка у %">
                 <label>Стара ціна: <p id="old_price"></p></label><br/>
                 <label>Нова ціна: <p id="new_price"></p></label>
             </div>
@@ -30,7 +30,7 @@
 @section('content')
 
 <a href="/admin/add-bouquet" class="b-ghost">Додати букет</a>
-<div class="product-wrapper row" style="height:1000px;">
+<div class="product-wrapper row" style="height:auto;">
     @foreach($bouquets as $bouquet)
     <div class="col-md-6 col-lg-4 product-card mb-4">
         <div class="card">
