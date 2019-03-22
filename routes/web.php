@@ -58,4 +58,6 @@ Route::get('/admin/flowers/edit/{flower_id}/delete-height/{height_id}','FlowerHe
 Route::get('/admin/hits-slider', 'HitsSliderController@indexAdmin');
 Route::get('/admin/add-to-hits/{bouquet_id}', 'HitsSliderController@addBouquet');
 Route::get('/admin/hits-slider/delete-slide/{slide_id}', 'HitsSliderController@deleteSlide');
+
+Route::post('/admin/add-bouquet-of-the-day', 'BouquetOfTheDayController@addBouquetOfTheDay');
 /*ENDADMIN*/

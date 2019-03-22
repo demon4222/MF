@@ -22,6 +22,8 @@
 
 </head>
 
+@yield('hidden')
+
 <body>
   <div class="d-flex" id="wrapper">
 

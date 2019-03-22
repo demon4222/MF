@@ -20,7 +20,7 @@ class Bouquet extends Model implements Transformable
      *
      * @var array
      */
-     protected $fillable = ['name', 'sub_type_id','description'];
+     protected $fillable = ['name', 'sub_type_id','description','bouquet_of_the_day'];
 
 	  public function join(Size $size, Photo $photo)
      {

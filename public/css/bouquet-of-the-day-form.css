@@ -1,0 +1,24 @@
+#bouquet_day_form{
+    position: absolute;
+	display: none;	
+	background-color: white;
+	color:black;
+	border:1px solid black;
+	border-radius: 15px;
+	width: auto;
+    z-index:100;
+    top:30%;
+    left: 50%;
+    height:auto;
+    width:auto;
+}
+.close-button button{
+	border:1px solid white;
+}
+.close-button{
+	display: inline-block;
+	float: right;
+}
+/* #new_price{
+    display: inline;
+} */

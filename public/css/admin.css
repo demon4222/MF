@@ -105,6 +105,12 @@ font-family: latoregular,latobold,lucida grande,Tahoma,Sans-Serif;
   opacity:1;
 }
 
+.day{
+  background-color: forestgreen;
+  color:white;
+  position: absolute;
+  bottom: 8.65rem;
+}
 
 
 

@@ -69,4 +69,10 @@ class BouquetController extends Controller
         return back();
     }
 
+    public function addBouquetOfTheDay($bouquet_id, $discount)
+    {
+        $this->bouquetRepository->newBouquetofTheDay($bouquet_id);
+        return back();
+    }
+
 }

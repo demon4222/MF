@@ -228,5 +228,4 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
 }
