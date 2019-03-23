@@ -21,7 +21,9 @@ class HomeController extends Controller
         $this->hitsSliderRepository = $hitsSliderRepository;
         $this->headSliderRepository = $headSliderRepository;
     }
-
+    /**
+     * Home page
+     */
     public function index()
     {
         $head_slides = $this->headSliderRepository->all();
@@ -30,4 +32,5 @@ class HomeController extends Controller
         $bouquetOfTheDay = $this->bouquetOfTheDayRepository->getForHome();
         return view('home', compact('head_slides','hits_slides','hits_slides_prices','bouquetOfTheDay'));
     }
+
 }

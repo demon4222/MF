@@ -42,7 +42,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-md-4 footer-brand " "><img src="img/brand.jpg" alt=""></div>
+        <div class="col-md-4 footer-brand " ><img src="{{asset('img/brand.jpg')}}" alt=""></div>
         <div class="col-md-2 footer-networks" >
           <div class="footer-menu-title mb-3">Соц. мережі</div>
           <ul class="footer-menu-links">

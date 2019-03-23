@@ -26,6 +26,30 @@ class BouquetController extends Controller
         $this->bouquetSizeRepository = $bouquetSizeRepository;
     }
 
+    public function show($slug, $size_id)
+    {
+        if (is_numeric($slug)) {
+            // Get post for slug.
+            $bouquet = $this->bouquetRepository->model()::findOrFail($slug);
+            return Redirect::to(route('bouquet.show', $bouquet->slug), 301);
+        }
+        // Get post for slug.
+        $bouquet = $this->bouquetRepository->model()::whereSlug($slug)->firstOrFail();
+        $sizes = $bouquet->sizes()->orderBy('count')->get();
+        $add_sizes= collect();
+        $i = 0;
+        foreach($sizes as $size)
+        {        
+            $id = $size->id;
+            $name = $size->size;
+            $add_sizes->put($i, ['id' => $id, 'name'=>$name]);
+            $i++;
+        }
+        $add_sizes = $add_sizes->all();
+        $size = $bouquet->sizes->find($size_id);
+        return view('layouts.show-bouquet',compact('bouquet','size','add_sizes'));
+    }
+
 	public function indexAdmin(){
         $bouquets = $this->bouquetRepository->all();
         $prices = $this->bouquetRepository->getPrices();

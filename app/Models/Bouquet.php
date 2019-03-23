@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 /**
  * Class Bouquet.
@@ -14,6 +15,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 class Bouquet extends Model implements Transformable
 {
     use TransformableTrait;
+    use Sluggable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,10 +24,23 @@ class Bouquet extends Model implements Transformable
      */
      protected $fillable = ['name', 'sub_type_id','description','bouquet_of_the_day'];
 
-	  public function join(Size $size, Photo $photo)
-     {
-       $this->sizes()->attach($size, ['photo_id' => $photo->id]);
-     }
+     /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+	  // public function join(Size $size, Photo $photo)
+    //  {
+    //    $this->sizes()->attach($size, ['photo_id' => $photo->id]);
+    //  }
 
      // public function sizes(){
      // 	return $this->belongsToMany('App\Size','bouquet_size')->withPivot('photo_id');;

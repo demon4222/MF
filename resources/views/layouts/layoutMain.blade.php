@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-    <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
-    <script src="js/modernizr.js"></script> <!-- Modernizr -->
-    <link media="screen" href="demo/styles/demo.css" type="text/css" rel="stylesheet" />
+    <link rel="shortcut icon" href="{{asset('img/brand.png')}}" type="image/png">
+    <link rel="stylesheet" href="{{asset('css/reset.css')}}"> <!-- CSS reset -->
+    <link rel="stylesheet" href="{{asset('css/style.css')}}"> <!-- Resource style -->
+    <script src="{{asset('js/modernizr.js')}}"></script> <!-- Modernizr -->
+    <link media="screen" href="{{asset('demo/styles/demo.css')}}" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('slick/slick.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('slick/slick-theme.css')}}"/>
     <title>Million Flowers</title>
 </head>
 <body>
     <div class="menu-wrap">
     <header class="cd-main-header">
+        <div class="cd-logo-icon">
+            @include('layouts.brand-icon-svg')
+        </div>
         <a class="cd-logo" href="#0">Million Flowers</a>
         <ul class="cd-header-buttons">
             <li><a class="cd-search-trigger" href="#cd-search"><span></span></a></li>
@@ -24,7 +28,7 @@
     </header>
     </div>
 
-    <main class="cd-main-content bg-white">
+    <main class="cd-main-content bg-white mb-5">
         @yield('content')   
     </main>
 
@@ -179,17 +183,17 @@
 
     @include('layouts.footer')
     <!--nav-->
-        <script src="js/jquery-2.1.1.js"></script>
-        <script src="js/jquery.mobile.custom.min.js"></script>
-        <script src="js/main.js"></script> <!-- Resource jQuery -->
+        <script src="{{asset('js/jquery-2.1.1.js')}}"></script>
+        <script src="{{asset('js/jquery.mobile.custom.min.js')}}"></script>
+        <script src="{{asset('js/main.js')}}"></script> <!-- Resource jQuery -->
     <!--nav-->
   <!-- Bootstrap tooltips -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
   <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <script type="text/javascript" src="slick/slick.min.js"></script>
-  <script type="text/javascript" src="js/product-slider.js"></script>
-<link rel="stylesheet" type="text/css" href="css/mystyle.css">
+  <script type="text/javascript" src="{{asset('slick/slick.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/product-slider.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('css/mystyle.css')}}">
 </body>
 </html>

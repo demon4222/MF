@@ -6,7 +6,7 @@
     @foreach($hits_slides as $slide)
         <div class="lazy__slide">
             <div class="hit-slide-photo" style="background-image: url('{{asset('media/bouquets/' . $slide->bouquet->id . '/g.jpg')}}')">
-                <a href="#" >
+                <a href="/bouquets/{{$slide->bouquet->slug}}/{{$slide->bouquet->sizes()->orderBy('count')->first()->id}}">
                     <img src="{{asset('media/bouquets/' . $slide->bouquet->id . '/gh.jpg')}}">
                 </a>
             </div>
