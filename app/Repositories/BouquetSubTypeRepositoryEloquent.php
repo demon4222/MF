@@ -30,6 +30,12 @@ class BouquetSubTypeRepositoryEloquent extends BaseRepository implements Bouquet
         return $this->find($id)->bouquetTypes()->first();
     }
 
+    public function getBouquets($sub_type_id)
+    {
+        $subType = $this->find($sub_type_id);
+        dd($subType);
+    }
+
     /**
      * Boot up the repository, pushing criteria
      */

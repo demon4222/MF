@@ -16,6 +16,12 @@ class AddCollumnSlugBouquets extends Migration
         Schema::table('bouquets', function (Blueprint $table) {
             $table->string('slug')->nullable()->index();
         });
+        Schema::table('bouquet_sub_types', function (Blueprint $table) {
+            $table->string('slug')->nullable()->index();
+        });
+        Schema::table('bouquet_types', function (Blueprint $table) {
+            $table->string('slug')->nullable()->index();
+        });
     }
 
     /**
@@ -26,6 +32,12 @@ class AddCollumnSlugBouquets extends Migration
     public function down()
     {
         Schema::table('bouquets', function (Blueprint $table) {
+            $table->dropColumn('slug');
+        });
+        Schema::table('bouquet_sub_types', function (Blueprint $table) {
+            $table->dropColumn('slug');
+        });
+        Schema::table('bouquet_types', function (Blueprint $table) {
             $table->dropColumn('slug');
         });
     }

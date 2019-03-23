@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 /**
  * Class BouquetType.
@@ -14,7 +15,16 @@ use Prettus\Repository\Traits\TransformableTrait;
 class BouquetType extends Model implements Transformable
 {
     use TransformableTrait;
+    use Sluggable;
 
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -29,6 +39,6 @@ class BouquetType extends Model implements Transformable
     }
 
     public function bouquets(){
-    	return $this->hasManyThrough(Bouquet::class, BouquetsSubType::class,'type_id','sub_type_id');
+    	return $this->hasManyThrough(Bouquet::class, BouquetSubType::class,'type_id','sub_type_id');
     }
 }

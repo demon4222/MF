@@ -1,5 +1,6 @@
 	<div class="daily-offer mt-5" >
 		<div class="row">
+			@if($bouquetOfTheDay!==null)
 			<div class="col-md-6 daily-offer-media">
 				<div class="daily-offer-photo text-left" style="background-image: url('{{asset('media/bouquets/' . $bouquetOfTheDay['id'] . '/g.jpg')}}');">
 					<a href="#">
@@ -23,5 +24,6 @@
 					<a href="" class="to-basket-button">детальніше</a>
 				</div>
 			</div>
+			@endif
 		</div>
 	</div>

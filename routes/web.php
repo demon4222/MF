@@ -22,6 +22,11 @@ Route::get('/item', function () {
 });
 Route::get('/bouquets','BouquetController@index');
 Route::get('/bouquets/{slug}/{size_id}','BouquetController@show')->name('bouquet.show');
+
+Route::get('/bouquet-types/{slug}','BouquetController@getBouquetsByType')->name('bouquets.byType');
+
+Route::get('/bouquet-sub-types/{slug}','BouquetController@getBouquetsBySubType')->name('bouquets.bySubType');
+// Route::get('/bouquets/{slug}','BouquetSubTypeController@indexSubTypes')->name('subType.indexSubTypes');
 /*ADMIN*/
 Route::get('/admin', function () {
     return view('admin');

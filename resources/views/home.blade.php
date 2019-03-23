@@ -50,32 +50,18 @@
                 <ul class="cd-secondary-nav is-hidden">
                     <li class="go-back"><a href="#0">Меню</a></li>
                     <li class="see-all"><a href="/bouquets">Усі букети</a></li>
-                    
+                    @foreach($types as $type)
                     <li class="has-children">
-                        <a href="#">Звичайні букети</a>
-
+                        <a href="/bouquet-types/{{$type->slug}}">{{$type->name}}</a>
                         <ul class="is-hidden">
                             <li class="go-back"><a href="#0">Букети</a></li>
                             <li class="see-all"><a href="#">Кисти</a></li>
-                            <li><a href="#">21, 51, 101 троянда</a></li>
-                            <li><a href="#">Букети з імпортних троянд</a></li>
-                            <li><a href="#0">Букети з місцевих троянд</a></li>
-                            <li><a href="#0">Букети з піоновидних троянд</a></li>
-                            <li><a href="#0">Букети з тюльпанів</a></li>
+                            @foreach($type->bouquetsSubTypes as $subType)
+                            <li><a href="/bouquet-sub-types/{{$subType->slug}}">{{$subType->name}}</a></li>
+                            @endforeach
                         </ul>
                     </li>
-
-                    <li class="has-children">
-                        <a href="#">Композиції</a>
-
-                        <ul class="is-hidden">
-                            <li class="go-back"><a href="#0">Введения</a></li>
-                            <li class="see-all"><a href="#">Термины</a></li>
-                            <li><a href="#">Композиції з місцевих квітів</a></li>
-                            <li><a href="#">Композиції з імпортних квітів</a></li>
-                            <li><a href="#">Композиції в коробці</a></li>
-                        </ul>
-                    </li>                    
+                    @endforeach                    
                 </ul>
             </li>
 

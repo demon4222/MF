@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\BouquetsType;
-use App\BouquetsSubType;
+use App\Models\BouquetSubType;
 use App\Repositories\BouquetRepositoryEloquent as Bouquet;
 use App\Repositories\SizeRepositoryEloquent as Size;
 use App\Repositories\BouquetTypeRepositoryEloquent as BouquetType;
@@ -31,7 +30,7 @@ class BouquetController extends Controller
         if (is_numeric($slug)) {
             // Get post for slug.
             $bouquet = $this->bouquetRepository->model()::findOrFail($slug);
-            return Redirect::to(route('bouquet.show', $bouquet->slug), 301);
+            return redirect(route('bouquet.show', $bouquet->slug), 301);
         }
         // Get post for slug.
         $bouquet = $this->bouquetRepository->model()::whereSlug($slug)->firstOrFail();
@@ -52,14 +51,42 @@ class BouquetController extends Controller
 
 	public function indexAdmin(){
         $bouquets = $this->bouquetRepository->paginate(15);
-        $prices = $this->bouquetRepository->getPrices();
+        $prices = $this->bouquetRepository->getPrices($bouquets);
 		return view('layouts.admin.admin-all-bouquets', compact('bouquets','prices'));
+    }
+
+    public function getBouquetsByType($type_slug)
+    {
+        if (is_numeric($type_slug)) {
+            // Get post for slug.
+            $type = $this->bouquetTypeRepository->model()::findOrFail($type_slug);
+            return redirect(route('types.index', $type->slug), 301);
+        }
+        // Get post for slug.
+        $type = $this->bouquetTypeRepository->model()::whereSlug($type_slug)->firstOrFail();
+        $bouquets = $type->bouquets()->paginate(15);
+        $prices = $this->bouquetRepository->getPrices($bouquets);
+        return view('layouts.all-bouquets', compact('bouquets','prices'));
+    }
+
+    public function getBouquetsBySubType($sub_type_slug)
+    {
+        if (is_numeric($sub_type_slug)) {
+            // Get post for slug.
+            $subType = BouquetSubType::findOrFail($sub_type_slug);
+            return redirect(route('bouquets.bySubType', $subType->slug), 301);
+        }
+        // Get post for slug.
+        $subType = BouquetSubType::whereSlug($sub_type_slug)->firstOrFail();
+        $bouquets = $subType->bouquets()->paginate(15);
+        $prices = $this->bouquetRepository->getPrices($bouquets);
+        return view('layouts.all-bouquets', compact('bouquets','prices'));
     }
 
     public function index()
     {
         $bouquets = $this->bouquetRepository->paginate(15);
-        $prices = $this->bouquetRepository->getPrices();
+        $prices = $this->bouquetRepository->getPrices($bouquets);
 		return view('layouts.all-bouquets', compact('bouquets','prices'));
     }
     

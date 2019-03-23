@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Repositories\BouquetOfTheDayRepositoryEloquent as BouquetOfTheDay;
 use App\Repositories\HitsSliderRepositoryEloquent as HitsSlider;
 use App\Repositories\HeadSliderRepositoryEloquent as HeadSlider;
+use App\Repositories\BouquetSubTypeRepositoryEloquent as SubType;
+use App\Repositories\BouquetTypeRepositoryEloquent as Type;
 
 class HomeController extends Controller
 {
@@ -15,8 +17,16 @@ class HomeController extends Controller
 
     private $headSliderRepository;
 
-    public function __construct(HeadSlider $headSliderRepository, HitsSlider $hitsSliderRepository, BouquetOfTheDay $bouquetOfTheDayRepository)
+    private $subTypesRepository;
+
+    private $typesRepository;
+
+    public function __construct(HeadSlider $headSliderRepository,
+     HitsSlider $hitsSliderRepository, BouquetOfTheDay $bouquetOfTheDayRepository,
+     SubType $subTypesRepository, Type $typesRepository)
     {
+        $this->subTypesTepository = $subTypesRepository;
+        $this->typesRepository = $typesRepository;
         $this->bouquetOfTheDayRepository = $bouquetOfTheDayRepository;
         $this->hitsSliderRepository = $hitsSliderRepository;
         $this->headSliderRepository = $headSliderRepository;
@@ -26,11 +36,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $types = $this->typesRepository->all();
+        //$subTypes = $this->subTypesRepository->all();
         $head_slides = $this->headSliderRepository->all();
         $hits_slides = $this->hitsSliderRepository->all();
         $hits_slides_prices = $this->hitsSliderRepository->getPrices($hits_slides);
         $bouquetOfTheDay = $this->bouquetOfTheDayRepository->getForHome();
-        return view('home', compact('head_slides','hits_slides','hits_slides_prices','bouquetOfTheDay'));
+        return view('home', compact('types','head_slides','hits_slides','hits_slides_prices','bouquetOfTheDay'));
     }
 
 }

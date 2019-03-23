@@ -84,9 +84,8 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
 
     }
 
-    public function getPrices()
+    public function getPrices($bouquets)
     {
-        $bouquets = $this->all();
         $prices = collect();
         foreach($bouquets as $bouquet)
         {
