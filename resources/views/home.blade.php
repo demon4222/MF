@@ -49,7 +49,7 @@
 
                 <ul class="cd-secondary-nav is-hidden">
                     <li class="go-back"><a href="#0">Меню</a></li>
-                    <li class="see-all"><a href="#">Всі букети</a></li>
+                    <li class="see-all"><a href="/bouquets">Усі букети</a></li>
                     
                     <li class="has-children">
                         <a href="#">Звичайні букети</a>
@@ -83,33 +83,33 @@
                 <a href="#">Квіти поштучно</a>
 
                 <ul class="cd-nav-gallery is-hidden">
-                    <li class="go-back"><a href="#0">Навигация по последним изображениям</a></li>
+                    <li class="go-back"><a href="#0">Навігація</a></li>
                     <li class="see-all"><a href="#">Усі квіти</a></li>
                     <li>
                         <a class="cd-nav-item" href="#">
-                            <img src="media/nav/el-toro-472x472.jpg" alt="Product Image">
-                            <h3>Назва</h3>
+                            <img src="{{asset('media/nav/el-toro-472x472.jpg')}}" alt="Product Image">
+                            <h3>Класична троянда</h3>
                         </a>
                     </li>
 
                     <li>
                         <a class="cd-nav-item" href="#">
-                            <img src="media/nav/karina-472x472.jpg" alt="Product Image">
-                            <h3>Назва</h3>
+                            <img src="{{asset('media/nav/karina-472x472.jpg')}}" alt="Product Image">
+                            <h3>Піоновидна троянда</h3>
                         </a>
                     </li>
 
                     <li>
                         <a class="cd-nav-item" href="#">
-                            <img src="media/nav/sprey-lady-bombastic-472x472.jpg" alt="Product Image">
-                            <h3>Назва</h3>
+                            <img src="{{asset('media/nav/sprey-lady-bombastic-472x472.jpg')}}" alt="Product Image">
+                            <h3>Тюльпани</h3>
                         </a>
                     </li>
 
                     <li>
                         <a class="cd-nav-item" href="#">
-                            <img src="media/nav/tulips-white-0x700.jpg" alt="Product Image">
-                            <h3>Назва</h3>
+                            <img src="{{asset('media/nav/tulips-white-0x700.jpg')}}">
+                            <h3>Хризантеми</h3>
                         </a>
                     </li>
                 </ul>
@@ -184,7 +184,7 @@
 
     <div id="cd-search" class="cd-search">
         <form>
-            <input type="search" placeholder="Поиск...">
+            <input type="search" placeholder="Пошук...">
         </form>
     </div>
 

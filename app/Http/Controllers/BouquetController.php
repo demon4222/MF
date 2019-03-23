@@ -51,9 +51,16 @@ class BouquetController extends Controller
     }
 
 	public function indexAdmin(){
-        $bouquets = $this->bouquetRepository->all();
+        $bouquets = $this->bouquetRepository->paginate(15);
         $prices = $this->bouquetRepository->getPrices();
 		return view('layouts.admin.admin-all-bouquets', compact('bouquets','prices'));
+    }
+
+    public function index()
+    {
+        $bouquets = $this->bouquetRepository->paginate(15);
+        $prices = $this->bouquetRepository->getPrices();
+		return view('layouts.all-bouquets', compact('bouquets','prices'));
     }
     
     public function add(){

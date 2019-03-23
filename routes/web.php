@@ -20,6 +20,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/item', function () {
     return view('layouts.item');
 });
+Route::get('/bouquets','BouquetController@index');
 Route::get('/bouquets/{slug}/{size_id}','BouquetController@show')->name('bouquet.show');
 /*ADMIN*/
 Route::get('/admin', function () {

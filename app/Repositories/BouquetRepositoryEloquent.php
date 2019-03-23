@@ -13,6 +13,7 @@ use App\Repositories\BouquetRepository;
 use App\Repositories\SizeRepositoryEloquent;
 use App\Repositories\BouquetSubTypeRepositoryEloquent;
 use App\Repositories\BouquetSizeRepositoryEloquent;
+use App\Models\HitsSlider;
 
 /**
  * Class BouquetRepositoryEloquent.
@@ -216,6 +217,11 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
         foreach($bouquetSizes as $bouquetSize)
         {
             FileUploadController::deleteBouquetsPhoto($id, $bouquetSize->size_id);
+        }
+        $slide = HitsSlider::where('bouquet_id', $id)->first();
+        if($slide!==null)
+        {
+            $slide->delete();
         }
         $this->bouquetSize->deleteWhere(['bouquet_id'=>$id]);
         $this->delete($id);

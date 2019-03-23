@@ -11,6 +11,7 @@
 
   <title>Admin</title>
 
+  <link rel="shortcut icon" href="{{asset('img/brand.png')}}" type="image/png">
   <!-- Bootstrap core CSS -->
   <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 

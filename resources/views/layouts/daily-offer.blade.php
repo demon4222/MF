@@ -1,4 +1,3 @@
-<section class="block" style="padding-right: 20px; padding-left: 20px;">
 	<div class="daily-offer mt-5" >
 		<div class="row">
 			<div class="col-md-6 daily-offer-media">
@@ -21,9 +20,8 @@
 				</div>
 
 				<div class="daily-offer-buttons">
-					<a href="" class="to-basket-button">ДОДАТИ У КОШИК</a>
+					<a href="" class="to-basket-button">детальніше</a>
 				</div>
 			</div>
 		</div>
 	</div>
-</section>
