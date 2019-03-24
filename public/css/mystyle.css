@@ -282,10 +282,13 @@ a.b-ghost {
 	background-size: contain;
 	background-position: center;
 	background-size: cover;
+	min-height: 500px;
+	max-height: 600px;
 }
 .daily-offer img{
 	opacity:0;
 	transition: 0.3s;
+	width:100%;
 }
 .daily-offer img:hover{
 	opacity: 1;
@@ -375,24 +378,38 @@ a.b-ghost {
 	/* border: none; */
 }
 .card a{
-  background-repeat: no-repeat;
-	background-size: contain;
-	background-position: center;
+	display: block;
+	width: 100%;
+	margin-bottom: 20px;
+	background-repeat: no-repeat;
+	background-position: center center;
 	background-size: cover;
+	position: relative;
 }
 .card a img{
-  opacity: 0;
-  transition: 0.3s;
+	display: block;
+	width: 100%;
+	height: 100%;
+	-o-object-fit: cover;
+	object-fit: cover;
+	-webkit-transition: opacity 0.2s ease-in-out;
+	transition: opacity 0.2s ease-in-out;
+	opacity:0;
 }
 .card a img:hover{
   opacity:1;
+}
+.card-img-top{
+	width:100%;
+	height:60vh;
+    object-fit: cover;
 }
 
 /*end all-bouquets*/
 
 .product-info-wrapper, .product-sl-wrapper{
-	/* padding-left: 15px;
-	padding-right: 15px; */
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 /*product-slider*/
@@ -413,6 +430,10 @@ a.b-ghost {
 .product-sl__slide img{
 	width: 100%;
 }
+/* .slick-track{
+	transform: none!important;
+	margin-left:0;
+} */
 /*end*/
 
 /*product-info*/
@@ -617,6 +638,9 @@ svg:not(:root) {
 	.product-wrapper{
 		margin-right: 10px;
 		margin-left: 10px;
+	}
+	.product-sl-wrapper{
+		padding:0;
 	}
 	/*.slick-slide{
 		margin:0 10px;

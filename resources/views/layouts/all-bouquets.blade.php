@@ -1,17 +1,22 @@
 @extends('layouts.layoutMain')
 
+@push('styles')
+
+@endpush
+
 @section('content')
 
 <section class="block">
     <div class=" text-center my-5 title-block">
         <p>букети</p>
     </div>
-    <div class="product-wrapper row" style="height:auto;">
+ 
+    <div class="product-wrapper row">
         @foreach($bouquets as $bouquet)
-        <div class="col-md-6 col-lg-4 product-card mb-4">
+        <div class="col-md-6 col-lg-4 product-card mb-4  ">
             <div class="card">
                 <a href="/bouquets/{{$bouquet->slug}}/{{$bouquet->sizes()->orderBy('count')->first()->id}}" style="background-image: url('{{asset('media/bouquets/' . $bouquet->id . '/g.jpg')}}')">
-                    <img class="card-img-top" src="{{asset('media/bouquets/' . $bouquet->id . '/' . 'gh.jpg')}}">
+                    <img style="" class="card-img-top" src="{{asset('media/bouquets/' . $bouquet->id . '/' . 'gh.jpg')}}">
                 </a>
                 <div class="card-body">
                     <div class="bouquet-name">
@@ -29,11 +34,11 @@
         </div>
         @endforeach
     </div>
-    <div class="paginator">
+    <!-- <div class="paginator">
         <div class="paginator-block">
             {{$bouquets->links()}}
         </div>
-    </div>
+    </div> -->
 </section>
 
 

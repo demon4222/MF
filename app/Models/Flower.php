@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 /**
  * Class Flower.
@@ -14,13 +15,14 @@ use Prettus\Repository\Traits\TransformableTrait;
 class Flower extends Model implements Transformable
 {
     use TransformableTrait;
+    use Sluggable;
 
     public function heights()
     {
         return $this->belongsToMany('App\Models\Height')->withPivot(['price']);
     }
     
-    public function categories()
+    public function category()
     {
         return $this->belongsTo('App\Models\FlowerCategory');
     }
@@ -33,4 +35,18 @@ class Flower extends Model implements Transformable
     protected $fillable = ['id','name','flower_category_id', 'description'];
 
     public $timestamps = false;
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }

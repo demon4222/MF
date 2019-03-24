@@ -8,6 +8,7 @@ use App\Repositories\HitsSliderRepositoryEloquent as HitsSlider;
 use App\Repositories\HeadSliderRepositoryEloquent as HeadSlider;
 use App\Repositories\BouquetSubTypeRepositoryEloquent as SubType;
 use App\Repositories\BouquetTypeRepositoryEloquent as Type;
+use App\Models\FlowerCategory;
 
 class HomeController extends Controller
 {
@@ -37,12 +38,12 @@ class HomeController extends Controller
     public function index()
     {
         $types = $this->typesRepository->all();
-        //$subTypes = $this->subTypesRepository->all();
+        $flowerCategory = FlowerCategory::all();
         $head_slides = $this->headSliderRepository->all();
         $hits_slides = $this->hitsSliderRepository->all();
         $hits_slides_prices = $this->hitsSliderRepository->getPrices($hits_slides);
         $bouquetOfTheDay = $this->bouquetOfTheDayRepository->getForHome();
-        return view('home', compact('types','head_slides','hits_slides','hits_slides_prices','bouquetOfTheDay'));
+        return view('home', compact('types','flowerCategory','head_slides','hits_slides','hits_slides_prices','bouquetOfTheDay'));
     }
 
 }

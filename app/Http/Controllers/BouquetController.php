@@ -46,7 +46,8 @@ class BouquetController extends Controller
         }
         $add_sizes = $add_sizes->all();
         $size = $bouquet->sizes->find($size_id);
-        return view('layouts.show-bouquet',compact('bouquet','size','add_sizes'));
+        $types = $this->bouquetTypeRepository->all();
+        return view('layouts.show-bouquet',compact('types','bouquet','size','add_sizes'));
     }
 
 	public function indexAdmin(){
@@ -66,7 +67,8 @@ class BouquetController extends Controller
         $type = $this->bouquetTypeRepository->model()::whereSlug($type_slug)->firstOrFail();
         $bouquets = $type->bouquets()->paginate(15);
         $prices = $this->bouquetRepository->getPrices($bouquets);
-        return view('layouts.all-bouquets', compact('bouquets','prices'));
+        $types = $this->bouquetTypeRepository->all();
+        return view('layouts.all-bouquets', compact('types','bouquets','prices'));
     }
 
     public function getBouquetsBySubType($sub_type_slug)
@@ -80,14 +82,16 @@ class BouquetController extends Controller
         $subType = BouquetSubType::whereSlug($sub_type_slug)->firstOrFail();
         $bouquets = $subType->bouquets()->paginate(15);
         $prices = $this->bouquetRepository->getPrices($bouquets);
-        return view('layouts.all-bouquets', compact('bouquets','prices'));
+        $types = $this->bouquetTypeRepository->all();
+        return view('layouts.all-bouquets', compact('bouquets','prices','types'));
     }
 
     public function index()
     {
         $bouquets = $this->bouquetRepository->paginate(15);
         $prices = $this->bouquetRepository->getPrices($bouquets);
-		return view('layouts.all-bouquets', compact('bouquets','prices'));
+        $types = $this->bouquetTypeRepository->all();
+		return view('layouts.cart', compact('bouquets','prices','types'));
     }
     
     public function add(){

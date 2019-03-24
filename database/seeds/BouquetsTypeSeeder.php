@@ -88,10 +88,20 @@ class BouquetsTypeSeeder extends Seeder
             'price'=> 221,
         ]);
         DB::table('flower_categories')->insert([
-            'name'    => 'троянда'
+            'name'    => 'Звичайна троянда',
+            'slug'    => 'zvichayna-troyanda'
         ]);
         DB::table('flower_categories')->insert([
-            'name'    => 'тюльпан'
+            'name'    => 'Піоновидна троянда',
+            'slug'    => 'pionovidna-troyanda'
+        ]);
+        DB::table('flower_categories')->insert([
+            'name'    => 'Тюльпани',
+            'slug'    => 'tullips'
+        ]);
+        DB::table('flower_categories')->insert([
+            'name'    => 'Хризантеми',
+            'slug'    => 'hryzantemu'
         ]);
     }
 }

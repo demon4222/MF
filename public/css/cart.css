@@ -1,0 +1,50 @@
+.data-slot{
+    min-height: 100px;
+}
+.data-slot_title{
+    padding-bottom: 5px;
+    border-bottom: 1px solid #d8d8d8;
+    margin-bottom: 15px;
+}
+.data-slot_customer .ds-input {
+    margin-bottom: 15px;
+}
+.ds-input{
+    width: 100%;
+    position: relative;
+}
+.ds-input_title{
+    display: inline-block;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+.ds-input_message{
+    font-size: 1rem;
+    font-weight: 300;
+    position: absolute;
+    top: 1.25rem;
+    right: 0;
+}
+.ds-input_input{
+    width: 100%;
+    border: 1px solid #d8d8d8;
+    padding: 5px;
+}
+.ds-message{
+    font-size: 12px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+.data-slot_who .ls-checkbox {
+    margin-bottom: 15px;
+}
+.ls-checkbox{
+    display: inline-flex;
+    overflow: hidden;
+    position: relative;
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+

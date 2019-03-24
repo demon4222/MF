@@ -40,19 +40,7 @@ class FlowerRepositoryEloquent extends BaseRepository implements FlowerRepositor
         $this->flowerHeight = $flowerHeight;
         parent::__construct($app);
     }
-
-    public function getPrices()
-    {
-        $flowers = $this->all();
-        $prices = collect();
-        foreach($flowers as $flower)
-        {
-            $price = $flower->heights()->orderBy('height')->first()->pivot->price;
-            $prices->put($flower->id, $price);
-        }
-        return $prices->all();
-    }
-
+    
     public function createByReq($req)
     {
         
@@ -141,6 +129,17 @@ class FlowerRepositoryEloquent extends BaseRepository implements FlowerRepositor
             if(isset($req->hover_photo))
                 FileUploadController::uploadFlowerPhoto($req->hover_photo,$flower->id,'h');
         }
+    }
+
+    public function getPrices($flowers)
+    {
+        $prices = collect();
+        foreach($flowers as $flower)
+        {
+            $price = $flower->heights()->orderBy('height')->first()->pivot->price;
+            $prices->put($flower->id, $price);
+        }
+        return $prices->all();
     }
 
     /**

@@ -95,7 +95,8 @@ font-family: latoregular,latobold,lucida grande,Tahoma,Sans-Serif;
   background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
-	background-size: cover;
+  background-size: cover;
+  
 }
 .card a img{
   opacity: 0;

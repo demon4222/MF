@@ -17,8 +17,8 @@
 //     var_dump($query->time);
 // });
 Route::get('/', 'HomeController@index');
-Route::get('/item', function () {
-    return view('layouts.item');
+Route::get('/cart', function(){
+    return view('layouts.cart');
 });
 Route::get('/bouquets','BouquetController@index');
 Route::get('/bouquets/{slug}/{size_id}','BouquetController@show')->name('bouquet.show');
@@ -26,7 +26,11 @@ Route::get('/bouquets/{slug}/{size_id}','BouquetController@show')->name('bouquet
 Route::get('/bouquet-types/{slug}','BouquetController@getBouquetsByType')->name('bouquets.byType');
 
 Route::get('/bouquet-sub-types/{slug}','BouquetController@getBouquetsBySubType')->name('bouquets.bySubType');
-// Route::get('/bouquets/{slug}','BouquetSubTypeController@indexSubTypes')->name('subType.indexSubTypes');
+
+
+Route::get('/flowers/{slug}/{height_id}','FlowerController@show')->name('flower.show');
+
+Route::get('/flower-type/{slug}','FlowerController@getFlowersByCategory')->name('flowers.byCategory');
 /*ADMIN*/
 Route::get('/admin', function () {
     return view('admin');

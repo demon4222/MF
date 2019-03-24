@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{asset('slick/slick.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('slick/slick-theme.css')}}"/>
+    
+    @stack('styles')
+
     <title>Million Flowers</title>
 </head>
 <body>
@@ -40,35 +43,18 @@
                 <ul class="cd-secondary-nav is-hidden">
                     <li class="go-back"><a href="#0">Меню</a></li>
                     <li class="see-all"><a href="/bouquets">Усі букети</a></li>
-                    
-
+                    @foreach($types as $type)
                     <li class="has-children">
-                        <a href="#">Звичайні букети</a>
-
+                        <a href="/bouquet-types/{{$type->slug}}">{{$type->name}}</a>
                         <ul class="is-hidden">
                             <li class="go-back"><a href="#0">Букети</a></li>
                             <li class="see-all"><a href="#">Кисти</a></li>
-                            <li><a href="#">Букет №1</a></li>
-                            <li><a href="#0">Букет №1</a></li>
-                            <li><a href="#0">Букет №1</a></li>
-                            <li><a href="#0">Букет №1</a></li>
+                            @foreach($type->bouquetsSubTypes as $subType)
+                            <li><a href="/bouquet-sub-types/{{$subType->slug}}">{{$subType->name}}</a></li>
+                            @endforeach
                         </ul>
                     </li>
-
-                    <li class="has-children">
-                        <a href="#">Композиції</a>
-
-                        <ul class="is-hidden">
-                            <li class="go-back"><a href="#0">Введения</a></li>
-                            <li class="see-all"><a href="#">Термины</a></li>
-                            <li><a href="#">Композиция #1</a></li>
-                            <li><a href="#">Композиция #2</a></li>
-                            <li><a href="#">Композиция #3</a></li>
-                            <li><a href="#">Композиция #4</a></li>
-                            <li><a href="#">Композиция #5</a></li>
-                            <li><a href="#">Композиция #6</a></li>
-                        </ul>
-                    </li>                
+                    @endforeach                
                 </ul>
             </li>
 

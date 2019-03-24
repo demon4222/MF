@@ -69,35 +69,17 @@
                 <a href="#">Квіти поштучно</a>
 
                 <ul class="cd-nav-gallery is-hidden">
-                    <li class="go-back"><a href="#0">Навігація</a></li>
+                    <li class="go-back"><a href="#">Навігація</a></li>
                     <li class="see-all"><a href="#">Усі квіти</a></li>
+                    @foreach($flowerCategory as $category)
                     <li>
-                        <a class="cd-nav-item" href="#">
-                            <img src="{{asset('media/nav/el-toro-472x472.jpg')}}" alt="Product Image">
-                            <h3>Класична троянда</h3>
+                        <a class="cd-nav-item" href="/flower-type/{{$category->slug}}">
+                            <img src="{{asset('media/nav/flower_categories/'.$category->id . '.jpg')}}" alt="Product Image">
+                            <h3>{{$category->name}}</h3>
                         </a>
                     </li>
-
-                    <li>
-                        <a class="cd-nav-item" href="#">
-                            <img src="{{asset('media/nav/karina-472x472.jpg')}}" alt="Product Image">
-                            <h3>Піоновидна троянда</h3>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="cd-nav-item" href="#">
-                            <img src="{{asset('media/nav/sprey-lady-bombastic-472x472.jpg')}}" alt="Product Image">
-                            <h3>Тюльпани</h3>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="cd-nav-item" href="#">
-                            <img src="{{asset('media/nav/tulips-white-0x700.jpg')}}">
-                            <h3>Хризантеми</h3>
-                        </a>
-                    </li>
+                    @endforeach
+                    
                 </ul>
             </li>
 
