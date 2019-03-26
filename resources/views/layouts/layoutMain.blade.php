@@ -17,6 +17,8 @@
 
     <title>Million Flowers</title>
 </head>
+
+    @stack('hidden')
 <body>
     <div class="menu-wrap">
     <header class="cd-main-header">
@@ -176,8 +178,11 @@
   <!-- Bootstrap tooltips -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+  
   <script type="text/javascript" src="{{asset('slick/slick.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/product-slider.js')}}"></script>
 <link rel="stylesheet" type="text/css" href="{{asset('css/mystyle.css')}}">

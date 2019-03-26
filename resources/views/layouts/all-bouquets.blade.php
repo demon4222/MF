@@ -24,9 +24,9 @@
                     </div>
                     
                     <div class="bouquet-info">
-                        <p class="card-text">від {{$prices[$bouquet->id]}} <span>грн</span></p>    
+                        <p class="card-text">{{$prices[$bouquet->id]}} <span>грн</span></p>    
                         <div class="to-basket-block">
-                            <a href="/bouquets/{{$bouquet->slug}}/{{$bouquet->sizes()->orderBy('count')->first()->id}}" class="text-uppercase to-basket-button mt-2">Детальніше</a>
+                            <a href="/bouquets/{{$bouquet->slug}}/{{$bouquet->sizes()->orderBy('count')->first()->id}}" class="text-uppercase to-basket-button mt-2">Купити</a>
                         </div>
                     </div>
                 </div>               

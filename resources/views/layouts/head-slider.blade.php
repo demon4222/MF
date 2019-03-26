@@ -2,7 +2,7 @@
  <div class="head-sl">
   @foreach($head_slides as $head_slide)
 
-  <div class="head-sl__slide bg-head-image" style="background-image: url('{{$head_slide->path_to_photo}}')">
+  <div class="head-sl__slide bg-head-image" style="background-image: url('{{$head_slide->path_to_photo}}');">
     
     
    <div class="head-sl__text">

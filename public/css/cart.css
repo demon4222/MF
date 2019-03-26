@@ -1,3 +1,8 @@
+
+
+
+
+
 .data-slot{
     min-height: 100px;
 }
@@ -20,7 +25,7 @@
     font-weight: 400;
 }
 .ds-input_message{
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: 300;
     position: absolute;
     top: 1.25rem;
@@ -32,7 +37,7 @@
     padding: 5px;
 }
 .ds-message{
-    font-size: 12px;
+    font-size: 1.25rem;
     font-weight: 300;
     margin-bottom: 20px;
     text-align: justify;
@@ -46,5 +51,153 @@
     position: relative;
     font-size: 0.875rem;
     font-weight: 300;
+}
+
+.data-slot_subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+.delivery-type-select {
+    padding: 5px 0;
+}
+.selfpick_where {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.ls-radio {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    /* display: inline-flex; */
+    overflow: hidden;
+    position: relative;
+    font-size: 1.25rem;
+    font-weight: 300;
+    display:block;
+}
+.comment textarea {
+    width: 100%;
+    resize: none;
+    border: 1px solid #d8d8d8;
+}
+.need-help {
+    background-color: #fafafa;
+    padding: 15px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.need-help_message {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+.need-help_phone{
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #242729;
+}
+.need-help_phone:hover, .need-help_phone:focus {
+    color: #00a395;
+}
+.make-order {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.bttn-card, .bttn-card--inactive {
+    height: 36px;
+    padding: 0 15px;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: #43a047;
+    border: 2px solid #43a047;
+    color: #fff;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    border-radius: 18px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.datepicker-wrapper {
+    position: relative;
+}
+.datepicker-wrapper input {
+    background-color: transparent;
+    cursor: pointer;
+}
+.ls-time {
+    width: 50px;
+    height: 25px;
+    padding-top: 15px;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    position: relative;
+}
+.ls-time input {
+    position: absolute;
+    z-index: -1;
+    visibility: hidden;
+}
+.ls-time label {
+    cursor: pointer;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+.ls-time input:checked + label:before {
+    background-color: #da4453;
+    cursor: pointer;
+}
+.ls-time input + label:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 10px;
+    background-color: #00a395;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    cursor: pointer;
+}
+.ls-time input:disabled+label:before {
+    background-color: #999;
+    cursor: default;
+}
+.ls-time input:disabled+label {
+    cursor: default;
 }
 

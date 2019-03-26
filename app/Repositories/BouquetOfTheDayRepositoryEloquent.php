@@ -49,10 +49,11 @@ class BouquetOfTheDayRepositoryEloquent extends BaseRepository implements Bouque
             $bouquetOfTheDay = $this->first()->bouquet;
             $discountPrice = $this->getDiscountPrice($bouquetOfTheDay);
             $data = [
-                'id' => $bouquetOfTheDay->id,
-                'name' => $bouquetOfTheDay->name,
-                'usual_price' => $bouquetOfTheDay->sizes()->orderBy('count')->first()->pivot->price,
-                'discount_price' => round($discountPrice)
+                // 'id' => $bouquetOfTheDay->id,
+                // 'name' => $bouquetOfTheDay->name,
+                // 'usual_price' => $bouquetOfTheDay->sizes()->orderBy('count')->first()->pivot->price,
+                'bouquet' => $bouquetOfTheDay,
+                'discount_price' => round($discountPrice),
             ];
             return $data;
         }
@@ -64,21 +65,12 @@ class BouquetOfTheDayRepositoryEloquent extends BaseRepository implements Bouque
     public function newBouquetofTheDay($req)
     {
         $bouquetOfTheDay = $this->findWhere(['bouquet_id' => $req->bouquet_id])->first();
-        if($bouquetOfTheDay===null)
-        {
+        
             $this->model()::truncate();
             $this->create([
                 'bouquet_id' => $req->bouquet_id,
                 'discount' => $req->discount
             ]);
-        }
-        else{
-            $this->model()::truncate();
-            $this->create([
-                'bouquet_id' => $req->bouquet_id,
-                'discount' => $req->discount
-            ]);
-        }
         $bouquet = $this->bouquetRepository->findWhere(['bouquet_of_the_day' => 1])->first();
         // dd($bouquet);
         if($bouquet!==null)
@@ -95,6 +87,7 @@ class BouquetOfTheDayRepositoryEloquent extends BaseRepository implements Bouque
             $newBouquet->bouquet_of_the_day = 1;
             $newBouquet->save();
         }
+        
     }    
 
     /**

@@ -15,11 +15,11 @@
                     <h2 class="text-left h2 my-4 ">{{$slide->bouquet->name}}</h2>
                 </div>
                 <div class="lazy__text_price">
-                    <p class="text-left">від {{$hits_slides_prices[$slide->id]}} <span>грн</span></p>
+                    <p class="text-left">{{$hits_slides_prices[$slide->id]}} <span>грн</span></p>
                 </div>
                 <div class="lazy__text_button">
                     <form>
-                        <a href="#" class="to-basket-button mt-2">детальніше</a>
+                        <a href="/bouquets/{{$slide->bouquet->slug}}/{{$slide->bouquet->sizes()->orderBy('count')->first()->id}}" class="to-basket-button mt-2">купити</a>
                     </form>
                 </div>
             </div>

@@ -48,6 +48,7 @@ a:hover{
 	background-size: contain;
 	background-position: center;
 	background-size: cover;
+	
 }
 .head-sl__slide{
   position: relative;
@@ -227,14 +228,14 @@ a.b-ghost {
  	/* outline:  1px solid #828282;*/
   	text-decoration: none;
   	border-radius: 25px;
-  	background-color: #a72896f0; 
+  	background-color: #43a047; 
 }
 .to-basket-button:active, .to-basket-button:focus{
 	outline: none;
 }
 .to-basket-button:hover{
 	color:white;
-	background-color: green;
+	background-color: #2E7D32;
 }
 .lazy__text_price{
 	display: inline-block;
@@ -297,24 +298,24 @@ a.b-ghost {
 	font-size: 60px;
 	display: flex;
 }
-.daily-offer_name{
+.daily-offer_name a{
 	font-size: 38px;
-	color:#EA4335;
+	color:#69aa6f;
 	display: flex;
 }
 .daily-offer-price{
 	margin-top: 10%;
-	font-family: latobold;
+	font-family: latoregular;
 }
 .daily-offer_usual-price{
 	font-size: 24px;
-	color:#c0c0c0;
+	color:#8d8d8d;
 	text-decoration: line-through;
 	max-height: 25px;
 }
 .daily-offer_discount-price{
-	font-size:48px;
-	color:#2E7D32;
+	font-size:38px;
+	color:dark;
 	margin-top: 10%;
 }
 .daily-offer-buttons{
