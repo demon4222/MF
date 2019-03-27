@@ -538,6 +538,16 @@ a.b-ghost {
     -ms-flex-pack: center;
     justify-content: center;
 }
+@media only screen and (max-width:425px)
+{
+	.utp-unit{
+		align-items: left;
+		-webkit-box-pack: left;
+    -ms-flex-pack: left;
+		justify-content: left;
+		padding-left:6rem;
+	}
+}
 .utp-unit__title {
     text-align: left;
     text-transform: uppercase;

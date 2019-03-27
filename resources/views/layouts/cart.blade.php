@@ -37,7 +37,113 @@ $('#datepicker').datepicker("setDate", today );
 
 @section('content')
 <section style="padding-left:15px; padding-right:15px;">
-      
+    
+    	<div class="cart_info mb-5">
+                    <div class="row">
+                        <div class="col">
+                            <!-- Column Titles -->
+                            <div class="cart_info_columns clearfix">
+                                <div class="cart_info_col cart_info_col_product">Ваші товари</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row cart_items_row">
+                        <div class="col">
+        
+                            <!-- Cart Item -->
+                            <div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+                                <!-- Name -->
+                                <div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
+                                    <div class="cart_item_image">
+                                        <div><img src="{{asset('img/fl1.jpg')}}" alt=""></div>
+                                    </div>
+                                    <div class="cart_item_name_container">
+                                        <div class="cart_item_name"><a href="#">Назва</a></div>
+                                        <div class="cart_item_edit">Розмір: </div>
+                                    </div>
+                                </div>
+                                <!-- Price -->
+                                <!-- Quantity -->
+                                <div class="cart-unit__controls">
+                                    <div class="cart-unit__controls-wrapper spin">
+                                        <span class="js-btn-minus" data-spin="id_items-0-quantity">–</span>
+                                        <input readonly="" id="id_items-0-quantity" type="text" value="5" name="items-0-quantity">
+                                        <span class="js-btn-plus" data-spin="id_items-0-quantity">+</span>
+                                    </div>
+                                </div>
+                                <!-- Total -->
+                                <div class="cart_item_total">Сума: $790.90</div>
+                                <!-- Delete -->
+                                <div class="cart_item_delete"><a href="">
+                                        ✖</a></div>
+                            </div>
+        
+                        </div>
+                    </div>
+
+
+
+
+                    
+
+
+
+                    <div class="row row_cart_buttons">
+                        <div class="col">
+                            <div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
+                                <div class="button continue_shopping_button"><a href="#">Назад до покупок</a></div>
+                                <div class="cart_buttons_right ml-lg-auto">
+                                    <div class="button clear_cart_button"><a href="#">Очистити кошик</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row_extra">
+                            <div class="col-lg-4">
+            
+                                <!-- Coupon Code -->
+                                <div class="coupon">
+                                    <div class="section_title">Промокод</div>
+                                    <div class="section_subtitle">Введіть ваш промокод</div>
+                                    <div class="coupon_form_container">
+                                        <form action="#" id="coupon_form" class="coupon_form">
+                                            <input type="text" class="coupon_input" required="required">
+                                            <button class="button coupon_button"><span>Активувати</span></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="col-lg-6 offset-lg-2">
+                                <div class="cart_total">
+                                    <div class="section_title">Всього</div>
+                                    <div class="cart_total_container">
+                                        <ul>
+                                            <li class="d-flex flex-row align-items-center justify-content-start">
+                                                <div class="cart_total_title">Доставка</div>
+                                                <div class="cart_total_value ml-auto">Безкоштовна</div>
+                                            </li>
+                                            <li class="d-flex flex-row align-items-center justify-content-start">
+                                                <div class="cart_total_title">Сума</div>
+                                                <div class="cart_total_value ml-auto">$790.90</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>		
+                </div>
+            </div>
+
+
+
+
 
     <form>
         <div class="card-wrapper row">
