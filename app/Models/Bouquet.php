@@ -17,6 +17,7 @@ class Bouquet extends Model implements Transformable
     use TransformableTrait;
     use Sluggable;
 
+    protected $table = 'bouquets';
     /**
      * The attributes that are mass assignable.
      *

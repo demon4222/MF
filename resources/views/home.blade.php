@@ -20,11 +20,19 @@
     <div class="menu-wrap">
     <header class="cd-main-header">
         <div class="cd-logo-icon">
+            <a href="/">
             @include('layouts.brand-icon-svg')
+            </a>
         </div>
         <a class="cd-logo" href="/">Million Flowers</a>
         <ul class="cd-header-buttons">
             <li><a class="cd-search-trigger" href="#cd-search"><span></span></a></li>
+            <li><a href="{{route('cart.index')}}" class="cart-link cart-link--goods">
+                <span class="cart-link__ico">
+                <svg width="24" height="24" viewBox="0 0 72.39 78.97"><g data-name="cart_layer"><path fill="#333333" d="M64.37 18.33H50.75v-4.14A14.21 14.21 0 0 0 36.55 0h-.72a14.21 14.21 0 0 0-14.18 14.19v4.14H8L0 79h72.39zM25 14.19A10.9 10.9 0 0 1 35.84 3.3h.72a10.9 10.9 0 0 1 10.88 10.89v4.14H25zm-14 7.44h10.65v8.85a3.64 3.64 0 1 0 3.3-.09v-8.76h22.49v8.81a3.65 3.65 0 1 0 3.3 0v-8.81h10.74l7.15 54H3.77z"></path></g></svg>
+                </span>
+                </a>
+            </li>
             <li><a class="cd-nav-trigger" href="#cd-primary-nav"><span></span></a></li>
         </ul> <!-- cd-header-buttons -->
     </header>

@@ -38,7 +38,29 @@ $('#datepicker').datepicker("setDate", today );
 @section('content')
 <section style="padding-left:15px; padding-right:15px;">
     
+        <div class="text-uppercase text-center my-5 title-block">
+            <h2 style="font-size:3rem;">кошик</h2>
+        </div>
+
     	<div class="cart_info mb-5">
+                    @if(session()->has('success_message'))
+                        <div class="alert alert-success">
+                            {{session()->get('success_message')}}
+                        </div>
+                    @endif
+
+                    @if(count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>$error</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    
+                    @if(Cart::count()>0)
+
                     <div class="row">
                         <div class="col">
                             <!-- Column Titles -->
@@ -48,9 +70,9 @@ $('#datepicker').datepicker("setDate", today );
                         </div>
                     </div>
 
-
-
-
+                    
+                    @foreach(Cart::content() as $item)
+                    <input type="hidden" id="item_price-{{$item->id}}" value="{{$item->price}}">
                     <div class="row cart_items_row">
                         <div class="col">
         
@@ -62,30 +84,45 @@ $('#datepicker').datepicker("setDate", today );
                                         <div><img src="{{asset('img/fl1.jpg')}}" alt=""></div>
                                     </div>
                                     <div class="cart_item_name_container">
-                                        <div class="cart_item_name"><a href="#">Назва</a></div>
-                                        <div class="cart_item_edit">Розмір: </div>
+                                        <div class="cart_item_name">
+                                        <a>{{$item->id}}    </a>
+                                        
+                                        @if(get_class($item->model)=='App\Models\Bouquet')
+                                            <a href="{{route('bouquet.show', [$item->model->slug, $item->options->size])}}">{{$item->name}}</a>
+                                        @elseif(get_class($item->model)=='App\Models\Flower')
+                                            <a href="{{route('flower.show', [$item->model->slug, $item->options->height])}}">{{$item->name}}</a>                                
+                                        @endif
+                                        </div>
+                                        <div class="cart_item_edit">ціна: {{$item->price}}</div>
                                     </div>
                                 </div>
                                 <!-- Price -->
                                 <!-- Quantity -->
                                 <div class="cart-unit__controls">
                                     <div class="cart-unit__controls-wrapper spin">
-                                        <span class="js-btn-minus" data-spin="id_items-0-quantity">–</span>
-                                        <input readonly="" id="id_items-0-quantity" type="text" value="5" name="items-0-quantity">
-                                        <span class="js-btn-plus" data-spin="id_items-0-quantity">+</span>
+                                        <span class="js-btn-minus" data-id="{{$item->id}}">–</span>
+                                        <input readonly="" id="id_items-{{$item->id}}-quantity" type="text" value="{{$item->qty}}" name="items-{{$item->id}}-quantity">
+                                        <span class="js-btn-plus" data-id="{{$item->id}}">+</span>
                                     </div>
                                 </div>
                                 <!-- Total -->
-                                <div class="cart_item_total">Сума: $790.90</div>
+                                <div class="cart_item_total">Сума: <span id="id_items-{{$item->id}}-price">{{$item->price*$item->qty}}</span><span> грн</span></div>
                                 <!-- Delete -->
-                                <div class="cart_item_delete"><a href="">
-                                        ✖</a></div>
+                                <div class="cart_item_delete">
+                                    <form method="POST" action="{{route('cart.destroy', $item->rowId)}}">
+                                        @csrf
+                                        {!! method_field('delete') !!}
+                                        <button type="submit" class="delete-btn">✖</button>
+                                    </form>
+                                </div>
                             </div>
         
                         </div>
                     </div>
 
 
+                    
+                    @endforeach
 
 
                     
@@ -97,7 +134,7 @@ $('#datepicker').datepicker("setDate", today );
                             <div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
                                 <div class="button continue_shopping_button"><a href="#">Назад до покупок</a></div>
                                 <div class="cart_buttons_right ml-lg-auto">
-                                    <div class="button clear_cart_button"><a href="#">Очистити кошик</a></div>
+                                    <div class="button clear_cart_button"><a href="{{route('cart.empty')}}">Очистити кошик</a></div>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +167,7 @@ $('#datepicker').datepicker("setDate", today );
                                             </li>
                                             <li class="d-flex flex-row align-items-center justify-content-start">
                                                 <div class="cart_total_title">Сума</div>
-                                                <div class="cart_total_value ml-auto">$790.90</div>
+                                                <div class="cart_total_value ml-auto"><span id="total">{{Cart::total(null,null,'')}}</span><span> грн</span></div>
                                             </li>
                                         </ul>
                                     </div>
@@ -171,7 +208,7 @@ $('#datepicker').datepicker("setDate", today );
                     <div class="data-slot_title">Інформація про отримувача</div>
                     <div class="ls-checkbox">
                         <input class="elip" onchange="isSameShipping()" id="id_same_billing_shipping" name="same_billing_shipping" type="checkbox">
-                        <label for="id_same_billing_shipping" style="font-size:1.25rem;">Я получатель</label>
+                        <label for="id_same_billing_shipping" style="font-size:1.25rem;">Я отримувач</label>
                     </div>
                     <div id="receiver">
                         <div class="ds-input">
@@ -292,5 +329,7 @@ $('#datepicker').datepicker("setDate", today );
             </div>
         </div>
     </form>
+
+    @endif
 </section>
 @endsection

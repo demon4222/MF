@@ -91,7 +91,7 @@ class BouquetController extends Controller
         $bouquets = $this->bouquetRepository->paginate(15);
         $prices = $this->bouquetRepository->getPrices($bouquets);
         $types = $this->bouquetTypeRepository->all();
-		return view('layouts.cart', compact('bouquets','prices','types'));
+		return view('layouts.all-bouquets', compact('bouquets','prices','types'));
     }
     
     public function add(){

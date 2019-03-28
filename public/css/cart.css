@@ -128,35 +128,8 @@ p a:hover::after
 {
 	opacity: 0.2;
 }
-::selection
-{
 	
-}
-p::selection
-{
-	
-}
-h1{font-size: 48px;}
-h2{font-size: 36px;}
-h3{font-size: 24px;}
-h4{font-size: 18px;}
-h5{font-size: 14px;}
-h1, h2, h3, h4, h5, h6
-{
-	font-family: 'latoregular', 'latobold';
-	-webkit-font-smoothing: antialiased;
-	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
-	text-shadow: rgba(0,0,0,.01) 0 0 1px;
-}
-h1::selection, 
-h2::selection, 
-h3::selection, 
-h4::selection, 
-h5::selection, 
-h6::selection
-{
-	
-}
+
 .form-control
 {
 	color: #db5246;
@@ -250,6 +223,11 @@ section
 {
 	padding: 0px !important;
 }
+.delete-btn{
+	outline:none;
+	background-color: transparent;
+	border:none;
+}
 .button
 {
     max-width: 180px;
@@ -333,7 +311,7 @@ section
 {
 	width: 100%;
 	background: #FFFFFF;
-	padding-top: 96px;
+	padding-top: 36px;
 	z-index: 2;
 }
 .cart_info_columns
@@ -345,7 +323,7 @@ section
 .cart_info_col
 {
 	float: left;
-	font-size: 14px;
+	font-size: 1.5rem;
 	color: #1b1b1b;
 }
 .cart_info_col_product

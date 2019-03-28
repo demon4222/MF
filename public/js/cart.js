@@ -1,5 +1,40 @@
+
 $(document).ready(function(){
     disableTimes();
+    $('.js-btn-minus').click(function () {
+        var $input = $(this).parent().find('input');
+        var count = parseInt($input.val()) - 1;
+        count = count < 1 ? 1 : count;
+        if($input.val()!=1)
+        {
+            var price_id = $(this).attr("data-id");
+            var price_elem = document.getElementById('id_items-'+ price_id + '-price');
+            var price_for_unit = document.getElementById('item_price-'+price_id).value;
+            price_elem.innerHTML = price_for_unit*$input.val()-price_for_unit;
+            var total = document.getElementById('total');
+            var current_total = Number(total.innerHTML);
+            current_total-=Number(price_for_unit);
+            total.innerHTML = current_total;
+        }
+        $input.val(count);
+        $input.change();
+        
+        return false;
+    });
+    $('.js-btn-plus').click(function () {
+        var $input = $(this).parent().find('input');
+        var price_id = $(this).attr("data-id");
+        $input.val(parseInt($input.val()) + 1);
+        $input.change();
+        var price_elem = document.getElementById('id_items-'+ price_id + '-price');
+        var price_for_unit = document.getElementById('item_price-'+price_id).value;
+        price_elem.innerHTML = price_for_unit*$input.val();
+        var total = document.getElementById('total');
+        var current_total = Number(total.innerHTML);
+        current_total+=Number(price_for_unit);
+        total.innerHTML = current_total;
+        return false;
+    });
 })
 function disableTimes(){
     var dateInput = document.getElementById('datepicker');
@@ -114,6 +149,4 @@ function isSelf(){
         courierAdress.style = "display:none;";
     }
 }
-
-    
 

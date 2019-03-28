@@ -17,9 +17,14 @@
 //     var_dump($query->time);
 // });
 Route::get('/', 'HomeController@index');
-Route::get('/cart', function(){
-    return view('layouts.cart');
-});
+
+
+Route::get('/cart', 'CartController@index')->name('cart.index');
+Route::post('/cart/bouquet', 'CartController@storeBouquet')->name('cart.storeBouquet');
+Route::post('cart/flower', 'CartController@storeFlower')->name('cart.storeFlower');
+Route::get('/empty', 'CartController@empty')->name('cart.empty');
+Route::delete('/cart/{id}', 'CartController@destroy')->name('cart.destroy');
+
 Route::get('/bouquets','BouquetController@index');
 Route::get('/bouquets/{slug}/{size_id}','BouquetController@show')->name('bouquet.show');
 

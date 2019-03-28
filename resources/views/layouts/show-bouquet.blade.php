@@ -73,7 +73,16 @@
 						</ul>
 					</div>
 					<div class="to-bascket-block mt-5">
-						<a href="#" class="to-basket-button mt-2">В КОШИК</a>
+						<form action="{{route('cart.storeBouquet')}}" method="POST">
+							@csrf
+							<input type="hidden" name="id" value="{{$bouquet->id}}">
+							<input type="hidden" name="name" value="{{$bouquet->name}}">
+							<input type="hidden" name="price" value="{{$size->pivot->price}}">
+							<input type="hidden" name="size_id" value="{{$size->id}}">
+							<input type="hidden" name="" value="">
+							<button class="to-basket-button mt-2" type="submit">В КОШИК</button>
+						</form>
+						<!-- <a href="#" class="to-basket-button mt-2">В КОШИК</a> -->
 					</div>
 					<div class="description-block mt-5">
 						<p>{{$bouquet->description}}</p>

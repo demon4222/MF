@@ -9,6 +9,10 @@
 </style>
 @endpush
 
+@push('scripts')
+<script src="{{asset('js/flower.js')}}"></script>
+@endpush
+
 @section('content')
 	<section class="block">
 		<div class="row product-wrapper">
@@ -39,7 +43,7 @@
 						<!-- <p class="product-article">Арт. 00001</p> -->
 					</div>
 					<div class="product-price mb-5">
-						{{$height->pivot->price}} <span>грн</span>
+						{{$height->pivot->price}} <span>грн</span><span style="font-size:1.75rem">/шт</span>
 					</div>
 					<div class="product-sizes">
 						<div class="product-sizes-title">
@@ -59,8 +63,32 @@
 						@endforeach
 						</ul>
 					</div>
+					
+					<div class="product-qty form-group mt-5">
+						<div class="select-qty">
+							<label class="select-qty__label">Виберіть кількість</label>
+							<div class="select-qty__block">
+								<span role="button" id="js-btn-minus" class="select-qty__control minus">-</span>
+								<input name="quantity" type="number" min="1" value="1" class="form-control select-qty__input">
+								<span role="button" id="js-btn-plus" class="select-qty__control plus">+</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="total-price mt-5 ">
+						<input type="hidden" id="price_unit" value="{{$height->pivot->price}}">
+						<p id="total">{{$height->pivot->price}} грн</p>
+					</div>
+
 					<div class="to-bascket-block mt-5">
-						<a href="#" class="to-basket-button mt-2">В КОШИК</a>
+						<form action="{{route('cart.storeFlower')}}" method="POST">
+							@csrf
+							<input type="hidden" name="id" value="{{$flower->id}}">
+							<input type="hidden" name="name" value="{{$flower->name}}">
+							<input type="hidden" name="price" value="{{$height->pivot->price}}">
+							<input type="hidden" name="height_id" value="{{$height->id}}">
+							<button type="submit" class="to-basket-button mt-2">В КОШИК</button>
+						</form>
 					</div>
 					<div class="description-block mt-5">
                         <h3><strong>Опис</strong></h3>
