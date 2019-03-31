@@ -27,6 +27,8 @@ class CreateBouquetsTable extends Migration
             $table->foreign('sub_type_id')->references('id')->on('bouquet_sub_types');
 
 			$table->boolean('bouquet_of_the_day')->default(0);
+
+			$table->boolean('inStock')->default(1);
             // $table->integer('size_id')->unsigned();
             // $table->foreign('size_id')->references('id')->on('sizes');
 

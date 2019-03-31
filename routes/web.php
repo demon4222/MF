@@ -18,6 +18,7 @@
 // });
 Route::get('/', 'HomeController@index');
 
+Route::post('/storeOrder', 'OrderController@storeOrder')->name('orders.store');
 
 Route::get('/cart', 'CartController@index')->name('cart.index');
 Route::post('/cart/bouquet', 'CartController@storeBouquet')->name('cart.storeBouquet');
@@ -59,6 +60,8 @@ Route::get('/admin/edit-bouquet/{bouquet_id}', 'BouquetController@edit');
 Route::post('/admin/edit-bouquet/{bouquet_id}', 'BouquetController@editRequest');
 Route::get('/admin/edit-bouquet/delete-size/{size_id}/{bouquet_id}', 'BouquetSizeController@deleteSize');
 Route::get('/admin/all-bouquets/delete/{bouquet_id}', 'BouquetController@delete');
+Route::get('/admin/bouquet/inStock/{id}','BouquetController@setInStock')->name('admin.bouquet.inStock');
+Route::get('/admin/bouquet/outOfStock/{id}','BouquetController@setOutOfStock')->name('admin.bouquet.outOfStock');
 
 Route::get('/admin/flowers/','FlowerController@indexAdmin');
 Route::get('/admin/flowers/add-flower', 'FlowerController@add');
@@ -66,10 +69,15 @@ Route::post('/admin/flowers/add-flower', 'FlowerController@addRequest');
 Route::get('/admin/flowers/edit/{flower_id}', 'FlowerController@getForEdit');
 Route::post('/admin/flowers/edit', 'FlowerController@editRequest');
 Route::get('/admin/flowers/edit/{flower_id}/delete-height/{height_id}','FlowerHeightController@deleteHeight');
+Route::get('/admin/flower/inStock/{id}','FlowerController@setInStock')->name('admin.flower.inStock');
+Route::get('/admin/flower/outOfStock/{id}','FlowerController@setOutOfStock')->name('admin.flower.outOfStock');
 
 Route::get('/admin/hits-slider', 'HitsSliderController@indexAdmin');
 Route::get('/admin/add-to-hits/{bouquet_id}', 'HitsSliderController@addBouquet');
 Route::get('/admin/hits-slider/delete-slide/{slide_id}', 'HitsSliderController@deleteSlide');
 
 Route::post('/admin/add-bouquet-of-the-day', 'BouquetOfTheDayController@addBouquetOfTheDay');
+
+Route::get('/admin/orders','OrderController@index')->name('orders.index');
+Route::get('/admin/orders/finish/{id}','OrderController@done')->name('order.done');
 /*ENDADMIN*/

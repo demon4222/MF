@@ -1,0 +1,51 @@
+.orders-wrapper{
+    width: 100%;
+}
+.order-item-wrapper{
+    border:2px solid grey;
+    min-height: 200px;
+    width:100%;
+    border-radius: 10px;
+    padding: 0;
+}
+.order-item-head{
+    border-bottom: 2px solid grey;
+    width:100%;
+    font-size:1.25rem;
+    font-weight: bold;
+}
+.order-item-status{
+    position: absolute;
+    right:0;
+    top:0;
+    font-size:1.25rem;
+    font-weight: bold;
+}
+.order-item-data-title{
+    text-decoration: underline;
+    font-size: 1.175rem;
+}
+.order-name-block{
+    display: flex;
+}
+.order-name-title{
+    font-weight: bold;
+}
+.date-block{
+    width: 100%;
+    border-top:2px solid grey;
+}
+.created-at label{
+    font-weight: bold;
+}
+.done-block{
+    position: absolute;
+    left:0;
+    bottom:0;
+}
+.not-done-status{
+    color:red;
+}
+.done-status{
+    color:green;
+}

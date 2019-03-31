@@ -45,9 +45,7 @@ class FlowerController extends Controller
         }
         $add_heights = $add_heights->all();
         $height = $flower->heights->find($height_id);
-        $types = BouquetType::all();        //bouqets types for nav
-        $flowerCategory = FlowerCategory::all();
-        return view('layouts.show-flower', compact('types','flowerCategory','flower','height','add_heights'));
+        return view('layouts.show-flower', compact('flower','height','add_heights'));
     }
 
     public function add()
@@ -79,6 +77,19 @@ class FlowerController extends Controller
         );
     }
 
+    public function setOutOfStock($id)
+    {
+        $this->flowerRepository->setOutOfStock($id);
+        return back();
+    }
+
+    public function setInStock($id)
+    {
+        $this->flowerRepository->setInStock($id);
+        return back();
+    }
+
+
     public function getFlowersByCategory($slug)
     {
         if (is_numeric($slug)) {
@@ -89,10 +100,8 @@ class FlowerController extends Controller
         // Get post for slug.
         $category = FlowerCategory::whereSlug($slug)->firstOrFail();
         $flowers = $category->flowers()->paginate(15);
-        $types = BouquetType::all();        //bouqets types for nav
-        $flowerCategory = FlowerCategory::all();
         $prices = $this->flowerRepository->getPrices($flowers);
         
-        return view('layouts.all-flowers', compact('types','flowerCategory','flowers','prices'));
+        return view('layouts.all-flowers', compact('flowers','prices'));
     }
 }

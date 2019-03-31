@@ -80,7 +80,11 @@
 							<input type="hidden" name="price" value="{{$size->pivot->price}}">
 							<input type="hidden" name="size_id" value="{{$size->id}}">
 							<input type="hidden" name="" value="">
+							@if($bouquet->inStock)
 							<button class="to-basket-button mt-2" type="submit">В КОШИК</button>
+							@else
+							<button class="soon-button mt-2" disabled>СКОРО</button>
+							@endif
 						</form>
 						<!-- <a href="#" class="to-basket-button mt-2">В КОШИК</a> -->
 					</div>

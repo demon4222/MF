@@ -34,10 +34,15 @@
     @foreach($bouquets as $bouquet)
     <div class="col-md-6 col-lg-4 product-card mb-4">
         <div class="card">
-            <a href="#" style="background-image: url('{{asset('media/bouquets/' . $bouquet->id . '/g.jpg')}}')">
+            <a href="{{route('bouquet.show',[$bouquet->slug, $bouquet->sizes()->orderBy('count')->first()->id])}}" style="background-image: url('{{asset('media/bouquets/' . $bouquet->id . '/g.jpg')}}')">
                 <img class="card-img-top" src="{{asset('media/bouquets/' . $bouquet->id . '/' . 'gh.jpg')}}">
                 @if($bouquet->bouquet_of_the_day)
                 <p class="day text-uppercase">пропозиція дня</p>
+                @endif
+                @if($bouquet->inStock)
+                <p class="stock text-uppercase">в наявності</p>
+                @else
+                <p class="stock text-uppercase">не в наявності</p>
                 @endif
             </a>
             <div class="card-body">
@@ -49,8 +54,13 @@
                 <div class="dropdown">
                 <i class=" dropbtn material-icons">more_horiz</i>
                     <div class="dropdown-content">
-                    <a href="/admin/add-to-hits/{{$bouquet->id}}">Додати в "Хіти продаж"</a>
-                    <a href="#" onclick="getForm({{$bouquet->id}},{{$prices[$bouquet->id]}});">Пропозиція дня</a>
+                        <a href="/admin/add-to-hits/{{$bouquet->id}}">Додати в "Хіти продаж"</a>
+                        <a href="#" onclick="getForm({{$bouquet->id}},{{$prices[$bouquet->id]}});">Пропозиція дня</a>
+                        @if($bouquet->inStock)
+                        <a href="{{route('admin.bouquet.outOfStock',[$bouquet->id])}}">Встановити "не в наявності"</a>
+                        @else
+                        <a href="{{route('admin.bouquet.inStock',[$bouquet->id])}}">Встановити "в наявності"</a>
+                        @endif
                     </div>
                 </div>
 

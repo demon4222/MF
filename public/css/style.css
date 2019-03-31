@@ -3,6 +3,15 @@
 Primary style
 
 -------------------------------- */
+@font-face {
+  font-family: latoregular; 
+  src: url(/fonts/LatoRegular.woff); 
+}
+@font-face {
+  font-family: latobold; 
+  src: url(/fonts/LatoBold.woff); 
+}
+
 *, *::after, *::before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -15,7 +24,7 @@ html {
 
 body {
   font-size: 1.6rem;
-  font-family: sans-serif;
+  font-family: latoregular,latobold,lucida grande,Tahoma,Sans-Serif;
   color: #2e3233;
   background-color: #ffffff;
   overflow: visible;
@@ -37,7 +46,7 @@ img {
 }
 
 input {
-  font-family: sans-serif;
+  font-family: latoregular,latobold,lucida grande,Tahoma,Sans-Serif;
   font-size: 1.6rem;
 }
 
@@ -244,7 +253,14 @@ Main components
   margin-right: 10px;
   
 }
-
+.type-link{
+  color:black!important;
+  font-weight:normal!important;
+  font-family: latoregular;
+}
+.type-link:hover{
+  color:#EA4335!important;
+}
 
 
 .cd-search-trigger, .cd-nav-trigger {
@@ -477,7 +493,7 @@ Main components
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   border-bottom: 1px solid #3a3f40;
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
@@ -516,6 +532,7 @@ Main components
 .cd-primary-nav .see-all a {
   /* different style for the See all button on mobile and tablet */
   color: #EA4335;
+  font-family: latobold;
 }
 .cd-nav-gallery{
   padding-bottom: 48px!important;
@@ -528,8 +545,17 @@ Main components
 .cd-primary-nav .cd-nav-gallery .cd-nav-item h3, .cd-primary-nav .cd-nav-icons .cd-nav-item h3 {
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 30px;
+  
+  /* margin-top: 30px; */
+  
 }
+@media only screen and (max-width:991px){
+  .cd-primary-nav .cd-nav-gallery .cd-nav-item h3, .cd-primary-nav .cd-nav-icons .cd-nav-item h3{
+    margin-top: 30px;
+  }
+}
+
+
 .cd-primary-nav .cd-nav-gallery .cd-nav-item {
   padding-left: 90px;
 }
@@ -566,22 +592,22 @@ Main components
   background-size: 40px 40px;
 }
 .cd-primary-nav .cd-nav-icons .cd-nav-item.item-1::before {
-  background-image: url("../img/line-icon-1.svg");
+  background-image: url("../media/nav/service/add.svg");
 }
 .cd-primary-nav .cd-nav-icons .cd-nav-item.item-2::before {
-  background-image: url("../img/line-icon-2.svg");
+  background-image: url("../media/nav/service/free-delivery.svg");
 }
 .cd-primary-nav .cd-nav-icons .cd-nav-item.item-3::before {
-  background-image: url("../img/line-icon-3.svg");
+  background-image: url("../media/nav/service/individual.svg");
 }
 .cd-primary-nav .cd-nav-icons .cd-nav-item.item-4::before {
-  background-image: url("../img/line-icon-4.svg");
+  background-image: url("../media/nav/service/overtime.svg");
 }
 .cd-primary-nav .cd-nav-icons .cd-nav-item.item-5::before {
-  background-image: url("../img/line-icon-5.svg");
+  background-image: url("../media/nav/service/photo.svg");
 }
 .cd-primary-nav .cd-nav-icons .cd-nav-item.item-6::before {
-  background-image: url("../img/line-icon-6.svg");
+  background-image: url("../media/nav/service/postcard.svg");
 }
 .cd-primary-nav .cd-nav-icons .cd-nav-item.item-7::before {
   background-image: url("../img/line-icon-7.svg");
@@ -886,6 +912,7 @@ Main components
 }
 .has-children > a, .go-back a {
   position: relative;
+  font-family: latoregular;
 }
 .has-children > a::before, .has-children > a::after, .go-back a::before, .go-back a::after {
   /* arrow icon in CSS - for element with nested unordered lists */

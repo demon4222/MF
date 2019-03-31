@@ -38,6 +38,20 @@ a:hover{
     padding-left: 15px;
     padding-right: 15px;
 }
+.cart-link--goods .cart-link__ico:after {
+	background-color: #84bd00;
+}
+
+.cart-link__ico:after {
+	content: "";
+	display: block;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	position: absolute;
+	bottom: 3px;
+	left: 8px;
+}
 
 /*head-slider*/
 
@@ -85,15 +99,15 @@ a.b-ghost {
   padding: 10px;
   color: 	white;
   font-family: latoregular;
-  border: 3px solid white;
+  border: 2px solid white;
   text-align: center;
   text-decoration: none;
   background-color: rgba(0,0,0,0.5);
 }
 .b-ghost:hover,.b-ghost:active {
 	outline: none;
-  background-color: rgba(213,0,0,0.9);
-  border: 3px solid white;
+  background-color: rgba(67,160,71,0.6);
+  border: 2px solid white;
   color: #CFCFCF;
   
 }
@@ -213,6 +227,21 @@ a.b-ghost {
 	z-index: 15;
 }
 /*hits-slider*/
+
+.soon-button{
+	display: block;
+		width:auto;
+		max-width: 180px;
+  	min-width: 120px;
+  	padding: 10px;
+  	color: white;
+		text-align: center;
+		text-transform: uppercase;
+  	text-decoration: none;
+  	border-radius: 25px;
+		background-color: #999;
+		border:none;
+}
 
 .to-basket-button{
 	/*margin: auto; */
@@ -349,14 +378,20 @@ a.b-ghost {
 /*footer*/
 .page-footer{
 	border-top:1px solid #ededed;
+	text-transform: uppercase;
 }
 .footer-menu-title{
 	font-size: 20px;
 	color:black;
-
+	text-align: left;
 }
 .footer-menu-links a{
 	color: #333;
+	text-align: left;
+	padding-top:1rem;
+}
+.footer-menu-links a:hover{
+	color: #43a047;
 }
 /*end*/
 

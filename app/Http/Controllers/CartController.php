@@ -27,7 +27,7 @@ class CartController extends Controller
 
     public function storeFlower(Request $request)
     {
-        Cart::add($request->id.'flower'.$request->height_id, $request->name, 1, $request->price, ['height' => $request->height_id])
+        Cart::add($request->id.'flower'.$request->height_id, $request->name, $request->qty, $request->price, ['height' => $request->height_id])
         ->associate('App\Models\Flower');
 
         return redirect()->route('cart.index')->with('success_message','У вас новий товар!');

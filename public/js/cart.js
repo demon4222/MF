@@ -15,6 +15,11 @@ $(document).ready(function(){
             var current_total = Number(total.innerHTML);
             current_total-=Number(price_for_unit);
             total.innerHTML = current_total;
+
+            var hidden_ptoduct_count = document.getElementById('hidden_product_count');
+            hidden_ptoduct_count.value = count;
+            var hidden_total_price = document.getElementById('hidden_total_price');
+            hidden_total_price.value = current_total;
         }
         $input.val(count);
         $input.change();
@@ -33,6 +38,12 @@ $(document).ready(function(){
         var current_total = Number(total.innerHTML);
         current_total+=Number(price_for_unit);
         total.innerHTML = current_total;
+
+        var hidden_ptoduct_count = document.getElementById('hidden_product_count');
+        hidden_ptoduct_count.value = $input.val();
+        var hidden_total_price = document.getElementById('hidden_total_price');
+        hidden_total_price.value = current_total;
+
         return false;
     });
 })
@@ -110,6 +121,17 @@ function isSameShipping() {
     chbox=document.getElementById('id_same_billing_shipping');
     var receiver;
     receiver = document.getElementById('receiver');
+    var name = document.getElementById('id_shipping_detail_last_first_name');
+    var tel = document.getElementById('id_shipping_detail_phone');
+    if(chbox.checked)
+    {
+        name.required=false;
+        tel.required=false;
+    }
+    else{
+        name.setAttribute('required','true');
+        tel.setAttribute('required','true');
+    }
     if (chbox.checked) {
         receiver.style = "display:none;";
     }
@@ -126,11 +148,13 @@ function isCourier(){
     selfpick = document.getElementById('selfpickWhere');
     courierCity = document.getElementById('courierCity');
     courierAdress = document.getElementById('courierAddress');
+    var address_input = document.getElementById('id_shipping_detail_address');
     if(chbox.checked)
     {
         selfpick.style = "display:none";
         courierCity.style = "display:block;";
         courierAdress.style = "display:block;";
+        address_input.setAttribute('required','true');
     }
 }
 function isSelf(){
@@ -142,11 +166,12 @@ function isSelf(){
     selfpick = document.getElementById('selfpickWhere');
     courierCity = document.getElementById('courierCity');
     courierAdress = document.getElementById('courierAddress');
+    var address_input = document.getElementById('id_shipping_detail_address');
     if(chbox.checked)
     {
+        address_input.required=false;
         selfpick.style = "display:block";
         courierCity.style = "display:none;";
         courierAdress.style = "display:none;";
     }
 }
-

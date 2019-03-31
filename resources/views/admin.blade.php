@@ -37,6 +37,7 @@
         <a href="#" class="list-group-item list-group-item-action">Букет дня</a>
         <a href="/admin/all-products" class="list-group-item list-group-item-action">Всі товари</a>
         <a href="/admin/nav-edit" class="list-group-item list-group-item-action">Меню</a>
+        <a href="{{route('orders.index')}}" class="list-group-item list-group-item-action">Замовлення</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->

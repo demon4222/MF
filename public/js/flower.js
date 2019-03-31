@@ -13,7 +13,8 @@ $(document).ready(function(){
             total.innerHTML = current_total + ' грн';
         }
         $input.val(count);
-        $input.change();       
+        $input.change(); 
+        document.getElementById('qty').val($input.val());      
         return false;
     });
     $('#js-btn-plus').click(function () {
@@ -23,6 +24,7 @@ $(document).ready(function(){
         var price_elem = document.getElementById('total');
         var price_for_unit = document.getElementById('price_unit').value;
         price_elem.innerHTML = price_for_unit*$input.val() + ' грн';
+        document.getElementById('qty').value = $input.val();
         return false;
     });
 })

@@ -30,11 +30,21 @@
         <a class="cd-logo" href="/">Million Flowers</a>
         <ul class="cd-header-buttons">
             <li><a class="cd-search-trigger" href="#cd-search"><span></span></a></li>
-            <li><a href="{{route('cart.index')}}" class="cart-link cart-link--goods">
-                <span class="cart-link__ico">
-                <svg width="24" height="24" viewBox="0 0 72.39 78.97"><g data-name="cart_layer"><path fill="#333333" d="M64.37 18.33H50.75v-4.14A14.21 14.21 0 0 0 36.55 0h-.72a14.21 14.21 0 0 0-14.18 14.19v4.14H8L0 79h72.39zM25 14.19A10.9 10.9 0 0 1 35.84 3.3h.72a10.9 10.9 0 0 1 10.88 10.89v4.14H25zm-14 7.44h10.65v8.85a3.64 3.64 0 1 0 3.3-.09v-8.76h22.49v8.81a3.65 3.65 0 1 0 3.3 0v-8.81h10.74l7.15 54H3.77z"></path></g></svg>
-                </span>
-                </a></li>
+            <li>
+                @if(Cart::count()!=0)
+                <a href="{{route('cart.index')}}" class="cart-link cart-link--goods">
+                    <span class="cart-link__ico">
+                    <svg width="24" height="24" viewBox="0 0 72.39 78.97"><g data-name="cart_layer"><path fill="#333333" d="M64.37 18.33H50.75v-4.14A14.21 14.21 0 0 0 36.55 0h-.72a14.21 14.21 0 0 0-14.18 14.19v4.14H8L0 79h72.39zM25 14.19A10.9 10.9 0 0 1 35.84 3.3h.72a10.9 10.9 0 0 1 10.88 10.89v4.14H25zm-14 7.44h10.65v8.85a3.64 3.64 0 1 0 3.3-.09v-8.76h22.49v8.81a3.65 3.65 0 1 0 3.3 0v-8.81h10.74l7.15 54H3.77z"></path></g></svg>
+                    </span>
+                </a>
+                @else
+                <a href="{{route('cart.index')}}" class="cart-link">
+                    <span class="cart-link__ico">
+                    <svg width="24" height="24" viewBox="0 0 72.39 78.97"><g data-name="cart_layer"><path fill="#333333" d="M64.37 18.33H50.75v-4.14A14.21 14.21 0 0 0 36.55 0h-.72a14.21 14.21 0 0 0-14.18 14.19v4.14H8L0 79h72.39zM25 14.19A10.9 10.9 0 0 1 35.84 3.3h.72a10.9 10.9 0 0 1 10.88 10.89v4.14H25zm-14 7.44h10.65v8.85a3.64 3.64 0 1 0 3.3-.09v-8.76h22.49v8.81a3.65 3.65 0 1 0 3.3 0v-8.81h10.74l7.15 54H3.77z"></path></g></svg>
+                    </span>
+                </a>
+                @endif
+            </li>
             <li><a class="cd-nav-trigger" href="#cd-primary-nav"><span></span></a></li>
         </ul> <!-- cd-header-buttons -->
     </header>
@@ -70,36 +80,16 @@
             <li class="has-children">
                 <a href="#">Квіти поштучно</a>
 
-                <ul class="cd-nav-gallery is-hidden">
+                <ul class="cd-secondary-nav is-hidden">
                     <li class="go-back"><a href="#0">Навігація</a></li>
                     <li class="see-all"><a href="#">Усі квіти</a></li>
+                    @foreach($flowerCategory as $category)
                     <li>
-                        <a class="cd-nav-item" href="#">
-                            <img src="{{asset('media/nav/el-toro-472x472.jpg')}}" alt="Product Image">
-                            <h3>Класична троянда</h3>
+                        <a class="" href="/flower-type/{{$category->slug}}">
+                            {{$category->name}}
                         </a>
                     </li>
-
-                    <li>
-                        <a class="cd-nav-item" href="#">
-                            <img src="{{asset('media/nav/karina-472x472.jpg')}}" alt="Product Image">
-                            <h3>Піоновидна троянда</h3>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="cd-nav-item" href="#">
-                            <img src="{{asset('media/nav/sprey-lady-bombastic-472x472.jpg')}}" alt="Product Image">
-                            <h3>Тюльпани</h3>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="cd-nav-item" href="#">
-                            <img src="{{asset('media/nav/tulips-white-0x700.jpg')}}">
-                            <h3>Хризантеми</h3>
-                        </a>
-                    </li>
+                    @endforeach
                 </ul>
             </li>
 
@@ -110,57 +100,43 @@
                     <li class="see-all"><a href="#">Смотреть услуги</a></li>
                     <li>
                         <a class="cd-nav-item item-1" href="#">
-                            <h3>Нарисовать макет</h3>
-                            <p>Мі сделаем для вас лучший макет</p>
+                            <h3>Додаткові комплектуючі</h3>
+                            
                         </a>
                     </li>
 
                     <li>
                         <a class="cd-nav-item item-2" href="#">
-                            <h3>Местоположение</h3>
-                            <p>Мы добавим ваши координаты на сайт</p>
+                            <h3>Безкоштовна доставка</h3>
+                            
                         </a>
                     </li>
 
                     <li>
                         <a class="cd-nav-item item-3" href="#">
-                            <h3>Изображения</h3>
-                            <p>Мы делаем лучшие картинки</p>
+                            <h3>Індивідуальне оформлення</h3>
+                            
                         </a>
                     </li>
 
                     <li>
                         <a class="cd-nav-item item-4" href="#">
-                            <h3>Фото</h3>
-                            <p>Фото лучших моментов вашей жизни</p>
+                            <h3>Доставка у неробочій час</h3>
+                            
                         </a>
                     </li>
 
                     <li>
                         <a class="cd-nav-item item-5" href="#">
-                            <h3>Отдыхайте</h3>
-                            <p>Отдыхайте пока мы работаем</p>
+                            <h3>Фото перед відправкою</h3>
+                            
                         </a>
                     </li>
 
                     <li>
                         <a class="cd-nav-item item-6" href="#">
-                            <h3>Поддержка</h3>
-                            <p>Круглосуточная поддержка проектов</p>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="cd-nav-item item-7" href="#">
-                            <h3>Настройка сайта</h3>
-                            <p>Мы постоянно обслуживаем наши проекты</p>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="cd-nav-item item-8" href="#">
-                            <h3>Все делаем во время</h3>
-                            <p>Проект будет разработан в установленные сроки</p>
+                            <h3>Листівка</h3>
+                            
                         </a>
                     </li>
                 </ul>

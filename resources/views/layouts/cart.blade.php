@@ -182,7 +182,22 @@ $('#datepicker').datepicker("setDate", today );
 
 
 
-    <form>
+    <form method="POST" action="{{route('orders.store')}}" id="order-form">
+        @csrf
+        @foreach(Cart::content() as $item)
+        <input type="hidden" name="product_name[]" value="{{$item->name}}">
+        <input type="hidden" name="product_count[]" value="{{$item->qty}}" id="hidden_product_count">
+        <input type="hidden" name="product_price[]" value="{{$item->price}}">
+        @if(get_class($item->model)=='App\Models\Bouquet')
+        <input type="hidden" name="product_size[]" value="{{$item->options->size}}">
+        <input type="hidden" name="product_category[]" value="bouquet">
+        @elseif(get_class($item->model)=='App\Models\Flower')
+        <input type="hidden" name="product_size[]" value="{{$item->options->height}}">
+        <input type="hidden" name="product_category[]" value="flower">
+        @endif
+        <input type="hidden" name="total_price[]" value="{{Cart::total()}}" id="hidden_total_price">
+        <input type="hidden" name="product_slug[]" value="{{$item->model->slug}}">
+        @endforeach
         <div class="card-wrapper row">
             <div class="data-slot col-md-4">
                 <div class="data-slot_title">Ваші данні:</div>
@@ -190,17 +205,12 @@ $('#datepicker').datepicker("setDate", today );
                     <div class="ds-input">
                         <label class="ds-input_title">Ім'я та фамілія:</label>
                         <div class="ds-input_message">обов'язкове поле</div>
-                        <input type="text" class="ds-input_input">
-                    </div>
-                    <div class="ds-input">
-                        <label class="ds-input_title">Email:</label>
-                        <div class="ds-input_message">обов'язкове поле</div>
-                        <input type="email" class="ds-input_input">
+                        <input type="text" name="customer_name" required class="ds-input_input">
                     </div>
                     <div class="ds-input">
                         <label class="ds-input_title">Телефон:</label>
                         <div class="ds-input_message">обов'язкове поле</div>
-                        <input type="number" class="ds-input_input">
+                        <input type="number" name="customer_phone" required class="ds-input_input">
                     </div>
                     <div class="ds-message">Усі поля обов'язкові для заповнення..</div>
                 </div>
@@ -214,12 +224,12 @@ $('#datepicker').datepicker("setDate", today );
                         <div class="ds-input">
                             <label class="ds-input_title">Имя:</label>
                             <div class="ds-input_message">обов'язкове поле</div>
-                            <input class="ds-input_input" id="id_shipping_detail_last_first_name" maxlength="200" name="shipping_detail_last_first_name" type="text" required="">
+                            <input class="ds-input_input" id="id_shipping_detail_last_first_name" maxlength="200" required name="shipping_detail_last_first_name" type="text">
                         </div>
                         <div class="ds-input">
                             <label class="ds-input_title">Телефон</label>
                             <div class="ds-input_message">обов'язкове поле</div>
-                            <input class="ds-input_input elip" id="id_shipping_detail_phone" maxlength="20" name="shipping_detail_phone" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" type="text">
+                            <input class="ds-input_input elip" id="id_shipping_detail_phone" maxlength="20" required name="shipping_detail_phone" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" type="text">
                         </div>
                     </div>
                 </div>
@@ -241,7 +251,7 @@ $('#datepicker').datepicker("setDate", today );
                     <div class="ds-input">
                         <label class="data-slot_subtitle ">Виберіть дату</label>
                         <div class="datepicker-wrapper">
-                            <div ><input style="width:100%;" onchange="changeDate()" class="ds-input_input" type="text" id="datepicker"></div>
+                            <div ><input style="width:100%;" onchange="changeDate()" class="ds-input_input" name="shipping_date" type="text" id="datepicker"></div>
                         </div>
                     </div>
                 </div>
@@ -250,27 +260,27 @@ $('#datepicker').datepicker("setDate", today );
                         <div class="data-slot_subtitle">Виберіть час</div>
                         <div class="data-slot_intervals">
                             <div class="ls-time">
-                                <input id="time-courier-1" type="radio" class="elip" name="time_courier" value="7" checked="">
+                                <input id="time-courier-1" type="radio" class="elip" name="time_courier" value="9-11" checked="">
                                 <label for="time-courier-1">09 - 11</label>
                             </div>
                             <div class="ls-time">
-                                <input id="time-courier-2" type="radio" class="elip" name="time_courier" value="8">
+                                <input id="time-courier-2" type="radio" class="elip" name="time_courier" value="11-13">
                                 <label for="time-courier-2">11 - 13</label>
                             </div>
                             <div class="ls-time">
-                                <input id="time-courier-3" type="radio" class="elip" name="time_courier" value="9">
+                                <input id="time-courier-3" type="radio" class="elip" name="time_courier" value="13-15">
                                 <label for="time-courier-3">13 - 15</label>
                             </div>
                             <div class="ls-time">
-                                <input id="time-courier-4" type="radio" class="elip" name="time_courier" value="10">
+                                <input id="time-courier-4" type="radio" class="elip" name="time_courier" value="15-17">
                                 <label for="time-courier-4">15 - 17</label>
                             </div>
                             <div class="ls-time">
-                                <input id="time-courier-5" type="radio" class="elip" name="time_courier" value="11">
+                                <input id="time-courier-5" type="radio" class="elip" name="time_courier" value="17-19">
                                 <label for="time-courier-5">17 - 19</label>
                             </div>
                             <div class="ls-time">
-                                <input id="time-courier-6" type="radio" class="elip" name="time_courier" value="12">
+                                <input id="time-courier-6" type="radio" class="elip" name="time_courier" value="19-21">
                                 <label for="time-courier-6">19 - 21</label>
                             </div>
                         </div>
@@ -286,12 +296,12 @@ $('#datepicker').datepicker("setDate", today );
                         <div class="ds-input">
                             <label class="ds-input_title">Адресса:</label>
                             <div class="ds-input_message">обов'язкове поле</div>
-                            <input class="ds-input_input elip" id="id_shipping_detail_address" maxlength="400" name="shipping_detail_address" type="text">
+                            <input class="ds-input_input elip" id="id_shipping_detail_address" required maxlength="400" name="shipping_detail_address" type="text">
                         </div>
                     </div>
                 </div>
                 <div class="selfpick_where" id="selfpickWhere" style="display:none;">
-                    <div class="data-slot_subtitle mt-3">Заберу букет по адресу:</div>
+                    <div class="data-slot_subtitle mt-3">Заберу букет за адресою:</div>
                     <div class="ls-radio mt-2">
                         <input id="addr1" class="elip" type="radio" name="shipping_detail_self_point" value="point_1" checked="">
                         <label for="addr1">Адресса</label>
@@ -323,8 +333,9 @@ $('#datepicker').datepicker("setDate", today );
                     <a class="need-help_phone" href="tel:380444922838">+380 (67) 311 33 55</a>
                 </div>
                 <div class="make-order">
-                    <input type="hidden" name="complete_order" value="Оформить заказ">
-                    <input type="submit" name="complete_order" class="btn-main-flx bttn-card" value="Оформить заказ">
+                    <!-- <input type="hidden" name="complete_order" value="Оформить заказ">
+                    <input type="submit" name="complete_order" class="btn-main-flx bttn-card" value="Оформить заказ"> -->
+                    <button type="submit" form="order-form" name="complete_order" class="btn-main-flx bttn-card">Оформити замовлення</button>
                 </div>
             </div>
         </div>

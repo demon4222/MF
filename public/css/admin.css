@@ -112,6 +112,26 @@ font-family: latoregular,latobold,lucida grande,Tahoma,Sans-Serif;
   position: absolute;
   bottom: 8.65rem;
 }
+.stock{
+  background-color: red;
+  color:black;
+  position: absolute;
+  bottom: 7.15rem;
+  right:0;
+}
+
+.page-item.active .page-link {
+	background-color: #a72896f0;
+	border-color: #a72896f0;
+}
+.page-link{
+	color:black;
+}
+.paginator-block{
+	margin-left: auto;
+    margin-right: auto;
+    width: 6em;
+}
 
 
 

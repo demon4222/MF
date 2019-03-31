@@ -21,5 +21,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        
+        view()->composer('layouts.layoutMain', function($view){
+            $view->with([
+                'types' => \App\Models\BouquetType::all(),
+                'flowerCategory' => \App\Models\FlowerCategory::all()
+            ]);
+        });
     }
 }

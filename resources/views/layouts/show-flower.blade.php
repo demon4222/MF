@@ -87,7 +87,12 @@
 							<input type="hidden" name="name" value="{{$flower->name}}">
 							<input type="hidden" name="price" value="{{$height->pivot->price}}">
 							<input type="hidden" name="height_id" value="{{$height->id}}">
-							<button type="submit" class="to-basket-button mt-2">В КОШИК</button>
+							<input type="hidden" name="qty" value="1" id="qty">
+							@if($flower->inStock)
+							<button class="to-basket-button mt-2" type="submit">В КОШИК</button>
+							@else
+							<button class="soon-button mt-2" disabled>СКОРО</button>
+							@endif
 						</form>
 					</div>
 					<div class="description-block mt-5">

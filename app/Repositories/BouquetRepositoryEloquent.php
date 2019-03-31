@@ -226,6 +226,16 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
         $this->delete($id);
     }
 
+    public function setInStock($id)
+    {
+        $this->update(['inStock' => 1],$id);
+    }
+
+    public function setOutOfStock($id)
+    {
+        $this->update(['inStock' => 0],$id);
+    }
+
     /**
      * Boot up the repository, pushing criteria
      */
