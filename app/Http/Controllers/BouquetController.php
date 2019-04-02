@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\BouquetSubType;
 use App\Repositories\BouquetRepositoryEloquent as Bouquet;
 use App\Repositories\SizeRepositoryEloquent as Size;
 use App\Repositories\BouquetTypeRepositoryEloquent as BouquetType;
 use App\Repositories\BouquetSizeRepositoryEloquent as BouquetSize;
 use App\Models\FlowerCategory;
+use App\Helpers\BouquetsFilter;
 
 class BouquetController extends Controller
 {
@@ -82,11 +84,14 @@ class BouquetController extends Controller
         $bouquets = $subType->bouquets()->paginate(15);
         $prices = $this->bouquetRepository->getPrices($bouquets);
         return view('layouts.all-bouquets', compact('prices','bouquets'));
-    }
+    } 
 
-    public function index()
+    public function index(Request $request)
     {
-        $bouquets = $this->bouquetRepository->paginate(15);
+        
+        // \Cookie::queue('price_filter_box_3', 'checked', 10);
+        //     \Cookie::queue('price_filter_val', 3, 10);
+        $bouquets = (new BouquetsFilter($request))->apply();
         $prices = $this->bouquetRepository->getPrices($bouquets);
 		return view('layouts.all-bouquets', compact('bouquets','prices'));
     }

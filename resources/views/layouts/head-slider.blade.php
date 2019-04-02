@@ -1,3 +1,4 @@
+@if($head_slides->first()!=null)
 <section class="block">
  <div class="head-sl">
   @foreach($head_slides as $head_slide)
@@ -23,4 +24,5 @@
   @endforeach
  </div>
 </section>
+@endif
 

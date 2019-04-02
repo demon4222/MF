@@ -13,8 +13,10 @@ jQuery(document).ready(function($){
 		if( $('.cd-main-content').hasClass('nav-is-visible') ) {
 			closeNav();
 			$('.cd-overlay').removeClass('is-visible');
+			
 		} else {
 			$(this).addClass('nav-is-visible');
+			
 			$('.cd-primary-nav').addClass('nav-is-visible');
 			$('.cd-main-header').addClass('nav-is-visible');
 			$('.cd-main-content').addClass('nav-is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){

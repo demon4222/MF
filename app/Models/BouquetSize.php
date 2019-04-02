@@ -23,7 +23,12 @@ class BouquetSize extends Model implements Transformable
     public function price()
 	{
 	    return $this->price;
-	}
+    }
+    
+    public function bouquets()
+    {
+        return $this->belongsToMany('App\Models\Bouquet','bouquet_size','bouquet_id');
+    }
 
 	public $timestamps = false;
 

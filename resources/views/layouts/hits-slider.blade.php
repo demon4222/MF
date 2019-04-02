@@ -1,4 +1,5 @@
 <section class="block">
+    @if($hits_slides->first()!=null)
     <div class=" text-center my-5">
         <strong class="title-block"><p>ПОПУЛЯРНЕ</p></strong>
     </div>
@@ -26,4 +27,5 @@
         </div>
     @endforeach
     </div>
+    @endif
 </section>

@@ -33,10 +33,15 @@ Route::get('/bouquet-types/{slug}','BouquetController@getBouquetsByType')->name(
 
 Route::get('/bouquet-sub-types/{slug}','BouquetController@getBouquetsBySubType')->name('bouquets.bySubType');
 
-
+Route::get('/flowers','FlowerController@index')->name('flowers.index');
 Route::get('/flowers/{slug}/{height_id}','FlowerController@show')->name('flower.show');
 
 Route::get('/flower-type/{slug}','FlowerController@getFlowersByCategory')->name('flowers.byCategory');
+
+Route::get('/search', 'SearchController@search')->name('search');
+
+// Route::get('/bouquets/{price_filter}','FilterController@bouquetsPrices')->name('filter.price.bouquets');
+
 /*ADMIN*/
 Route::get('/admin', function () {
     return view('admin');
@@ -46,6 +51,7 @@ Route::get('/admin/head-slider/edit/{slide_id}','HeadSliderController@show');
 Route::get('/admin/head-slider/add','HeadSliderController@add');
 Route::post('/admin/head-slider/add','HeadSliderController@addRequest');
 Route::post('/admin/head-slider/{slide_id}/change-button','HeadSliderController@changeButton');
+Route::post('/admin/head-slider/{slide_id}/change-button-link','HeadSliderController@changeButtonLink');
 Route::post('/admin/head-slider/{slide_id}/change-text','HeadSliderController@changeText');
 Route::post('/admin/head-slider/{slide_id}/change-photo','HeadSliderController@changePhoto');
 Route::post('/admin/head-slider/{slide_id}/delete','HeadSliderController@delete');

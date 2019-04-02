@@ -57,6 +57,15 @@
     </form>
   </div>
 
+  <div class="change-button-link-block p-3 text-center" id="change-button-link-block">
+    <a href="#" class="close-button"><i class='fas fa-window-close' style='font-size:24px;color:red'></i></a>
+    <form method="post" action="/admin/head-slider/{{$slide->id}}/change-button-link">
+      {!! csrf_field() !!}
+      <input type="text" name="button_link">
+      <button type="submit">Змінити</button>
+    </form>
+  </div>
+
   <div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->
@@ -116,6 +125,9 @@
                 </div>
                 <div class="col-3">
                   <a href="#" class="b-ghost change-button">Змінити кнопку</a>
+                </div>
+                <div class="col-3">
+                  <a href="#" class="b-ghost change-button-link">Змінити посил.</a>
                 </div>
               </div>
           </div>

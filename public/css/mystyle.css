@@ -113,6 +113,54 @@ a.b-ghost {
 }
 /*end*/
 
+/*filter*/
+.filter-wrapper{
+	border-bottom:1px solid #d8d8d8;
+}
+.filter {
+	background: white repeat left top;
+	border-right: 1px solid #43a047;
+  left: -285px; /* прячем меню */
+	height: 100%;
+  position: fixed;
+	width: 285px;
+	z-index:4;
+}
+.filter-head{
+	padding:1rem;
+	border-bottom: 1px solid #d8d8d8;
+}
+
+.filter a {
+  font-size: 1.5rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.icon-close {
+	background-color: dark;
+	cursor: pointer;
+	position: absolute;
+	right:0;
+	top:1rem;
+	padding-right:1rem;
+}
+
+.icon-filter {
+  cursor: pointer;
+  font-family: latoregular;
+  font-size: 1.5rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.icon-filter img {
+  margin-right: 5px;
+}
+
+
+/*end filter*/
+
 /*begin head-slider dots */
 
 .my-dots {
@@ -647,6 +695,11 @@ input[type='number'] {
     -ms-flex-pack: center;
     justify-content: center;
 }
+
+.search-types{
+	display:flex;
+}
+
 @media only screen and (max-width:425px)
 {
 	.utp-unit{
@@ -758,6 +811,7 @@ svg:not(:root) {
 	.product-wrapper{
 		margin-right: 10px;
 		margin-left: 10px;
+		border-top:1px solid #d8d8d8;
 	}
 	.product-sl-wrapper{
 		padding:0;

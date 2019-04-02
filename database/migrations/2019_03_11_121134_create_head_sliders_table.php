@@ -15,8 +15,9 @@ class CreateHeadSlidersTable extends Migration
     {
         Schema::create('head_sliders', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('path_to_photo',150);
-            $table->char('button_text',50)->nullable();
+            $table->string('path_to_photo',150);
+            $table->string('button_text',50)->nullable();
+            $table->string('button_link')->nullable();
             $table->mediumText('description')->nullable();
         });
     }

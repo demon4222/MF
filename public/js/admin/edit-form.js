@@ -4,6 +4,7 @@ $('.close-button').click(function(){
 	document.getElementById('delete-photo-block').style = "display:none;";
 	document.getElementById('change-text-block').style = "display:none;";
 	document.getElementById('change-button-block').style = "display:none;";
+	document.getElementById('change-button-link-block').style = "display:none;";
 });
 $('.change-photo').click(function(){
 	document.getElementById('change-photo-block').style = "display:block;";
@@ -19,5 +20,9 @@ $('.change-text').click(function(){
 });
 $('.change-button').click(function(){
 	document.getElementById('change-button-block').style = "display:block;";
+	document.getElementById('wrapper').style = "opacity:0.2;";
+});
+$('.change-button-link').click(function(){
+	document.getElementById('change-button-link-block').style = "display:block;";
 	document.getElementById('wrapper').style = "opacity:0.2;";
 });

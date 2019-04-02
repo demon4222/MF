@@ -16,6 +16,13 @@ class FlowerController extends Controller
         $this->flowerRepository = $flowerRepository;
     }
 
+    public function index()
+    {
+        $flowers = $this->flowerRepository->paginate(15);
+        $prices = $this->flowerRepository->getPrices($flowers);
+        return view('layouts.all-flowers', compact('flowers','prices'));
+    }
+
     public function indexAdmin()
     {
         $flowers = $this->flowerRepository->all();

@@ -43,7 +43,6 @@ class HomeController extends Controller
         $hits_slides = $this->hitsSliderRepository->all();
         $hits_slides_prices = $this->hitsSliderRepository->getPrices($hits_slides);
         $bouquetOfTheDay = $this->bouquetOfTheDayRepository->getForHome();
-        
         return view('home', compact('types','flowerCategory','head_slides','hits_slides','hits_slides_prices','bouquetOfTheDay'));
     }
 

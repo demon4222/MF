@@ -1,31 +1,25 @@
 @extends('layouts.layoutMain')
 
-@push('scripts')
-<script src="{{asset('js/filter.js')}}"></script>
-@endpush
-
 @section('content')
 
 <section class="block">
-    <div class=" text-center my-5 title-block">
-        <p>букети</p>
-    </div>
-    
-    @if($bouquets->first()==null)
-        <div style="display:block">
-            <p style="font-size:4rem; color:#8b8b8b;">Наразі немає доступних букетів...</p>
-            <a href="/" style="font-size:2rem;color:#a72896f0">Головна</a>
+    @if(session()->has('success_message'))
+        <div class="alert alert-success">
+            {{session()->get('success_message')}}
         </div>
-    @else
-    @include('layouts.filter-menu')
-    <div class="filter-wrapper mb-3 py-2">
-        <div class="icon-filter">
-            <img src="{{asset('media/filter-button.svg')}}">
-            Фільтр
-        </div>
-    </div>
+    @endif
 
-    <div class="product-wrapper row mt-4">
+    @if(count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>$error</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <div class="product-wrapper row">
         @foreach($bouquets as $bouquet)
         <div class="col-md-6 col-lg-4 product-card mb-4  ">
             <div class="card">
@@ -47,14 +41,19 @@
             </div>
         </div>
         @endforeach
+        @if($bouquets[0]==null)
+        <div style="display:block">
+        <p style="font-size:4rem; color:#8b8b8b;">Наразі немає доступних букетів...</p>
+        <a href="/" style="font-size:2rem;color:#a72896f0">Головна</a>
+        </div>
+        @endif
     </div>
     <div class="paginator">
         <div class="paginator-block">
-            {{$bouquets->appends(['price_filter' => request()->input('price_filter')])->links()}}
+            {{$bouquets->appends(['q' => request()->input('q')])->links()}}
         </div>
     </div>
-    @endif
-</section>
 
+</section>
 
 @endsection

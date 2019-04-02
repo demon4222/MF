@@ -31,7 +31,8 @@ class HeadSliderRepositoryEloquent extends BaseRepository implements HeadSliderR
         $data = [
     		"path_to_photo" => '0',
     		"description" => $req->description,
-    		"button_text" => $req->button_text,
+            "button_text" => $req->button_text,
+            "button_link" =>$req->button_link,
         ];
         $slide = $this->create($data);
         $path = '/media/head-slider/'. $slide->id . '.jpg';
@@ -41,8 +42,12 @@ class HeadSliderRepositoryEloquent extends BaseRepository implements HeadSliderR
 
     public function changeButtonText($id, $text)
     {
-        $data = ['button_text' => $text];
-        $this->update($data, $id);
+        $this->update(['button_text' => $text], $id);
+    }
+
+    public function changeButtonLink($id, $link)
+    {
+        $this->update(['button_link' => $link],$id);
     }
 
     public function changePhoto($id, $photo)

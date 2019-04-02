@@ -47,9 +47,24 @@
     </header>
     </div>
     <main class="cd-main-content bg-white container-fluid">
-        <!--head-slider-->
+        @if(session()->has('success_message'))
+        <div class="alert alert-success">
+            {{session()->get('success_message')}}
+        </div>
+        @endif
+
+        @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         @include('layouts.head-slider')
-        <!--head-slider-->   
+
         @include('layouts.hits-slider')
 
         @include('layouts.daily-offer')
@@ -72,7 +87,7 @@
                         <a href="/bouquet-types/{{$type->slug}}">{{$type->name}}</a>
                         <ul class="is-hidden">
                             <li class="go-back"><a href="#0">Букети</a></li>
-                            <li class="see-all"><a href="#">Кисти</a></li>
+                            <li class="see-all"><a href="/bouquet-types/{{$type->slug}}">{{$type->name}}</a></li>
                             @foreach($type->bouquetsSubTypes as $subType)
                             <li><a href="/bouquet-sub-types/{{$subType->slug}}">{{$subType->name}}</a></li>
                             @endforeach
@@ -87,7 +102,7 @@
 
                 <ul class="cd-secondary-nav is-hidden">
                     <li class="go-back"><a href="#0">Навігація</a></li>
-                    <li class="see-all"><a href="#">Усі квіти</a></li>
+                    <li class="see-all"><a href="{{route('flowers.index')}}">Усі квіти</a></li>
                     @foreach($flowerCategory as $category)
                     <li>
                         <a class="type-link" href="/flower-type/{{$category->slug}}">
@@ -101,8 +116,8 @@
             <li class="has-children">
                 <a href="#">Послуги</a>
                 <ul class="cd-nav-icons is-hidden">
-                    <li class="go-back"><a href="#0">Меню услуг</a></li>
-                    <li class="see-all"><a href="#">Смотреть услуги</a></li>
+                    <li class="go-back"><a href="#0">Меню послуг</a></li>
+                    <li class="see-all"><a href="#">Дивитися послуги</a></li>
                     <li>
                         <a class="cd-nav-item item-1" href="#">
                             <h3>Додаткові комплектуючі</h3>
@@ -153,9 +168,8 @@
     </nav> <!-- cd-nav -->
 
     <div id="cd-search" class="cd-search">
-        <form method="GET" action="">
-            @csrf
-            <input type="search" name="query" placeholder="Пошук...">
+        <form method="GET" action="{{route('search')}}">
+            <input type="search" name="q" value="{{request()->input('q')}}" placeholder="Пошук...">
         </form>
     </div>
 

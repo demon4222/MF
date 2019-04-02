@@ -1,4 +1,4 @@
-.delete-slide-block, .change-photo-block, .change-text-block, .change-button-block{
+.delete-slide-block, .change-photo-block, .change-text-block, .change-button-block, .change-button-link-block{
 	position: absolute;
 	display: none;	
 	background-color: white;
@@ -21,6 +21,10 @@
 	left:45%;
 }
 .change-button-block{
+	bottom:45%;
+	left:45%;
+}
+.change-button-link-block{
 	bottom:45%;
 	left:45%;
 }

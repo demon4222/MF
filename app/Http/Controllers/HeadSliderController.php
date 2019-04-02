@@ -31,6 +31,11 @@ class HeadSliderController extends Controller
         return $this->show($id);
     }
 
+    public function changeButtonLink($id, Request $req){
+        $this->headSliderRepository->changeButtonLink($id, $req->button_link);
+        return $this->show($id);
+    }
+
     public function changePhoto($id,Request $req){
         $this->headSliderRepository->changePhoto($id, $req->photo);
         return $this->show($id);
