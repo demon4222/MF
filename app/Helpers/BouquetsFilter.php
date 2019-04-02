@@ -3,7 +3,6 @@
 namespace App\Helpers;
 use App\Models\BouquetSize;
 use App\Models\Bouquet;
-use Illuminate\Support\Facades\DB;
 
 class BouquetsFilter
 {
@@ -11,11 +10,11 @@ class BouquetsFilter
 
     protected $request;
 
-    protected $perPage = 2;
+    protected $perPage = 15;
 
     public function __construct($request)
     {
-        $this->builder = Bouquet::paginate(2);
+        $this->builder = Bouquet::paginate($this->perPage);
         $this->request = $request; 
     }
 
@@ -37,41 +36,39 @@ class BouquetsFilter
 
     public function price_filter($value)
     {
-        if($value==1)
-        {
-            $bouquetsSize = BouquetSize::where('price', '<=', 500)
-                                                    ->groupBy('bouquet_id')
-                                                    ->distinct()
-                                                    ->get();
-            $this->builder = $this->getBouquets($bouquetsSize);
+        if($value<0||$value>6||!is_numeric($value))
+            return;
+
+        $bouquetsSize = null;
+        if($value==1){
+            $bouquetsSize = $this->getPivotTable(0,500);
         }
-        if($value==2)
-        {
-            $bouquetsSize = \App\Models\BouquetSize::where('price', '>=', 501)
-                                                    ->where('price','<=',1000)
-                                                    ->groupBy('bouquet_id')
-                                                    ->distinct()
-                                                    ->get();
-            $this->builder = $this->getBouquets($bouquetsSize);
+        else if($value==2){
+            $bouquetsSize = $this->getPivotTable(501,1000);
         }
-        if($value==3)
-        {
-            $bouquetsSize = \App\Models\BouquetSize::where('price', '>=', 1001)
-                                                    ->where('price','<=',1500)
-                                                    ->groupBy('bouquet_id')
-                                                    ->distinct()
-                                                    ->get();
-            $this->builder = $this->getBouquets($bouquetsSize);
+        else if($value==3){
+            $bouquetsSize = $this->getPivotTable(1001,1500);
         }
-        if($value==4)
-        {
-            $bouquetsSize = \App\Models\BouquetSize::where('price', '>=', 1501)
-                                                    ->where('price','<=',2500)
-                                                    ->groupBy('bouquet_id')
-                                                    ->distinct()
-                                                    ->get();
-            $this->builder = $this->getBouquets($bouquetsSize);
+        else if($value==4){
+            $bouquetsSize = $this->getPivotTable(1501,2000);
         }
+        else if($value==5){
+            $bouquetsSize = $this->getPivotTable(2001,3000);
+        }
+        else if($value==6){
+            $bouquetsSize = $this->getPivotTable(3001,4000);
+        }
+
+        $this->builder = $this->getBouquets($bouquetsSize);
+    }
+
+    public function getPivotTable($min, $max)
+    {
+        return BouquetSize::where('price', '>=', $min)
+            ->where('price','<=',$max)
+            ->groupBy('bouquet_id')
+            ->distinct()
+            ->get();
     }
 
     public function getBouquets($bouquetsSize)
@@ -81,6 +78,6 @@ class BouquetsFilter
         {
             array_push($bouquetsId, $bouquetSize->bouquet_id);
         }
-        return Bouquet::whereIn('id',$bouquetsId)->paginate(2);
+        return Bouquet::whereIn('id',$bouquetsId)->paginate($this->perPage);
     }
 }

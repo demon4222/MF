@@ -10,7 +10,7 @@
     <div class=" text-center my-5 title-block">
         <p>букети</p>
     </div>
-    
+
     @if($bouquets->first()==null)
         <div style="display:block">
             <p style="font-size:4rem; color:#8b8b8b;">Наразі немає доступних букетів...</p>

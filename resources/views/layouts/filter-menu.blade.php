@@ -32,7 +32,15 @@
                     </div>
                     <div class="filter-block__item">
                         <input id="id_price_4" name="price_filter"  onclick="document.getElementById('filter_form').submit()" type="checkbox" value="4">
-                        <label for="id_price_4">від 1501 до 2500</label>
+                        <label for="id_price_4">від 1501 до 2000</label>
+                    </div>
+                    <div class="filter-block__item">
+                        <input id="id_price_5" name="price_filter"  onclick="document.getElementById('filter_form').submit()" type="checkbox" value="5">
+                        <label for="id_price_5">від 2001 до 3000</label>
+                    </div>
+                    <div class="filter-block__item">
+                        <input id="id_price_6" name="price_filter"  onclick="document.getElementById('filter_form').submit()" type="checkbox" value="6">
+                        <label for="id_price_6">від 3001 до 4000</label>
                     </div>
                 </div>
             </div>
