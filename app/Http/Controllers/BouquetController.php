@@ -18,7 +18,8 @@ class BouquetController extends Controller
     private $bouquetSizeRepository;
 
     public function __construct(Bouquet $bouquetRepository,
-     BouquetType $bouquetTypeRepository, BouquetSize $bouquetSizeRepository) {
+                                BouquetType $bouquetTypeRepository, BouquetSize $bouquetSizeRepository)
+    {
 
         $this->bouquetRepository = $bouquetRepository;
         $this->bouquetTypeRepository = $bouquetTypeRepository;
@@ -35,24 +36,24 @@ class BouquetController extends Controller
         // Get post for slug.
         $bouquet = $this->bouquetRepository->model()::whereSlug($slug)->firstOrFail();
         $sizes = $bouquet->sizes()->orderBy('count')->get();
-        $add_sizes= collect();
+        $add_sizes = collect();
         $i = 0;
-        foreach($sizes as $size)
-        {        
+        foreach ($sizes as $size) {
             $id = $size->id;
             $name = $size->size;
-            $add_sizes->put($i, ['id' => $id, 'name'=>$name]);
+            $add_sizes->put($i, ['id' => $id, 'name' => $name]);
             $i++;
         }
         $add_sizes = $add_sizes->all();
         $size = $bouquet->sizes->find($size_id);
-        return view('layouts.show-bouquet',compact('bouquet','size','add_sizes'));
+        return view('layouts.show-bouquet', compact('bouquet', 'size', 'add_sizes'));
     }
 
-	public function indexAdmin(){
+    public function indexAdmin()
+    {
         $bouquets = $this->bouquetRepository->paginate(15);
         $prices = $this->bouquetRepository->getPrices($bouquets);
-		return view('layouts.admin.admin-all-bouquets', compact('bouquets','prices'));
+        return view('layouts.admin.admin-all-bouquets', compact('bouquets', 'prices'));
     }
 
     public function getBouquetsByType($type_slug)
@@ -66,7 +67,7 @@ class BouquetController extends Controller
         $type = $this->bouquetTypeRepository->model()::whereSlug($type_slug)->firstOrFail();
         $bouquets = $type->bouquets()->paginate(15);
         $prices = $this->bouquetRepository->getPrices($bouquets);
-        return view('layouts.all-bouquets', compact('bouquets','prices'));
+        return view('layouts.all-bouquets', compact('bouquets', 'prices'));
     }
 
     public function getBouquetsBySubType($sub_type_slug)
@@ -80,34 +81,37 @@ class BouquetController extends Controller
         $subType = BouquetSubType::whereSlug($sub_type_slug)->firstOrFail();
         $bouquets = $subType->bouquets()->paginate(15);
         $prices = $this->bouquetRepository->getPrices($bouquets);
-        return view('layouts.all-bouquets', compact('prices','bouquets'));
-    } 
+        return view('layouts.all-bouquets', compact('prices', 'bouquets'));
+    }
 
     public function index(Request $request)
     {
         $bouquets = (new BouquetsFilter($request))->apply();
         $prices = $this->bouquetRepository->getPrices($bouquets);
-		return view('layouts.all-bouquets', compact('bouquets','prices'));
-    }
-    
-    public function add(){
-        
-        $bouquetTypes = $this->bouquetTypeRepository->all();
-    	return view('layouts.admin.admin-add-bouquet',compact('bouquetTypes'));
+        return view('layouts.all-bouquets', compact('bouquets', 'prices'));
     }
 
-    public function addRequest(Request $request){
+    public function add()
+    {
+
+        $bouquetTypes = $this->bouquetTypeRepository->all();
+        return view('layouts.admin.admin-add-bouquet', compact('bouquetTypes'));
+    }
+
+    public function addRequest(Request $request)
+    {
         $this->bouquetRepository->createByReq($request);
         return redirect()->action(
             'BouquetController@indexAdmin'
         );
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $bouquetData = $this->bouquetRepository->getForEdit($id);
 
         $bouquetTypes = $this->bouquetTypeRepository->all();
-        return view('layouts.admin.admin-edit-bouquet', compact('bouquetData'),compact('bouquetTypes'));
+        return view('layouts.admin.admin-edit-bouquet', compact('bouquetData','bouquetTypes'));
     }
 
     public function setOutOfStock($id)

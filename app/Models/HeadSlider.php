@@ -24,7 +24,8 @@ class HeadSlider extends Model implements Transformable
     protected $fillable = [
 		"path_to_photo",
 		"description",
-		"button_text"
+		"button_text",
+        "button_link"
 	];
 
 	public $timestamps = false;

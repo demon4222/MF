@@ -21,7 +21,7 @@ class CartController extends Controller
     {
         Cart::add($request->id.'bouquet'.$request->size_id, $request->name, 1, $request->price, ['size' => $request->size_id])
         ->associate('App\Models\Bouquet');
-    
+
         return redirect()->route('cart.index')->with('success_message','У вас новий товар!');
     }
 

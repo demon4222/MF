@@ -14,6 +14,7 @@ $(document).ready(function(){
             var total = document.getElementById('total');
             var current_total = Number(total.innerHTML);
             current_total-=Number(price_for_unit);
+
             total.innerHTML = current_total;
 
             var hidden_ptoduct_count = document.getElementById('hidden_product_count');
@@ -37,8 +38,8 @@ $(document).ready(function(){
         var total = document.getElementById('total');
         var current_total = Number(total.innerHTML);
         current_total+=Number(price_for_unit);
-        total.innerHTML = current_total;
 
+        total.innerHTML = current_total;
         var hidden_ptoduct_count = document.getElementById('hidden_product_count');
         hidden_ptoduct_count.value = $input.val();
         var hidden_total_price = document.getElementById('hidden_total_price');
@@ -46,6 +47,7 @@ $(document).ready(function(){
 
         return false;
     });
+
 })
 function disableTimes(){
     var dateInput = document.getElementById('datepicker');
