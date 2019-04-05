@@ -37,11 +37,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $types = $this->typesRepository->all();
+        $flowerCategory = FlowerCategory::all();
         $head_slides = $this->headSliderRepository->all();
         $hits_slides = $this->hitsSliderRepository->all();
         $hits_slides_prices = $this->hitsSliderRepository->getPrices($hits_slides);
         $bouquetOfTheDay = $this->bouquetOfTheDayRepository->getForHome();
-        return view('home', compact('head_slides','hits_slides','hits_slides_prices','bouquetOfTheDay'));
+        return view('home', compact('types','flowerCategory','head_slides','hits_slides','hits_slides_prices','bouquetOfTheDay'));
     }
 
 }
