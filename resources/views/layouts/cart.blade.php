@@ -88,8 +88,6 @@
                                     </div>
                                     <div class="cart_item_name_container">
                                         <div class="cart_item_name">
-                                            <a>{{$item->id}}    </a>
-
                                             @if(get_class($item->model)=='App\Models\Bouquet')
                                                 <a href="{{route('bouquet.show', [$item->model->slug, $item->options->size])}}">{{$item->name}}</a>
                                             @elseif(get_class($item->model)=='App\Models\Flower')
@@ -172,14 +170,22 @@
                                     <li class="d-flex flex-row align-items-center justify-content-start">
                                         <div class="cart_total_title">Доставка</div>
                                         <div class="cart_total_value ml-auto" id="delivery_price">
-                                            Безкоштовна
+                                            @if(Cart::total()<350)
+                                                50 грн
+                                            @else
+                                                Безкоштовна
+                                            @endif
                                         </div>
                                     </li>
                                     <li class="d-flex flex-row align-items-center justify-content-start">
                                         <div class="cart_total_title">Сума</div>
                                         <div class="cart_total_value ml-auto">
-                                            <span id="total">
-                                                {{Cart::total(null,null,'')}}
+                                            <span id="total" >
+                                                @if(Cart::total()<350)
+                                                    {{Cart::total(null,null,'')+50}}
+                                                @else
+                                                    {{Cart::total(null,null,'')}}
+                                                @endif
                                             </span>
                                             <span> грн</span>
                                         </div>
@@ -196,6 +202,7 @@
 
         <form method="POST" action="{{route('orders.store')}}" id="order-form">
             @csrf
+            <input type="hidden" id="hidden_total_price" name="total_price" value="{{Cart::total(null,null,'')}}">
             @foreach(Cart::content() as $item)
                 <input type="hidden" name="product_name[]" value="{{$item->name}}">
                 <input type="hidden" name="product_count[]" value="{{$item->qty}}" id="hidden_product_count">
@@ -365,7 +372,7 @@
                     <div class="make-order">
                         <!-- <input type="hidden" name="complete_order" value="Оформить заказ">
                         <input type="submit" name="complete_order" class="btn-main-flx bttn-card" value="Оформить заказ"> -->
-                        <button type="submit" form="order-form" name="complete_order" class="btn-main-flx bttn-card">
+                        <button type="submit" id="make_order_btn" onclick="makeOrder()" form="order-form" name="complete_order" class="btn-main-flx bttn-card">
                             Оформити замовлення
                         </button>
                     </div>

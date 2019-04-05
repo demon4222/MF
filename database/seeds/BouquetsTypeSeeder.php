@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\BouquetSubType;
+use App\Models\BouquetType;
+use App\Models\FlowerCategory;
+use App\Models\Bouquet;
 
 class BouquetsTypeSeeder extends Seeder
 {
@@ -11,38 +15,39 @@ class BouquetsTypeSeeder extends Seeder
      */
     public function run()
     {
-         DB::table('bouquet_types')->insert([
+        BouquetType::create([
             'name' => 'Звичані букети',
-            'slug' => 'zvichayni-bukety'
         ]);
-         DB::table('bouquet_types')->insert([
+        BouquetType::create([
             'name' => 'Композиції',
-            'slug' => 'kompozytsii'
         ]);
-          DB::table('bouquet_sub_types')->insert([
-            'name'    => '21, 51, 101 троянда',
+        BouquetSubType::create([
+            'name'    => 'Букети з місцевої троянди',
             'type_id' => 1,
-            'slug' => '21-51-101-troyandu'
         ]);
-         DB::table('bouquet_sub_types')->insert([
-            'name'    => 'Букет з місцевої троянди',
+        BouquetSubType::create([
+            'name'    => 'Букети з імпортної троянди',
             'type_id' => 1,
-            'slug' => 'buket-z-miscevoi-troyandu'
         ]);
-         DB::table('bouquet_sub_types')->insert([
-            'name'    => 'Букет з імпортної троянди',
+         BouquetSubType::create([
+             'name'    => 'Букети з кущової троянди',
+             'type_id' => 1,
+         ]);
+        BouquetSubType::create([
+            'name'    => 'Букети з інших сортів',
             'type_id' => 1,
-            'slug' => 'buket-z-importnoi-troyandu'
         ]);
-         DB::table('bouquet_sub_types')->insert([
+        BouquetSubType::create([
+            'name'    => 'Букети з використанням зелені',
+            'type_id' => 1,
+        ]);
+        BouquetSubType::create([
             'name'    => 'Композиція з місцевих квітів',
             'type_id' => 2,
-            'slug' => 'kompozitsiya-z-miscevih-kvitiv'
         ]);
-         DB::table('bouquet_sub_types')->insert([
+        BouquetSubType::create([
             'name'    => 'Композиція з імпортних квітів',
             'type_id' => 2,
-            'slug' => 'kompozitsiya-z-importnuh-kvitiv'
         ]);
          DB::table('sizes')->insert([
             'size'    => 'S',
@@ -56,22 +61,21 @@ class BouquetsTypeSeeder extends Seeder
             'height' => 50,
             'diameter' =>40,
         ]);
-         DB::table('bouquets')->insert([
-            'name'    => '21 троянда',
-            'sub_type_id' => 1,
-            'description' => 'aaa'
-        ]);
-         DB::table('bouquets')->insert([
-            'name'    => '51 троянда',
-            'sub_type_id' => 1,
-            'description' => 'aaa'
-        ]);
-         DB::table('bouquets')->insert([
+        Bouquet::create([
             'name'    => 'Весна',
             'sub_type_id' => 4,
             'description' => 'aaa'
         ]);
-
+        Bouquet::create([
+            'name'    => 'Чарівність',
+            'sub_type_id' => 1,
+            'description' => 'aaa'
+        ]);
+        Bouquet::create([
+            'name'    => 'Ніжність',
+            'sub_type_id' => 2,
+            'description' => 'aaa'
+        ]);
          DB::table('bouquet_size')->insert([
             'bouquet_id'    => 1,
             'size_id' => 1,
@@ -87,21 +91,17 @@ class BouquetsTypeSeeder extends Seeder
             'size_id' => 1,
             'price'=> 221,
         ]);
-        DB::table('flower_categories')->insert([
+        FlowerCategory::create([
             'name'    => 'Звичайна троянда',
-            'slug'    => 'zvichayna-troyanda'
         ]);
-        DB::table('flower_categories')->insert([
+        FlowerCategory::create([
             'name'    => 'Піоновидна троянда',
-            'slug'    => 'pionovidna-troyanda'
         ]);
-        DB::table('flower_categories')->insert([
+        FlowerCategory::create([
             'name'    => 'Тюльпани',
-            'slug'    => 'tullips'
         ]);
-        DB::table('flower_categories')->insert([
+        FlowerCategory::create([
             'name'    => 'Хризантеми',
-            'slug'    => 'hryzantemu'
         ]);
     }
 }

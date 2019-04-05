@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->string('product_name');
             $table->integer('product_price');
             $table->integer('qty')->default(1);
+            $table->integer('total');
 
             $table->string('customer_name');
             $table->string('customer_phone');

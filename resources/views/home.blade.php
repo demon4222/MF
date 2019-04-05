@@ -115,9 +115,9 @@
 
             <li class="has-children">
                 <a href="#">Послуги</a>
-                <ul class="cd-nav-icons is-hidden">
+                <ul class="cd-nav-icons is-hidden" style="padding-bottom: 48px;">
                     <li class="go-back"><a href="#0">Меню послуг</a></li>
-                    <li class="see-all"><a href="#">Дивитися послуги</a></li>
+{{--                    <li class="see-all"><a href="#">Дивитися послуги</a></li>--}}
                     <li>
                         <a class="cd-nav-item item-1" href="#">
                             <h3>Додаткові комплектуючі</h3>

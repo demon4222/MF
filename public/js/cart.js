@@ -1,6 +1,33 @@
+class totalEntity{
+    constructor(){
+        this.islimit = false;
+        this.isChangedMin = false;
+        this.isChangedPl = false;
+    }
+    get changedMin(){
+        return this.isChangedMin;
+    }
+    set changedMin(value){
+        this.isChangedMin = value;
+    }
+    get changedPl(){
+        return this.isChangedPl;
+    }
+    set changedPl(value){
+        this.isChangedPl = value;
+    }
+    get limit(){
+        return this.islimit;
+    }
+    set limit(value){
+        this.islimit = value;
+    }
+}
+$totalClass = new totalEntity();
 
 $(document).ready(function(){
     disableTimes();
+    var totalClass = new totalEntity();
     $('.js-btn-minus').click(function () {
         var $input = $(this).parent().find('input');
         var count = parseInt($input.val()) - 1;
@@ -14,9 +41,20 @@ $(document).ready(function(){
             var total = document.getElementById('total');
             var current_total = Number(total.innerHTML);
             current_total-=Number(price_for_unit);
+            if(current_total<350.75)
+            {
+                $('#delivery_price').text("50 грн");
+            }
+            if(current_total<350.75&&!$totalClass.changedMin)
+            {
+                current_total+=50;
+                $('#delivery_price').innerHTML="50 грн";
+                $totalClass.changedMin = true;
+                $totalClass.changedPl = false;
+                $totalClass.limit = false;
+            }
 
             total.innerHTML = current_total;
-
             var hidden_ptoduct_count = document.getElementById('hidden_product_count');
             hidden_ptoduct_count.value = count;
             var hidden_total_price = document.getElementById('hidden_total_price');
@@ -38,7 +76,17 @@ $(document).ready(function(){
         var total = document.getElementById('total');
         var current_total = Number(total.innerHTML);
         current_total+=Number(price_for_unit);
-
+        if(current_total>350)
+        {
+            $('#delivery_price').text("Безкоштовна");
+        }
+        if(current_total>350&&!$totalClass.changedPl&&$('#delivery_price').innerHTML!="Безкоштовна")
+        {
+            current_total-=50;
+            $totalClass.changedPl = true;
+            $totalClass.changedMin = false;
+            $totalClass.limit = true;
+        }
         total.innerHTML = current_total;
         var hidden_ptoduct_count = document.getElementById('hidden_product_count');
         hidden_ptoduct_count.value = $input.val();
@@ -47,8 +95,8 @@ $(document).ready(function(){
 
         return false;
     });
-
 })
+
 function disableTimes(){
     var dateInput = document.getElementById('datepicker');
    var date = new Date();
@@ -157,6 +205,16 @@ function isCourier(){
         courierCity.style = "display:block;";
         courierAdress.style = "display:block;";
         address_input.setAttribute('required','true');
+        var total = document.getElementById('total');
+        var current_total = Number(total.innerHTML);
+        if(!$totalClass.limit)
+        {
+            current_total+=50;
+            $totalClass.limit = true;
+            $('#delivery_price').text("50 грн");
+        }
+        total.innerHTML = current_total;
+
     }
 }
 function isSelf(){
@@ -175,5 +233,19 @@ function isSelf(){
         selfpick.style = "display:block";
         courierCity.style = "display:none;";
         courierAdress.style = "display:none;";
+        var total = document.getElementById('total');
+        var current_total = Number(total.innerHTML);
+        if(!$totalClass.limit)
+        {
+            current_total-=50;
+            $totalClass.limit = false;
+        }
+        total.innerHTML = current_total;
+        $('#delivery_price').text("Безкоштовна");
     }
+}
+
+function makeOrder() {
+    var total = document.getElementById('total');
+    document.getElementById('hidden_total_price').value( Number(total.innerHTML));
 }

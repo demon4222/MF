@@ -19,6 +19,8 @@ class BouquetSubType extends Model implements Transformable
 
     protected $table = 'bouquet_sub_types';
 
+    public $timestamps = false;
+
     public function sluggable()
     {
         return [

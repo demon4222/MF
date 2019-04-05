@@ -17,6 +17,8 @@ class BouquetType extends Model implements Transformable
     use TransformableTrait;
     use Sluggable;
 
+    public $timestamps = false;
+
     public function sluggable()
     {
         return [
@@ -25,6 +27,7 @@ class BouquetType extends Model implements Transformable
             ]
         ];
     }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -34,11 +37,13 @@ class BouquetType extends Model implements Transformable
 
     protected $table = 'bouquet_types';
 
-    public function bouquetsSubTypes(){
-    	return $this->hasMany(BouquetSubType::class,'type_id');
+    public function bouquetsSubTypes()
+    {
+        return $this->hasMany(BouquetSubType::class, 'type_id');
     }
 
-    public function bouquets(){
-    	return $this->hasManyThrough(Bouquet::class, BouquetSubType::class,'type_id','sub_type_id');
+    public function bouquets()
+    {
+        return $this->hasManyThrough(Bouquet::class, BouquetSubType::class, 'type_id', 'sub_type_id');
     }
 }

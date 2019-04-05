@@ -28,5 +28,18 @@ class AppServiceProvider extends ServiceProvider
                 'flowerCategory' => \App\Models\FlowerCategory::all()
             ]);
         });
+
+        view()->composer('home', function($view){
+            $view->with([
+                'types' => \App\Models\BouquetType::all(),
+                'flowerCategory' => \App\Models\FlowerCategory::all()
+            ]);
+        });
+
+        view()->composer('admin', function ($view){
+            $view->with([
+                'newOrders' => count(\App\Models\Order::where(['isComplete' => 0])->get()),
+            ]);
+        });
     }
 }

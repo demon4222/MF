@@ -12,6 +12,7 @@
         "cviebrock/eloquent-sluggable": "4.8",
         "fideloper/proxy": "^4.0",
         "hardevine/shoppingcart": "^2.6",
+        "irazasyed/telegram-bot-sdk": "^3.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "prettus/l5-repository": "^2.6"

@@ -13,9 +13,9 @@ class BouquetsFilter
 
     protected $perPage = 15;
 
-    public function __construct($request)
+    public function __construct($builder, $request)
     {
-        $this->builder = Bouquet::paginate($this->perPage);
+        $this->builder = $builder;
         $this->request = $request;
     }
 
@@ -31,6 +31,8 @@ class BouquetsFilter
                 $this->$filter($value);
             }
         }
+        if ($this->filters() == null || (count($this->filters()) == 1 && isset($this->filters()['page'])))
+            $this->builder = $this->builder->paginate($this->perPage);
         return $this->builder;
     }
 
@@ -72,6 +74,7 @@ class BouquetsFilter
         foreach ($bouquetsSize as $bouquetSize) {
             array_push($bouquetsId, $bouquetSize->bouquet_id);
         }
-        return Bouquet::whereIn('id', $bouquetsId)->paginate($this->perPage);
+//        dd($this->builder->whereIn('bouquets.id', $bouquetsId)->get());
+        return $this->builder->whereIn('bouquets.id', $bouquetsId)->paginate($this->perPage);
     }
 }

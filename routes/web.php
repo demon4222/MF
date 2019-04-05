@@ -55,7 +55,7 @@ Route::post('/admin/head-slider/{slide_id}/change-button-link','HeadSliderContro
 Route::post('/admin/head-slider/{slide_id}/change-text','HeadSliderController@changeText');
 Route::post('/admin/head-slider/{slide_id}/change-photo','HeadSliderController@changePhoto');
 Route::post('/admin/head-slider/{slide_id}/delete','HeadSliderController@delete');
-Route::get('/admin/bouquets/','BouquetController@indexAdmin');
+Route::get('/admin/bouquets/','BouquetController@indexAdmin')->name('admin.all-bouquets');
 Route::get('/admin/all-products', function(){
     return view('layouts.admin.admin-all-products');
 });

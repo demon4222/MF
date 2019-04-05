@@ -56,6 +56,11 @@ class Bouquet extends Model implements Transformable
        return $this->hasOne('App\Models\HitsSlider');
      }
 
+     public function subType()
+     {
+         return $this->belongsTo('App\Models\BouquetSubType');
+     }
+
      public $timestamps = false;
 
    //  public function sizes()

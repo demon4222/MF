@@ -8,6 +8,7 @@ use App\Repositories\BouquetRepositoryEloquent as Bouquet;
 use App\Repositories\BouquetTypeRepositoryEloquent as BouquetType;
 use App\Repositories\BouquetSizeRepositoryEloquent as BouquetSize;
 use App\Helpers\BouquetsFilter;
+use NotificationChannels\Telegram\TelegramServiceProvider;
 
 class BouquetController extends Controller
 {
@@ -56,7 +57,7 @@ class BouquetController extends Controller
         return view('layouts.admin.admin-all-bouquets', compact('bouquets', 'prices'));
     }
 
-    public function getBouquetsByType($type_slug)
+    public function getBouquetsByType($type_slug, Request $request)
     {
         if (is_numeric($type_slug)) {
             // Get post for slug.
@@ -65,12 +66,13 @@ class BouquetController extends Controller
         }
         // Get post for slug.
         $type = $this->bouquetTypeRepository->model()::whereSlug($type_slug)->firstOrFail();
-        $bouquets = $type->bouquets()->paginate(15);
+        $bouquets = $type->bouquets();
+        $bouquets = (new BouquetsFilter($bouquets, $request))->apply();
         $prices = $this->bouquetRepository->getPrices($bouquets);
         return view('layouts.all-bouquets', compact('bouquets', 'prices'));
     }
 
-    public function getBouquetsBySubType($sub_type_slug)
+    public function getBouquetsBySubType($sub_type_slug, Request $request)
     {
         if (is_numeric($sub_type_slug)) {
             // Get post for slug.
@@ -79,14 +81,16 @@ class BouquetController extends Controller
         }
         // Get post for slug.
         $subType = BouquetSubType::whereSlug($sub_type_slug)->firstOrFail();
-        $bouquets = $subType->bouquets()->paginate(15);
+        $bouquets = $subType->bouquets();
+        $bouquets = (new BouquetsFilter($bouquets, $request))->apply();
         $prices = $this->bouquetRepository->getPrices($bouquets);
         return view('layouts.all-bouquets', compact('prices', 'bouquets'));
     }
 
     public function index(Request $request)
     {
-        $bouquets = (new BouquetsFilter($request))->apply();
+        $bouquets = new \App\Models\Bouquet;
+        $bouquets = (new BouquetsFilter($bouquets, $request))->apply();
         $prices = $this->bouquetRepository->getPrices($bouquets);
         return view('layouts.all-bouquets', compact('bouquets', 'prices'));
     }

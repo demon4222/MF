@@ -20,8 +20,7 @@ class BouquetOfTheDayController extends Controller
 
     public function addBouquetOfTheDay(Request $req)
     {
-        
         $this->bouquetOfTheDayRepository->newBouquetofTheDay($req);
-        return back();
+        return redirect()->route('admin.all-bouquets');
     }
 }

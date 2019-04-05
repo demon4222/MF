@@ -18,7 +18,7 @@ class CreateBouquetsTable extends Migration
 		Schema::create('bouquets', function(Blueprint $table) {
 			$table->increments('id');
 
-            $table->char('name',100);
+            $table->char('name',100)->index();
 
             // $table->integer('flower_id')->unsigned();
             // $table->foreign('flower_id')->references('id')->on('flowers');

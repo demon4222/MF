@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <section class="block">
+    <section class="block mb-5">
         <div class="orders-wrapper row">
             @foreach($orders as $order)
                 <div class="order-item-wrapper my-3 mx-3 col-12">
@@ -20,7 +20,7 @@
                             @endif
                         </div>
                         <div class="order-item-data-block text-center row">
-                            <div class="order-item-data col-4">
+                            <div class="order-item-data col-md-4 col-sm-12">
                                 <div class="order-item-data-title mb-2">Інформація про замовлення</div>
                                 <div class="order-item-data-info">
                                     <div class="order-name-block pl-2">
@@ -35,15 +35,21 @@
                                         <div class="order-name-title text-left">Ціна:</div>
                                         <div class="order-name-value pl-3">{{$order->product_price}} грн</div>
                                     </div>
-                                    @if($order->categoty=='flower'&&$$order->qty<19&&$order->delivery_type=='courier')
+                                    @if($order->delivery_type=='courier'&&$order->total<350.75)
                                         <div class="order-name-block pl-2">
                                             <div class="order-name-title text-left">Доставка:</div>
                                             <div class="order-name-value pl-3">+50 грн</div>
                                         </div>
                                     @endif
+{{--                                    @if($order->categoty=='flower'&&$$order->qty<19&&$order->delivery_type=='courier')--}}
+{{--                                        <div class="order-name-block pl-2">--}}
+{{--                                            <div class="order-name-title text-left">Доставка:</div>--}}
+{{--                                            <div class="order-name-value pl-3">+50 грн</div>--}}
+{{--                                        </div>--}}
+{{--                                    @endif--}}
                                     <div class="order-name-block pl-2">
                                         <div class="order-name-title text-left">Загально:</div>
-                                        <div class="order-name-value pl-3">{{($order->product_price * $order->qty) + 50}}грн
+                                        <div class="order-name-value pl-3">{{$order->product_price * $order->qty}}грн
                                         </div>
                                     </div>
                                     <div class="order-name-block pl-2">
@@ -58,7 +64,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="order-item-data col-4">
+                            <div class="order-item-data col-md-4 col-sm-12">
                                 <div class="order-item-data-title">Інформація про замовника</div>
                                 <div class="order-item-data-info">
                                     <div class="order-name-block pl-2">
@@ -79,7 +85,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="order-item-data col-4">
+                            <div class="order-item-data col-md-4 col-sm-12">
                                 <div class="order-item-data-title">Інформація про доставку</div>
                                 <div class="order-item-data-info">
                                     <div class="order-name-block pl-2">

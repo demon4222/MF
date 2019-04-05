@@ -133,6 +133,22 @@ font-family: latoregular,latobold,lucida grande,Tahoma,Sans-Serif;
     width: 6em;
 }
 
+.cart-count {
+    display: inline-block;
+    background: #FFD94D;
+    color: #212121;
+    line-height: 0;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+.cart-count span {
+    display: inline-block;
+    padding-top: 50%;
+    padding-bottom: 50%;
+    margin-left: 6px;
+    margin-right: 6px;
+}
 
 
 
