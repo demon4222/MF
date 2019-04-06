@@ -16,6 +16,7 @@
 // DB::listen(function($query) {
 //     var_dump($query->time);
 // });
+
 Route::get('/', 'HomeController@index');
 
 Route::post('/storeOrder', 'OrderController@storeOrder')->name('orders.store');

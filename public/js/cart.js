@@ -1,33 +1,33 @@
-class totalEntity{
-    constructor(){
-        this.islimit = false;
-        this.isChangedMin = false;
-        this.isChangedPl = false;
-    }
-    get changedMin(){
-        return this.isChangedMin;
-    }
-    set changedMin(value){
-        this.isChangedMin = value;
-    }
-    get changedPl(){
-        return this.isChangedPl;
-    }
-    set changedPl(value){
-        this.isChangedPl = value;
-    }
-    get limit(){
-        return this.islimit;
-    }
-    set limit(value){
-        this.islimit = value;
-    }
-}
-$totalClass = new totalEntity();
+// class totalEntity{
+//     constructor(){
+//         this.islimit = false;
+//         this.isChangedMin = false;
+//         this.isChangedPl = false;
+//     }
+//     get changedMin(){
+//         return this.isChangedMin;
+//     }
+//     set changedMin(value){
+//         this.isChangedMin = value;
+//     }
+//     get changedPl(){
+//         return this.isChangedPl;
+//     }
+//     set changedPl(value){
+//         this.isChangedPl = value;
+//     }
+//     get limit(){
+//         return this.islimit;
+//     }
+//     set limit(value){
+//         this.islimit = value;
+//     }
+// }
+// $totalClass = new totalEntity();
 
 $(document).ready(function(){
     disableTimes();
-    var totalClass = new totalEntity();
+    // var totalClass = new totalEntity();
     $('.js-btn-minus').click(function () {
         var $input = $(this).parent().find('input');
         var count = parseInt($input.val()) - 1;
@@ -40,18 +40,16 @@ $(document).ready(function(){
             price_elem.innerHTML = price_for_unit*$input.val()-price_for_unit;
             var total = document.getElementById('total');
             var current_total = Number(total.innerHTML);
+            var all_price = document.getElementById('all_price');
             current_total-=Number(price_for_unit);
-            if(current_total<350.75)
-            {
-                $('#delivery_price').text("50 грн");
-            }
-            if(current_total<350.75&&!$totalClass.changedMin)
-            {
-                current_total+=50;
-                $('#delivery_price').innerHTML="50 грн";
-                $totalClass.changedMin = true;
-                $totalClass.changedPl = false;
-                $totalClass.limit = false;
+            all_price.innerHTML = current_total
+            var chbox;
+            chbox = document.getElementById('selfpick');
+            if(!chbox.checked) {
+                if (current_total < 350.75) {
+                    all_price.innerHTML = current_total + 50;
+                    $('#delivery_price').text("50 грн");
+                }
             }
 
             total.innerHTML = current_total;
@@ -75,18 +73,29 @@ $(document).ready(function(){
         price_elem.innerHTML = price_for_unit*$input.val();
         var total = document.getElementById('total');
         var current_total = Number(total.innerHTML);
+        var all_price = document.getElementById('all_price');
         current_total+=Number(price_for_unit);
+        all_price.innerHTML = current_total;
+        var chbox;
+        chbox = document.getElementById('selfpick');
+        if(!chbox.checked) {
+            if (current_total < 350) {
+                all_price.innerHTML = current_total + 50;
+            }
+            if (current_total > 350) {
+                all_price.innerHTML = current_total;
+            }
+        }
         if(current_total>350)
         {
             $('#delivery_price').text("Безкоштовна");
         }
-        if(current_total>350&&!$totalClass.changedPl&&$('#delivery_price').innerHTML!="Безкоштовна")
-        {
-            current_total-=50;
-            $totalClass.changedPl = true;
-            $totalClass.changedMin = false;
-            $totalClass.limit = true;
-        }
+        // if(current_total>350)
+        // {
+        //     $totalClass.changedPl = true;
+        //     $totalClass.changedMin = false;
+        //     $totalClass.limit = true;
+        // }
         total.innerHTML = current_total;
         var hidden_ptoduct_count = document.getElementById('hidden_product_count');
         hidden_ptoduct_count.value = $input.val();
@@ -207,10 +216,16 @@ function isCourier(){
         address_input.setAttribute('required','true');
         var total = document.getElementById('total');
         var current_total = Number(total.innerHTML);
-        if(!$totalClass.limit)
+        var all_price = document.getElementById('all_price');
+        // if(!$totalClass.limit)
+        // {
+        //     all_price.innerHTML = current_total+50;
+        //     $totalClass.limit = true;
+        //     $('#delivery_price').text("50 грн");
+        // }
+        if(current_total<350)
         {
-            current_total+=50;
-            $totalClass.limit = true;
+            all_price.innerHTML = current_total+50;
             $('#delivery_price').text("50 грн");
         }
         total.innerHTML = current_total;
@@ -234,12 +249,9 @@ function isSelf(){
         courierCity.style = "display:none;";
         courierAdress.style = "display:none;";
         var total = document.getElementById('total');
+        var all_price = document.getElementById('all_price');
         var current_total = Number(total.innerHTML);
-        if(!$totalClass.limit)
-        {
-            current_total-=50;
-            $totalClass.limit = false;
-        }
+            all_price.innerHTML = current_total;
         total.innerHTML = current_total;
         $('#delivery_price').text("Безкоштовна");
     }

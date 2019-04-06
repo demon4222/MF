@@ -182,10 +182,23 @@
                                         <div class="cart_total_value ml-auto">
                                             <span id="total" >
                                                 @if(Cart::total()<350)
-                                                    {{Cart::total(null,null,'')+50}}
+                                                    {{Cart::total(null,null,'')}}
                                                 @else
                                                     {{Cart::total(null,null,'')}}
                                                 @endif
+                                            </span>
+                                            <span> грн</span>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex flex-row align-items-center justify-content-start">
+                                        <div class="cart_all_title">Разом</div>
+                                        <div class="cart_all_value ml-auto">
+                                             <span id="all_price">
+                                                @if(Cart::total()<350)
+                                                     {{Cart::total(null,null,'')+50}}
+                                                 @else
+                                                     {{Cart::total(null,null,'')}}
+                                                 @endif
                                             </span>
                                             <span> грн</span>
                                         </div>
