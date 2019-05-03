@@ -25,8 +25,6 @@ class HeightRepositoryEloquent extends BaseRepository implements HeightRepositor
         return Height::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -34,5 +32,5 @@ class HeightRepositoryEloquent extends BaseRepository implements HeightRepositor
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

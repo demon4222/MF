@@ -24,6 +24,7 @@ class FlowerRepositoryEloquent extends BaseRepository implements FlowerRepositor
     private $height;
 
     private $flowerHeight;
+
     /**
      * Specify Model class name
      *
@@ -40,10 +41,26 @@ class FlowerRepositoryEloquent extends BaseRepository implements FlowerRepositor
         $this->flowerHeight = $flowerHeight;
         parent::__construct($app);
     }
-    
+
+    public function getAddHeightsForFlower($flower)
+    {
+        $heights = $flower->heights()->orderBy('height')->get();
+        $add_heights = collect();
+        $i = 0;
+        foreach ($heights as $height) {
+            $id = $height->id;
+            $name = $height->height;
+            $add_heights->put($i, ['id' => $id, 'name' => $name]);
+            $i++;
+        }
+        $add_heights = $add_heights->all();
+        return $add_heights;
+    }
+
+
     public function createByReq($req)
     {
-        
+
         $data = [
             'name' => mb_strtoupper($req->name),
             'flower_category_id' => $req->category,
@@ -52,8 +69,7 @@ class FlowerRepositoryEloquent extends BaseRepository implements FlowerRepositor
         $flower = $this->create($data);
 
         $heights_count = count($req->height);
-        for($i = 0;$i<$heights_count; $i++)
-        {
+        for ($i = 0; $i < $heights_count; $i++) {
             $data = [
                 'height' => $req->height[$i]
             ];
@@ -65,10 +81,10 @@ class FlowerRepositoryEloquent extends BaseRepository implements FlowerRepositor
                 'price' => $req->price[$i]
             ]);
         }
-        FileUploadController::uploadFlowerPhoto($req->main_photo,$flower->id, 'm');
-        FileUploadController::uploadFlowerPhoto($req->hover_photo,$flower->id, 'h');
-    }   
-    
+        FileUploadController::uploadFlowerPhoto($req->main_photo, $flower->id, 'm');
+        FileUploadController::uploadFlowerPhoto($req->hover_photo, $flower->id, 'h');
+    }
+
     public function getForEdit($id)
     {
         $flower = $this->find($id);
@@ -78,7 +94,7 @@ class FlowerRepositoryEloquent extends BaseRepository implements FlowerRepositor
             'flower_id' => $flower->id,
             'category' => $flower->flower_category_id,
             'name' => $flower->name,
-            'heights' =>$flowerHeights,
+            'heights' => $flowerHeights,
             'description' => $flower->description,
         ];
         return $data;
@@ -86,7 +102,6 @@ class FlowerRepositoryEloquent extends BaseRepository implements FlowerRepositor
 
     public function editByReq($req)
     {
-        // dd($req->all());
         $flower = $this->find($req->flower_id);
         $data = [
             'name' => mb_strtoupper($req->name),
@@ -94,18 +109,14 @@ class FlowerRepositoryEloquent extends BaseRepository implements FlowerRepositor
             'description' => $req->description,
         ];
         $this->update($data, $req->flower_id);
-        $heights_exist_count = 0;
-        if(isset($req->height_id))
-        {
+        if (isset($req->height_id)) {
             $heights_exist_count = count($req->height_id);
-            for($i = 0; $i < $heights_exist_count; $i++)
-            {
+            for ($i = 0; $i < $heights_exist_count; $i++) {
                 $data = [
                     'height' => $req->height[$i],
                 ];
                 $height = $this->height->findWhere($data)->first();
-                if($height===null)
-                {
+                if ($height === null) {
                     $this->flowerHeight->deleteWhere([
                         'flower_id' => $flower->id,
                         'height_id' => $req->height_id[$i],
@@ -116,26 +127,24 @@ class FlowerRepositoryEloquent extends BaseRepository implements FlowerRepositor
                         'height_id' => $newHeight->id,
                         'price' => $req->price[$i]
                     ]);
-                }
-                else{
+                } else {
                     FlowerHeight::where('flower_id', $flower->id)
-                                ->where('height_id',$height->id)
-                                ->update(['price' => $req->price[$i]]);
-                    
+                        ->where('height_id', $height->id)
+                        ->update(['price' => $req->price[$i]]);
+
                 }
             }
-            if(isset($req->main_photo))
-                FileUploadController::uploadFlowerPhoto($req->main_photo,$flower->id,'m');
-            if(isset($req->hover_photo))
-                FileUploadController::uploadFlowerPhoto($req->hover_photo,$flower->id,'h');
+            if (isset($req->main_photo))
+                FileUploadController::uploadFlowerPhoto($req->main_photo, $flower->id, 'm');
+            if (isset($req->hover_photo))
+                FileUploadController::uploadFlowerPhoto($req->hover_photo, $flower->id, 'h');
         }
     }
 
     public function getPrices($flowers)
     {
         $prices = collect();
-        foreach($flowers as $flower)
-        {
+        foreach ($flowers as $flower) {
             $price = $flower->heights()->orderBy('height')->first()->pivot->price;
             $prices->put($flower->id, $price);
         }
@@ -144,12 +153,12 @@ class FlowerRepositoryEloquent extends BaseRepository implements FlowerRepositor
 
     public function setInStock($id)
     {
-        $this->update(['inStock' => 1],$id);
+        $this->update(['inStock' => 1], $id);
     }
 
     public function setOutOfStock($id)
     {
-        $this->update(['inStock' => 0],$id);
+        $this->update(['inStock' => 0], $id);
     }
 
     /**
@@ -159,5 +168,5 @@ class FlowerRepositoryEloquent extends BaseRepository implements FlowerRepositor
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

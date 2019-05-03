@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\BouquetTypeRepository;
 use App\Models\BouquetType;
 use App\Validators\BouquetTypeValidator;
 
@@ -29,6 +28,11 @@ class BouquetTypeRepositoryEloquent extends BaseRepository implements BouquetTyp
     {
         $type = $this->find($id);
         return $type->bouquetsSubTypes()->get();
+    }
+
+    public function getBySlug($slug)
+    {
+        return $this->model()::whereSlug($slug)->firstOrFail();
     }
 
     /**

@@ -6,13 +6,8 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Validators\BouquetValidator;
 use Illuminate\Container\Container as Application;
-use App\Models\BouquetSize;
 use App\Models\Bouquet;
 use App\Http\Controllers\FileUploadController;
-use App\Repositories\BouquetRepository;
-use App\Repositories\SizeRepositoryEloquent;
-use App\Repositories\BouquetSubTypeRepositoryEloquent;
-use App\Repositories\BouquetSizeRepositoryEloquent;
 use App\Models\HitsSlider;
 
 /**
@@ -49,7 +44,6 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
 
     public function createByReq($req)
     {
-        // dd($req->all());
         $data = [
             "name"        => mb_strtoupper($req->name),
             "sub_type_id" => mb_strtoupper($req->subType),
@@ -79,9 +73,6 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
             FileUploadController::uploadGeneralBouquetPhoto($req->general_photo,$bouquet->id,'g');
             FileUploadController::uploadGeneralBouquetPhoto($req->general_photo_hover,$bouquet->id,'gh');
         }
-
-        // FileUploaderController::uploadBouquetPhoto($)
-
     }
 
     public function getPrices($bouquets)
@@ -208,6 +199,11 @@ class BouquetRepositoryEloquent extends BaseRepository implements BouquetReposit
             }
         }
         
+    }
+
+    public function getBySlug($slug)
+    {
+        return $this->model()::whereSlug($slug)->firstOrFail();
     }
 
     public function deleteBouquet($id)

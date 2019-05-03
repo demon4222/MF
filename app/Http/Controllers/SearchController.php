@@ -21,12 +21,10 @@ class SearchController extends Controller
 
     public function search(SearchRequest $request)
     {
-        //dd($request->all());
         $query = $request->input('q');
 
         $bouquets = \App\Models\Bouquet::where('name','like',"%$query%")->paginate(15);
         $prices = $this->bouquetRepository->getPrices($bouquets);
-        //dd($bouquets);
         return view('layouts.search-result')->with([
             'bouquets' => $bouquets,
             'prices' => $prices

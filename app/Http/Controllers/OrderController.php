@@ -16,16 +16,17 @@ class OrderController extends Controller
 
     public function storeOrder(Request $request)
     {
-        $items_count = count($request->product_name);
-        for ($i = 0; $i < $items_count; $i++) {
-            $order = Order::create([
-                'category' => $request->product_category[$i],
-                'product_slug' => $request->product_slug[$i],
-                'product_name' => $request->product_name[$i],
-                'product_size_id' => $request->product_size[$i],
-                'product_price' => $request->product_price[$i],
-                'qty' => $request->product_count[$i],
-                'total' => $request->total_price,
+        $total = Cart::total();
+        foreach(Cart::content() as $item)
+        {
+            Order::create([
+                'category' => $item->options->category,
+                'product_slug' => $item->model->slug,
+                'product_name' => $item->name,
+                'product_size_id' => $item->options->size,
+                'product_price' => $item->price,
+                'qty' => $item->qty,
+                'total' => $total,
                 'customer_name' => $request->customer_name,
                 'customer_phone' => $request->customer_phone,
                 'customer_shipping_name' => $request->shipping_detail_last_first_name,
@@ -38,6 +39,7 @@ class OrderController extends Controller
                 'add_info' => $request->additional_instructions,
             ]);
         }
+
         Cart::destroy();
         \App\Http\Controllers\TelegramBotController::sendMessage();
         return redirect()->route('cart.index')->with('success_message', 'Ваше замовлення оформленно! Очікуйте на дзвінок.');

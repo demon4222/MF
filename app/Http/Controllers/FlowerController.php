@@ -32,25 +32,8 @@ class FlowerController extends Controller
 
     public function show($slug, $height_id)
     {
-        if (is_numeric($slug)) {
-            // Get post for slug.
-            $flower = $this->flowerRepository->model()::findOrFail($slug);
-            return redirect(route('flower.show', $flower->slug), 301);
-        }
-        // Get post for slug.
         $flower = $this->flowerRepository->model()::whereSlug($slug)->firstOrFail();
-
-        $heights = $flower->heights()->orderBy('height')->get();
-        $add_heights = collect();
-        $i = 0;
-        foreach($heights as $height)
-        {        
-            $id = $height->id;
-            $name = $height->height;
-            $add_heights->put($i, ['id' => $id, 'name'=>$name]);
-            $i++;
-        }
-        $add_heights = $add_heights->all();
+        $add_heights = $this->flowerRepository->getAddHeightsForFlower($flower);
         $height = $flower->heights->find($height_id);
         return view('layouts.show-flower', compact('flower','height','add_heights'));
     }

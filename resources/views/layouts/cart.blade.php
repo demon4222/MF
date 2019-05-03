@@ -1,7 +1,6 @@
 @extends('layouts.layoutMain')
 
-@push('styles')
-    <link rel="stylesheet" href="{{asset('css/cart.css')}}">
+@push('datepicker')
 
     @if(Cart::count()>0)
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -29,6 +28,12 @@
         </script>
         <script src="{{asset('js/cart.js')}}"></script>
     @endif
+
+@endpush
+
+@push('styles')
+
+    <link rel="stylesheet" href="{{asset('css/cart.css')}}">
 @endpush
 
 @push('hidden')
@@ -45,22 +50,6 @@
         </div>
 
         <div class="cart_info mb-5">
-            {{--            @if(session()->has('success_message'))--}}
-            {{--                <div class="alert alert-success">--}}
-            {{--                    {{session()->get('success_message')}}--}}
-            {{--                </div>--}}
-            {{--            @endif--}}
-
-            {{--            @if(count($errors) > 0)--}}
-            {{--                <div class="alert alert-danger">--}}
-            {{--                    <ul>--}}
-            {{--                        @foreach($errors->all() as $error)--}}
-            {{--                            <li>{{$error}}</li>--}}
-            {{--                        @endforeach--}}
-            {{--                    </ul>--}}
-            {{--                </div>--}}
-            {{--            @endif--}}
-
             @if(Cart::count()>0)
 
                 <div class="row">
@@ -75,6 +64,7 @@
 
                 @foreach(Cart::content() as $item)
                     <input type="hidden" id="item_price-{{$item->id}}" value="{{$item->price}}">
+                    <input type="hidden" id="productRowId-{{$item->id}}" value="{{$item->rowId}}">
                     <div class="row cart_items_row">
                         <div class="col">
 
@@ -91,7 +81,7 @@
                                             @if(get_class($item->model)=='App\Models\Bouquet')
                                                 <a href="{{route('bouquet.show', [$item->model->slug, $item->options->size])}}">{{$item->name}}</a>
                                             @elseif(get_class($item->model)=='App\Models\Flower')
-                                                <a href="{{route('flower.show', [$item->model->slug, $item->options->height])}}">{{$item->name}}</a>
+                                                <a href="{{route('flower.show', [$item->model->slug, $item->options->size])}}">{{$item->name}}</a>
                                             @endif
                                         </div>
                                         <div class="cart_item_edit">ціна: {{$item->price}}</div>
@@ -99,6 +89,7 @@
                                 </div>
                                 <!-- Price -->
                                 <!-- Quantity -->
+
                                 <div class="cart-unit__controls">
                                     <div class="cart-unit__controls-wrapper spin">
                                         <span class="js-btn-minus" data-id="{{$item->id}}">–</span>
@@ -107,6 +98,7 @@
                                         <span class="js-btn-plus" data-id="{{$item->id}}">+</span>
                                     </div>
                                 </div>
+
                                 <!-- Total -->
                                 <div class="cart_item_total">Сума: <span
                                         id="id_items-{{$item->id}}-price">{{$item->price*$item->qty}}</span><span> грн</span>
@@ -170,7 +162,7 @@
                                     <li class="d-flex flex-row align-items-center justify-content-start">
                                         <div class="cart_total_title">Доставка</div>
                                         <div class="cart_total_value ml-auto" id="delivery_price">
-                                            @if(Cart::total()<350)
+                                            @if(Cart::total(null,null,'')<350)
                                                 50 грн
                                             @else
                                                 Безкоштовна
@@ -180,12 +172,8 @@
                                     <li class="d-flex flex-row align-items-center justify-content-start">
                                         <div class="cart_total_title">Сума</div>
                                         <div class="cart_total_value ml-auto">
-                                            <span id="total" >
-                                                @if(Cart::total()<350)
-                                                    {{Cart::total(null,null,'')}}
-                                                @else
-                                                    {{Cart::total(null,null,'')}}
-                                                @endif
+                                            <span id="total">
+                                                {{Cart::total(null,null,'')}}
                                             </span>
                                             <span> грн</span>
                                         </div>
@@ -194,7 +182,7 @@
                                         <div class="cart_all_title">Разом</div>
                                         <div class="cart_all_value ml-auto">
                                              <span id="all_price">
-                                                @if(Cart::total()<350)
+                                                @if(Cart::total(null,null,'')<350)
                                                      {{Cart::total(null,null,'')+50}}
                                                  @else
                                                      {{Cart::total(null,null,'')}}
@@ -216,20 +204,6 @@
         <form method="POST" action="{{route('orders.store')}}" id="order-form">
             @csrf
             <input type="hidden" id="hidden_total_price" name="total_price" value="{{Cart::total(null,null,'')}}">
-            @foreach(Cart::content() as $item)
-                <input type="hidden" name="product_name[]" value="{{$item->name}}">
-                <input type="hidden" name="product_count[]" value="{{$item->qty}}" id="hidden_product_count">
-                <input type="hidden" name="product_price[]" value="{{$item->price}}">
-                @if(get_class($item->model)=='App\Models\Bouquet')
-                    <input type="hidden" name="product_size[]" value="{{$item->options->size}}">
-                    <input type="hidden" name="product_category[]" value="bouquet">
-                @elseif(get_class($item->model)=='App\Models\Flower')
-                    <input type="hidden" name="product_size[]" value="{{$item->options->height}}">
-                    <input type="hidden" name="product_category[]" value="flower">
-                @endif
-                <input type="hidden" name="total_price[]" value="{{Cart::total()}}" id="hidden_total_price">
-                <input type="hidden" name="product_slug[]" value="{{$item->model->slug}}">
-            @endforeach
             <div class="card-wrapper row">
                 <div class="data-slot col-md-4">
                     <div class="data-slot_title">Ваші данні:</div>
@@ -365,10 +339,10 @@
                                    value="on_delivery" checked="">
                             <label for="cash">Оплата при доставці</label>
                         </div>
-                        <div class="ls-radio">
-                            <input id="card" class="elip" type="radio" name="billing_detail_payment_type" value="card">
-                            <label for="card">Оплата картою на сайті</label>
-                        </div>
+                        {{--                        <div class="ls-radio">--}}
+                        {{--                            <input id="card" class="elip" type="radio" name="billing_detail_payment_type" value="card">--}}
+                        {{--                            <label for="card">Оплата картою на сайті</label>--}}
+                        {{--                        </div>--}}
                     </div>
                     <div class="comment">
                         <div class="data-slot_subtitle">Додаткові побажання</div>
@@ -385,7 +359,8 @@
                     <div class="make-order">
                         <!-- <input type="hidden" name="complete_order" value="Оформить заказ">
                         <input type="submit" name="complete_order" class="btn-main-flx bttn-card" value="Оформить заказ"> -->
-                        <button type="submit" id="make_order_btn" onclick="makeOrder()" form="order-form" name="complete_order" class="btn-main-flx bttn-card">
+                        <button type="submit" id="make_order_btn" onclick="makeOrder()" form="order-form"
+                                name="complete_order" class="btn-main-flx bttn-card">
                             Оформити замовлення
                         </button>
                     </div>

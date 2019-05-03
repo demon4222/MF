@@ -25,6 +25,21 @@ class BouquetSizeRepositoryEloquent extends BaseRepository implements BouquetSiz
         return BouquetSize::class;
     }
 
+    public function getAddSizesForBouquetShowPage($bouquet)
+    {
+        $sizes = $bouquet->sizes()->orderBy('count')->get();
+        $add_sizes = collect();
+        $i = 0;
+        foreach ($sizes as $size) {
+            $id = $size->id;
+            $name = $size->size;
+            $add_sizes->put($i, ['id' => $id, 'name' => $name]);
+            $i++;
+        }
+        $add_sizes = $add_sizes->all();
+        return $add_sizes;
+    }
+
     public function deleteSize($sizeId, $bouquetId)
     {
         $this->deleteWhere(['size_id' => $sizeId, 'bouquet_id' => $bouquetId]);

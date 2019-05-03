@@ -3,7 +3,6 @@
 namespace App\Helpers;
 
 use App\Models\BouquetSize;
-use App\Models\Bouquet;
 
 class BouquetsFilter
 {
@@ -31,8 +30,12 @@ class BouquetsFilter
                 $this->$filter($value);
             }
         }
-        if ($this->filters() == null || (count($this->filters()) == 1 && isset($this->filters()['page'])))
+        if ((isset($this->filters()['_url'])&&(count($this->filters()) == 1) || (count($this->filters()) == 2 && isset($this->filters()['page'])))) {
             $this->builder = $this->builder->paginate($this->perPage);
+        }
+
+        $this->builder = $this->builder->paginate($this->perPage);
+
         return $this->builder;
     }
 
@@ -40,7 +43,6 @@ class BouquetsFilter
     {
         if ($value < 0 || $value > 6 || !is_numeric($value))
             return;
-
         $bouquetsSize = null;
         if ($value == 1) {
             $bouquetsSize = $this->getPivotTable(0, 500);
@@ -74,7 +76,7 @@ class BouquetsFilter
         foreach ($bouquetsSize as $bouquetSize) {
             array_push($bouquetsId, $bouquetSize->bouquet_id);
         }
-//        dd($this->builder->whereIn('bouquets.id', $bouquetsId)->get());
+
         return $this->builder->whereIn('bouquets.id', $bouquetsId)->paginate($this->perPage);
     }
 }

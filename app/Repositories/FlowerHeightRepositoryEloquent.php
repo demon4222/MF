@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Controllers\FileUploadController;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\FlowerHeightRepository;
@@ -36,6 +37,13 @@ class FlowerHeightRepositoryEloquent extends BaseRepository implements FlowerHei
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function deleteFlower($id)
+    {
+        $flowerHeights = $this->flowerHeight->deleteWhere(['flower_id'=>$id]);
+        FileUploadController::deleteFlowerPhoto($id);
+        $this->delete($id);
     }
     
 }

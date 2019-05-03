@@ -17,7 +17,6 @@ class HitsSliderController extends Controller
     public function indexAdmin()
     {
         $slides = $this->hitsSliderRepository->all();
-        //dd($slides);
         $prices = $this->hitsSliderRepository->getPrices($slides);
         return view('layouts.admin.admin-hits-slider', compact('slides','prices'));
     }

@@ -38,14 +38,6 @@ class Bouquet extends Model implements Transformable
             ]
         ];
     }
-	  // public function join(Size $size, Photo $photo)
-    //  {
-    //    $this->sizes()->attach($size, ['photo_id' => $photo->id]);
-    //  }
-
-     // public function sizes(){
-     // 	return $this->belongsToMany('App\Size','bouquet_size')->withPivot('photo_id');;
-     // }
      public function sizes()
      {
        return $this->belongsToMany('App\Models\Size')->withPivot(['price']);
@@ -62,18 +54,5 @@ class Bouquet extends Model implements Transformable
      }
 
      public $timestamps = false;
-
-   //  public function sizes()
-   //  {
-   //      return new SizesRalation(
-   //         (new Size())->newQuery(),
-   //         $this,
-   //         'bouquet_size',
-   //         'bouquet_id',
-   //         'size_id',
-   //         'id',
-   //         'id'
-   //      );
-   // }
 
 }

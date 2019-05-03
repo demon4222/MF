@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HitsSlider;
+use App\Models\BouquetOfTheDay;
 use Illuminate\Http\Request;
 use App\Models\BouquetSubType;
 use App\Repositories\BouquetRepositoryEloquent as Bouquet;
@@ -29,23 +31,8 @@ class BouquetController extends Controller
 
     public function show($slug, $size_id)
     {
-        if (is_numeric($slug)) {
-            // Get post for slug.
-            $bouquet = $this->bouquetRepository->model()::findOrFail($slug);
-            return redirect(route('bouquet.show', $bouquet->slug), 301);
-        }
-        // Get post for slug.
-        $bouquet = $this->bouquetRepository->model()::whereSlug($slug)->firstOrFail();
-        $sizes = $bouquet->sizes()->orderBy('count')->get();
-        $add_sizes = collect();
-        $i = 0;
-        foreach ($sizes as $size) {
-            $id = $size->id;
-            $name = $size->size;
-            $add_sizes->put($i, ['id' => $id, 'name' => $name]);
-            $i++;
-        }
-        $add_sizes = $add_sizes->all();
+        $bouquet = $this->bouquetRepository->getBySlug($slug);
+        $add_sizes = $this->bouquetSizeRepository->getAddSizesForBouquetShowPage($bouquet);
         $size = $bouquet->sizes->find($size_id);
         return view('layouts.show-bouquet', compact('bouquet', 'size', 'add_sizes'));
     }
@@ -59,13 +46,7 @@ class BouquetController extends Controller
 
     public function getBouquetsByType($type_slug, Request $request)
     {
-        if (is_numeric($type_slug)) {
-            // Get post for slug.
-            $type = $this->bouquetTypeRepository->model()::findOrFail($type_slug);
-            return redirect(route('types.index', $type->slug), 301);
-        }
-        // Get post for slug.
-        $type = $this->bouquetTypeRepository->model()::whereSlug($type_slug)->firstOrFail();
+        $type = $this->bouquetTypeRepository->getBySlug($type_slug);
         $bouquets = $type->bouquets();
         $bouquets = (new BouquetsFilter($bouquets, $request))->apply();
         $prices = $this->bouquetRepository->getPrices($bouquets);
@@ -74,12 +55,6 @@ class BouquetController extends Controller
 
     public function getBouquetsBySubType($sub_type_slug, Request $request)
     {
-        if (is_numeric($sub_type_slug)) {
-            // Get post for slug.
-            $subType = BouquetSubType::findOrFail($sub_type_slug);
-            return redirect(route('bouquets.bySubType', $subType->slug), 301);
-        }
-        // Get post for slug.
         $subType = BouquetSubType::whereSlug($sub_type_slug)->firstOrFail();
         $bouquets = $subType->bouquets();
         $bouquets = (new BouquetsFilter($bouquets, $request))->apply();
@@ -97,7 +72,6 @@ class BouquetController extends Controller
 
     public function add()
     {
-
         $bouquetTypes = $this->bouquetTypeRepository->all();
         return view('layouts.admin.admin-add-bouquet', compact('bouquetTypes'));
     }
@@ -140,6 +114,8 @@ class BouquetController extends Controller
 
     public function delete($id)
     {
+        HitsSlider::where(['bouquet_id' => $id])->delete();
+        BouquetOfTheDay::where(['bouquet_id' => $id])->delete();
         $this->bouquetRepository->deleteBouquet($id);
         return back();
     }

@@ -49,9 +49,6 @@ class BouquetOfTheDayRepositoryEloquent extends BaseRepository implements Bouque
             $bouquetOfTheDay = $this->first()->bouquet;
             $discountPrice = $this->getDiscountPrice($bouquetOfTheDay);
             $data = [
-                // 'id' => $bouquetOfTheDay->id,
-                // 'name' => $bouquetOfTheDay->name,
-                // 'usual_price' => $bouquetOfTheDay->sizes()->orderBy('count')->first()->pivot->price,
                 'bouquet' => $bouquetOfTheDay,
                 'discount_price' => round($discountPrice),
             ];
